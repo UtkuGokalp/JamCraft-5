@@ -31,7 +31,10 @@ namespace JamCraft5.Player.Movement
         #region FixedUpdate
         private void FixedUpdate()
         {
-            rb.velocity = rb.velocity.With(playerInput.x * movementSpeed * Time.fixedDeltaTime, null, playerInput.y * movementSpeed * Time.fixedDeltaTime);
+            if (!PlayerDashController.Dashing)
+            {
+                rb.velocity = rb.velocity.With(playerInput.x * movementSpeed * Time.fixedDeltaTime, null, playerInput.y * movementSpeed * Time.fixedDeltaTime);
+            }
         }
         #endregion
     }
