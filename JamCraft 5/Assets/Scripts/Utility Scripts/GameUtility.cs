@@ -5,6 +5,8 @@ namespace Utility.Development
     public static class GameUtility
     {
         #region Variables
+        private static GameObject player;
+        private static Transform playerTransform;
         private static Camera mainCam;
 
         public static Camera MainCam
@@ -31,6 +33,30 @@ namespace Utility.Development
                 return default;
             }
         }
+        public static GameObject Player
+        {
+            get
+            {
+                if (player == null)
+                {
+                    player = GameObject.FindGameObjectWithTag(PLAYER_TAG);
+                }
+                return player;
+            }
+        }
+        public static Transform PlayerTransform
+        {
+            get
+            {
+                if (playerTransform == null)
+                {
+                    playerTransform = Player.transform;
+                }
+                return playerTransform;
+            }
+        }
+        public static Vector3 PlayerPosition => PlayerTransform.position;
+        public const string PLAYER_TAG = "Player";
         #endregion
 
         #region GetDirection
