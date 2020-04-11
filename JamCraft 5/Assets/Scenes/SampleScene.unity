@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 6129025}
   - component: {fileID: 6129024}
   - component: {fileID: 6129023}
+
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -759,10 +760,12 @@ Rigidbody:
   m_CollisionDetection: 0
 --- !u!114 &847431016
 MonoBehaviour:
+
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+
   m_GameObject: {fileID: 847431008}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -773,6 +776,7 @@ MonoBehaviour:
   attackRate: 1
 --- !u!114 &847431017
 MonoBehaviour:
+
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -794,3 +798,4 @@ MonoBehaviour:
   maxDefiniteLootCount: 2
   definiteLoots:
   - {fileID: -6038676769446285106, guid: 6081ca5f145c93940b68ef3c85bd5f45, type: 3}
+
