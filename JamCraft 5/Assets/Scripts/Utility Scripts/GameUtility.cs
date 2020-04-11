@@ -18,8 +18,19 @@ namespace Utility.Development
                 return mainCam;
             }
         }
-        //.With(null,null,MainCam.nearClipPlane)
-        public static Vector3 MousePosition => MainCam.ScreenToWorldPoint(Input.mousePosition);
+        public static Vector3 MousePosition
+        {
+            get
+            {
+                Ray ray = MainCam.ScreenPointToRay(Input.mousePosition);
+                Plane plane = new Plane(Vector3.up, Vector3.zero);
+                if (plane.Raycast(ray, out float distance))
+                {
+                    return ray.GetPoint(distance);
+                }
+                return default;
+            }
+        }
         #endregion
 
         #region GetDirection
@@ -31,6 +42,10 @@ namespace Utility.Development
         /// Gets the normalized direction from position to to position.
         /// </summary>
         public static Vector3 GetDirection(Vector3 from, Vector3 to) => (to - from).normalized;
+        #endregion
+
+        #region GetDirectionToMouse
+        public static Vector3 GetDirectionToMouse(Vector3 from) => GetDirection(from, MousePosition);
         #endregion
 
         #region GetAngleFromVector
