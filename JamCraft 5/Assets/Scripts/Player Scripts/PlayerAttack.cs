@@ -13,6 +13,7 @@ namespace JamCraft5.Player.Attack
         private BoxCollider attackColider;
         private bool attacking = false;
         private int comboAttacks = 0;
+        private bool pressedMouse = false;//Is here to detect if betwen combo attacks the mouse has been pressed
         #endregion
 
         #region ProvisionalWeaponClass
@@ -67,17 +68,26 @@ namespace JamCraft5.Player.Attack
         #region Update
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0) && !attacking)
+            if (Input.GetMouseButton(0))
             {
-                attacking = true;
-                if (comboAttacks == 0)
+                
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                pressedMouse = true;
+                if (!attacking)
                 {
-                    StartCoroutine(Attack());
+                    attacking = true;
+                    if (comboAttacks == 0)
+                    {
+                        StartCoroutine(Attack());
+                    }
+                    else if (comboAttacks < 3)//If comboAttacks is < AttacksBeforeCooldown
+                    {
+                        StartCoroutine(ComboAttack());
+                    }
                 }
-                else if (comboAttacks < 3)
-                {
-                    StartCoroutine(ComboAttack());
-                }
+                
             }
         }
         #endregion
@@ -85,7 +95,7 @@ namespace JamCraft5.Player.Attack
         #region Attack
         private IEnumerator Attack()
         {
-            rotation.enabled = false;
+            rotation.enabled = false;//for the player not to move while attacking
             //start the attack animation
             yield return new WaitForSeconds(0.2f);//fix this value with the animation
             attackColider.enabled = true;
@@ -97,15 +107,17 @@ namespace JamCraft5.Player.Attack
         }
         #endregion
 
-        #region ComboStart
+        #region Combo
         private IEnumerator Combo()
         {
+            pressedMouse = false;
             comboAttacks++;
-            yield return new WaitForSeconds(1f);
-            if (comboAttacks == 1)
+            yield return new WaitForSeconds(0.4f);
+            if (!pressedMouse)
             {
                 comboAttacks = 0;
             }
+            
         }
         #endregion
 
@@ -116,7 +128,7 @@ namespace JamCraft5.Player.Attack
              it makes a combo attack, faster than the frist attack
              needed to adjust the times of the animation and balance it         
              */
-            comboAttacks++;
+            attacking = true;
             rotation.enabled = false;
             //start the attck animation
             yield return new WaitForSeconds(0.1f);//the combo attacks would be faster
@@ -125,10 +137,13 @@ namespace JamCraft5.Player.Attack
             attackColider.enabled = false;
             rotation.enabled = true;
             attacking = false;
-            if (comboAttacks > 2)
+            if (comboAttacks > 1)//comboAttacks = numberOfAttacksBeforeCooldown(3) - 2 
             {
-                yield return new WaitForSeconds(0.1f);//need to adjust it
+                yield return new WaitForSeconds(0.1f);//(need to adjust it) Cooldown before continue attacking
                 comboAttacks = 0;
+            }
+            else {
+                StartCoroutine(Combo());
             }
         }
         #endregion
