@@ -44,6 +44,7 @@ namespace JamCraft5.Enemies.Components
             }
             else
             {
+                timeLeftForNextAttack = 0;
                 enemyState.StateOfEnemy = EnemyStateEnum.Idle;
             }
         }
