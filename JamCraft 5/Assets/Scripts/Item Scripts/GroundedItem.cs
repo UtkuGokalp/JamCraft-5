@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace JamCraft5.Enemies
+namespace JamCraft5.Items
 {
-    public class EnemyLoot : MonoBehaviour
+    public class GroundedItem : MonoBehaviour
     {
         #region Variables
         [Range(0, 100)]
