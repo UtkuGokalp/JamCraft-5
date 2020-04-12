@@ -23,6 +23,10 @@ namespace JamCraft5.Enemies.Components
         private EnemyLoot[] definiteLoots;
         private Transform transformCache;
 
+        /// <summary>
+        /// If we have 4 possible loots with %70, %50, %30, %10 drop chance respectively
+        /// this variable will be set to the max, in this case %70.
+        /// </summary>
         private int maxPossibleChance;
         #endregion
 

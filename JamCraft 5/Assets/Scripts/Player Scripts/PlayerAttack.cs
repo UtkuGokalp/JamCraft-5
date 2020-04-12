@@ -1,12 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace JamCraft5.Player.Attack
 {
     public class PlayerAttack : MonoBehaviour
     {
-
         #region Variables
         JamCraft5.Player.Movement.PlayerRotationController rotation;
 
@@ -53,7 +51,7 @@ namespace JamCraft5.Player.Attack
                 BoxCollider box = new BoxCollider();
                 box.isTrigger = true;
                 box.size = new Vector3(0.8f, 1, wep.attackRange);
-                box.center = Vector3.right * wep.attackRange/2;
+                box.center = Vector3.right * wep.attackRange / 2;
                 box.enabled = false;
                 box.tag = "PlayerAttack";//The tag that the enemy will detect
                 return box;
@@ -69,17 +67,18 @@ namespace JamCraft5.Player.Attack
         #region Update
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0) && !attacking )
+            if (Input.GetMouseButtonDown(0) && !attacking)
             {
                 attacking = true;
                 if (comboAttacks == 0)
                 {
                     StartCoroutine(Attack());
-                } else if (comboAttacks<3)
+                }
+                else if (comboAttacks < 3)
                 {
                     StartCoroutine(ComboAttack());
                 }
-            } 
+            }
         }
         #endregion
 
