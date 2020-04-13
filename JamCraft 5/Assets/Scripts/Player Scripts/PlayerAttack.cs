@@ -21,9 +21,7 @@ namespace JamCraft5.Player.Attack
         #region Awake
         private void Awake()
         {
-            wep = new InventoryItem(new ItemsBase());
-            wep.ItemData.weaponRange = 10;
-            wep.ItemData.weaponDamage = 10;
+            wep = GetComponent<Inventory.PlayerInventoryManager>().SelectedWeapon.ContainedItem;
            //Make that the wep gets from the inventory
 
             rotation = GetComponent<JamCraft5.Player.Movement.PlayerRotationController>();

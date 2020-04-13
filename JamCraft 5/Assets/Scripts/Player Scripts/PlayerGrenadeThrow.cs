@@ -16,7 +16,6 @@ namespace JamCraft5.Player.Attack
         #region Variables
         InventorySlot grenades;
         private int grenadesLeft;
-        private ItemsBase grenadeType;
         public GameObject hand;
 
         private MeshRenderer render;
