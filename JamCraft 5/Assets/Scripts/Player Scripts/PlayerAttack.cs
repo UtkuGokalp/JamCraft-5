@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
+using JamCraft5.Items;
+using JamCraft5.Inventory;
 
 namespace JamCraft5.Player.Attack
 {
@@ -8,51 +10,39 @@ namespace JamCraft5.Player.Attack
         #region Variables
         JamCraft5.Player.Movement.PlayerRotationController rotation;
 
-        Weapon wep;/*when creating the items part, this class should be removed but 
-        for now to apply the paroperties of the weapons I'll do it like this*/
-        private BoxCollider attackColider;
+        private InventoryItem wep;
+
+        public BoxCollider attackColider { get; private set; }
         private bool attacking = false;
         private int comboAttacks = 0;
         private bool pressedMouse = false;//Is here to detect if betwen combo attacks the mouse has been pressed
         #endregion
 
-        #region ProvisionalWeaponClass
-        //Just a provisional layout for the weapons
-        public class Weapon
-        {
-            public float damage { get; private set; }
-            public float attackRange { get; private set; }
-            public Weapon(float dmg, float range)
-            {
-                damage = dmg;
-                attackRange = range;
-            }
-
-        }
-        #endregion
-
         #region Awake
         private void Awake()
         {
-            wep = new Weapon(10, 2f);//that should be the access to the weapon in the inventory
+            wep = new InventoryItem(new ItemsBase());
+            wep.ItemData.weaponRange = 10;
+            wep.ItemData.weaponDamage = 10;
+           //Make that the wep gets from the inventory
 
             rotation = GetComponent<JamCraft5.Player.Movement.PlayerRotationController>();
-            attackColider = CreateColider();
+            attackColider = gameObject.AddComponent<BoxCollider>();
+            CreateColider(attackColider);
         }
         #endregion
 
         #region CreateColider
-        BoxCollider CreateColider()
+        BoxCollider CreateColider(BoxCollider box)
         {
             /*sumary
              Create a box colider with the range of the current weapon
              */
             if (wep != null)
             {
-                BoxCollider box = new BoxCollider();
                 box.isTrigger = true;
-                box.size = new Vector3(0.8f, 1, wep.attackRange);
-                box.center = Vector3.right * wep.attackRange / 2;
+                box.size = new Vector3(0.8f, 1, wep.ItemData.weaponRange);
+                box.center = Vector3.forward * wep.ItemData.weaponRange / 2;
                 box.enabled = false;
                 box.tag = "PlayerAttack";//The tag that the enemy will detect
                 return box;
@@ -68,10 +58,7 @@ namespace JamCraft5.Player.Attack
         #region Update
         private void Update()
         {
-            if (Input.GetMouseButton(0))
-            {
-                
-            }
+
             if (Input.GetMouseButtonDown(0))
             {
                 pressedMouse = true;
