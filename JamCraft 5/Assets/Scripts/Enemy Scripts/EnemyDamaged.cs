@@ -16,7 +16,7 @@ namespace JamCraft5.Enemies.Components
         private EnemyState enemyState;
 
         private InventoryItem wep;
-        private InventoryItem Grenade;
+        private InventoryItem grenade;
         #endregion
 
         private void Awake()
@@ -24,6 +24,13 @@ namespace JamCraft5.Enemies.Components
             hs = GetComponent<HealthSystem>();
             rb = GetComponent<Rigidbody>();
             enemyState = GetComponent<EnemyState>();
+
+
+            wep = new InventoryItem(new ItemsBase());
+            wep.ItemData.weaponDamage = 10;
+            grenade = new InventoryItem(new ItemsBase());
+            wep.ItemData.grenadeDamage = 10;
+
         }
 
         private void OnTriggerEnter(Collider col)
@@ -33,7 +40,7 @@ namespace JamCraft5.Enemies.Components
                 StartCoroutine(GetDamage());
             } else if (col.CompareTag("GrenadeExplosion"))
             {
-                //StartCoroutine(GetGrenadeDamage());
+                StartCoroutine(GetGrenadeDamage());
             }
         }
 
@@ -52,7 +59,7 @@ namespace JamCraft5.Enemies.Components
             EnemyStateEnum currentEnemyState = enemyState.StateOfEnemy;
             enemyState.StateOfEnemy = EnemyStateEnum.Damaging;
             rb.AddRelativeForce(0,0,1/*Insert grenade Knockback*/, ForceMode.Impulse);
-            hs.DecreaseHealth(wep.ItemData.grenadeDamage);
+            hs.DecreaseHealth(grenade.ItemData.grenadeDamage);
             yield return new WaitForSeconds(0.1f);
             enemyState.StateOfEnemy = currentEnemyState;
         }
