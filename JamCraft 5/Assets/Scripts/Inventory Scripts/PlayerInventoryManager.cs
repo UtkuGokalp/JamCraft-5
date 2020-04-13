@@ -26,6 +26,20 @@ namespace JamCraft5.Player.Inventory
                 return inventory;
             }
         }
+        private InventorySlot[] weapons = new InventorySlot[4];
+        private int gotWep = 0;
+        private InventorySlot selectedWeapon;
+        public InventorySlot SelectedWeapon
+        {
+            get
+            {
+                if (selectedWeapon == null)
+                {
+                    selectedWeapon = weapons[0];
+                }
+                return selectedWeapon;
+            }
+        }
         #endregion
 
         #region Awake
@@ -34,6 +48,25 @@ namespace JamCraft5.Player.Inventory
             foreach (InventoryItem item in startingItems)
             {
                 AddItem(item);
+            }
+        }
+        #endregion
+
+        #region Update
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1) && gotWep > 0)
+            {
+                selectedWeapon = weapons[0];
+            } else if (Input.GetKeyDown(KeyCode.Alpha2) && gotWep>1)
+            {
+                selectedWeapon = weapons[1];
+            } else if (Input.GetKeyDown(KeyCode.Alpha3) && gotWep > 2)
+            {
+                selectedWeapon = weapons[2];
+            } else if (Input.GetKeyDown(KeyCode.Alpha4) && gotWep > 3)
+            {
+                selectedWeapon = weapons[3];
             }
         }
         #endregion
