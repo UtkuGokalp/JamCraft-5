@@ -29,7 +29,7 @@ namespace JamCraft5.Enemies.Components
         #region Update
         private void Update()
         {
-            if (InAttackRange)
+            if (InAttackRange && enemyState.StateOfEnemy != EnemyStateEnum.Damaging)
             {
                 if (timeLeftForNextAttack <= 0)
                 {

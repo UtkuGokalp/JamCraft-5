@@ -4,6 +4,7 @@
 	{
 		Idle,
 		Chasing,
-		Attacking
+		Attacking,
+        Damaging
 	}
 }

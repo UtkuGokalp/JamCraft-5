@@ -26,23 +26,6 @@ namespace JamCraft5.Player.Attack
         private bool cooldown = false;
         #endregion
 
-        #region ProvisionalGrenadeClass
-        //Just a provisional layout for the grenade
-        public class Grenade
-        {
-            public float damage { get; private set; }
-            public float explosionRadius { get; private set; }
-            public float explosionTime { get; private set; }
-            public Grenade(float dmg, float range, float expTime)
-            {
-                damage = dmg;
-                explosionRadius = range;
-                explosionTime = expTime;
-            }
-
-        }
-        #endregion
-
         #region Awake
         private void Awake()
         {
@@ -66,6 +49,7 @@ namespace JamCraft5.Player.Attack
         {
             coli.isTrigger = true;
             coli.radius = grenades.ContainedItem.ItemData.grenadeRange;
+            coli.tag = "GrenadeExplosion";
             coli.enabled = false;
             return coli;
         }
