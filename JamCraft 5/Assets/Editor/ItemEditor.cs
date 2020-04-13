@@ -10,7 +10,6 @@ public class ItemEditor : Editor
         ItemsBase Items = (ItemsBase)target;
 
         Items.itemName = EditorGUILayout.TextField("Item name", Items.itemName);
-        Items.amount = EditorGUILayout.IntField("Amount", Items.amount);
         Items.type = EditorGUILayout.Popup(Items.type, new string[] { "Weapons", "Grenade", "Materials", "Healing"});
         switch (Items.type)
         {
@@ -22,6 +21,7 @@ public class ItemEditor : Editor
                 Items.grenadeDamage = EditorGUILayout.IntField("Damage", Items.grenadeDamage);
                 Items.grenadeRange = EditorGUILayout.IntField("Range", Items.grenadeRange);
                 Items.grenadeForce = EditorGUILayout.IntField("Force", Items.grenadeForce);
+                Items.grenadeTime = EditorGUILayout.FloatField("Explosion time", Items.grenadeTime);
                 break;
             case 2:
                 Items.matType = EditorGUILayout.TextField("Material", Items.matType);

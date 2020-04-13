@@ -1,6 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using JamCraft5.Inventory;
+using JamCraft5.Items;
 
 namespace JamCraft5.Player.Attack
 {
@@ -13,8 +14,9 @@ namespace JamCraft5.Player.Attack
              */
 
         #region Variables
-        Grenade grenade;
-        int grenadesLeft;
+        InventorySlot grenades;
+        private int grenadesLeft;
+        private ItemsBase grenadeType;
         public GameObject hand;
 
         private MeshRenderer render;
@@ -44,14 +46,14 @@ namespace JamCraft5.Player.Attack
         #region Awake
         private void Awake()
         {
-            grenadesLeft = 15;//conect the number to the inventory
+            
             transform.parent = hand.transform;
             render = GetComponent<MeshRenderer>();
             render.enabled = false;
             rb = GetComponent<Rigidbody>();
             rb.useGravity = false;
 
-            grenade = new Grenade(20, 4f, 5f);//that should take the active grenade properties
+            
             col = gameObject.AddComponent<SphereCollider>();
             col = CreateColider(col);
             colision = gameObject.AddComponent<SphereCollider>();//another collider for the grenade not to fall into the ground
@@ -63,19 +65,42 @@ namespace JamCraft5.Player.Attack
         SphereCollider CreateColider(SphereCollider coli)
         {
             coli.isTrigger = true;
-            coli.radius = grenade.explosionRadius;
+            coli.radius = grenades.ContainedItem.ItemData.grenadeRange;
             coli.enabled = false;
             return coli;
+        }
+        #endregion
+
+        #region GrenadeCheck
+        void GrenadeCheck()
+        {
+            foreach (InventorySlot i in GetComponent<Inventory.PlayerInventoryManager>().Inventory)
+            {
+                if (i.ContainedItem.ItemData.type == 1)
+                {
+                    grenades = i;
+                }
+            }
+            if (grenades == null)
+            {
+                grenades = new InventorySlot();
+                grenades.ItemCount = 0;
+            }
+            grenadesLeft = grenades.ItemCount;
         }
         #endregion
 
         #region Update
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F) && !cooldown && grenadesLeft>=1)
+            if (Input.GetKeyDown(KeyCode.F) && !cooldown)
             {
-                grenadesLeft--;
-                StartCoroutine(ThrowGrenade());
+                GrenadeCheck();
+                if (grenadesLeft >= 1)
+                {
+                    grenades.ItemCount--;
+                    StartCoroutine(ThrowGrenade());
+                }               
             }
         }
         #endregion
@@ -93,7 +118,7 @@ namespace JamCraft5.Player.Attack
             rb.AddForce(new Vector3(0, 0, throwingForce), ForceMode.Impulse);
             colision.enabled = true;
 
-            yield return new WaitForSeconds(grenade.explosionTime);
+            yield return new WaitForSeconds(grenades.ContainedItem.ItemData.grenadeTime);
             col.enabled = true;
             //Maybe could create a particle system here, I'm not pretty good at that
 

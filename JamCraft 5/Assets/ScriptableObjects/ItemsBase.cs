@@ -8,7 +8,6 @@ public class ItemsBase : ScriptableObject
     public int ID { get; private set; }
     public string itemName;
     public int type;//0-weapon, 1-grenade, 2-material, 3-Healing
-    public int amount;
 
     public int weaponDamage;
     public int weaponRange;
@@ -16,6 +15,7 @@ public class ItemsBase : ScriptableObject
     public int grenadeDamage;
     public int grenadeRange;
     public int grenadeForce;
+    public float grenadeTime;
 
     public string matType;
 
