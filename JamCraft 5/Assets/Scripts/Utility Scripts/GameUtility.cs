@@ -60,7 +60,12 @@ namespace Utility.Development
             }
         }
         public static Vector3 PlayerPosition => PlayerTransform.position;
+        public static LayerMask GroundedItemLayer => LayerMask.NameToLayer(GROUNDED_ITEM_LAYER_NAME);
+        public static LayerMask PlayerLayer => LayerMask.NameToLayer(PLAYER_LAYER_NAME);
+
         public const string PLAYER_TAG = "Player";
+        public const string PLAYER_LAYER_NAME = "Player";
+        public const string GROUNDED_ITEM_LAYER_NAME = "Grounded Item";
         #endregion
 
         #region GetDirection

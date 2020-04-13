@@ -25,10 +25,12 @@ namespace JamCraft5.Enemies.Components
             rb = GetComponent<Rigidbody>();
             enemyState = GetComponent<EnemyState>();
 
+
             wep = new InventoryItem(new ItemsBase());
             wep.ItemData.weaponDamage = 10;
             grenade = new InventoryItem(new ItemsBase());
             wep.ItemData.grenadeDamage = 10;
+
         }
 
         private void OnTriggerEnter(Collider col)
@@ -44,20 +46,22 @@ namespace JamCraft5.Enemies.Components
 
         IEnumerator GetDamage()
         {
+            EnemyStateEnum currentEnemyState = enemyState.StateOfEnemy;
             enemyState.StateOfEnemy = EnemyStateEnum.Damaging;
             rb.AddRelativeForce(0, 0, 1/*Insert weapon Knockback*/, ForceMode.Impulse);
             hs.DecreaseHealth(wep.ItemData.weaponDamage);
             yield return new WaitForSeconds(0.1f);
-            enemyState.StateOfEnemy = EnemyStateEnum.Idle;
+            enemyState.StateOfEnemy = currentEnemyState;
         }
 
         IEnumerator GetGrenadeDamage()
         {
+            EnemyStateEnum currentEnemyState = enemyState.StateOfEnemy;
             enemyState.StateOfEnemy = EnemyStateEnum.Damaging;
             rb.AddRelativeForce(0,0,1/*Insert grenade Knockback*/, ForceMode.Impulse);
             hs.DecreaseHealth(grenade.ItemData.grenadeDamage);
             yield return new WaitForSeconds(0.1f);
-            enemyState.StateOfEnemy = EnemyStateEnum.Idle;
+            enemyState.StateOfEnemy = currentEnemyState;
         }
     }
 }

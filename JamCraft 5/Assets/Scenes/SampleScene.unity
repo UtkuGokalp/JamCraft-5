@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 6129028}
   - component: {fileID: 6129029}
   - component: {fileID: 6129030}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -326,6 +326,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dcc5297a4ec8804b810ebf5a1ce2b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropDistanceMultiplier: 1.5
+  throwForce: 200
+  collisionIgnoranceTime: 0.5
   removeItem:
     itemData: {fileID: 11400000, guid: 133385442cb8c6f4d9ea102c3b0d2a06, type: 2}
 --- !u!1 &164198143
@@ -339,7 +342,7 @@ GameObject:
   - component: {fileID: 164198144}
   - component: {fileID: 164198147}
   - component: {fileID: 164198146}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Direction Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,7 +419,7 @@ PrefabInstance:
     - target: {fileID: 5573967017208174369, guid: 304c95565381e9142a98d8d5aa34f75f,
         type: 3}
       propertyPath: m_Name
-      value: Test Grounded Item
+      value: Adamantium
       objectReference: {fileID: 0}
     - target: {fileID: 5573967017208174381, guid: 304c95565381e9142a98d8d5aa34f75f,
         type: 3}
