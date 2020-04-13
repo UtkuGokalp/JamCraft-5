@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
+using Utility.Development;
 
 namespace JamCraft5.Items
 {
+    [RequireComponent(typeof(Collider))]
+    [RequireComponent(typeof(Rigidbody))]
     public class GroundedItem : MonoBehaviour
     {
         #region Variables
@@ -11,6 +14,8 @@ namespace JamCraft5.Items
         [SerializeField]
         private ItemsBase itemData;
         private Transform transformCache;
+        private Collider colliderComponent;
+        private Rigidbody rigidbodyComponent;
         public int DropChance => dropChance;
         public ItemsBase ItemData
         {
@@ -28,17 +33,35 @@ namespace JamCraft5.Items
                 return transformCache;
             }
         }
+        public Collider ColliderComponent
+        {
+            get
+            {
+                if (colliderComponent == null)
+                {
+                    colliderComponent = GetComponent<Collider>();
+                }
+                return colliderComponent;
+            }
+        }
+        public Rigidbody RigidbodyComponent
+        {
+            get
+            {
+                if (rigidbodyComponent == null)
+                {
+                    rigidbodyComponent = GetComponent<Rigidbody>();
+                }
+                return rigidbodyComponent;
+            }
+        }
         #endregion
 
-        /// <summary>
-        /// Instantiates a new grounded item at given position. (NOT COMPLETELY IMPLEMETED!)
-        /// </summary>
-        public static GroundedItem Create(Vector3 position, ItemsBase itemData)
+        #region Awake
+        private void Awake()
         {
-            GroundedItem groundedItem = new GameObject("Grounded Item", typeof(GroundedItem)).GetComponent<GroundedItem>();
-            groundedItem.transform.position = position;
-            groundedItem.ItemData = itemData;
-            return groundedItem;
+            gameObject.layer = GameUtility.GroundedItemLayer;
         }
+        #endregion
     }
 }

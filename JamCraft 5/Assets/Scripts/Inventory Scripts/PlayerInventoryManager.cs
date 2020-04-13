@@ -28,6 +28,16 @@ namespace JamCraft5.Player.Inventory
         }
         #endregion
 
+        #region Awake
+        private void Awake()
+        {
+            foreach (InventoryItem item in startingItems)
+            {
+                AddItem(item);
+            }
+        }
+        #endregion
+
         #region AddItem
         /// <summary>
         /// Adds the given item to inventory if possible. Returns false otherwise.
@@ -81,6 +91,10 @@ namespace JamCraft5.Player.Inventory
         {
             foreach (InventorySlot slot in Inventory)
             {
+                if (slot.ContainedItem == null)
+                {
+                    continue;
+                }
                 if (slot.ContainedItem.ItemData.ID == item.ItemData.ID)
                 {
                     return System.ValueTuple.Create(true, slot);

@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using JamCraft5.Items;
 
 [CustomEditor(typeof(ItemsBase))]
 public class ItemEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-
         ItemsBase Items = (ItemsBase)target;
 
         Items.itemName = EditorGUILayout.TextField("Item name", Items.itemName);
-        Items.type = EditorGUILayout.Popup(Items.type, new string[] { "Weapons", "Grenade", "Materials", "Healing"});
+        Items.groundedItemPrefab = (GroundedItem)EditorGUILayout.ObjectField("Grounded Item Prefab", Items.groundedItemPrefab, typeof(GroundedItem), true);
+
+        Items.type = EditorGUILayout.Popup(Items.type, new string[] { "Weapons", "Grenade", "Materials", "Healing" });
         switch (Items.type)
         {
             case 0:
@@ -31,5 +33,5 @@ public class ItemEditor : Editor
                 break;
         }
     }
-    
+
 }
