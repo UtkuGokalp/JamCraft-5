@@ -31,10 +31,14 @@ namespace JamCraft5.Enemies.Components
         #region FixedUpdate
         private void FixedUpdate()
         {
-            if (PlayerIsInDetectionRange && enemyState.StateOfEnemy != EnemyStateEnum.Attacking && enemyState.StateOfEnemy != EnemyStateEnum.Damaging)
+            if (PlayerIsInDetectionRange)
             {
-                enemyState.StateOfEnemy = EnemyStateEnum.Chasing;
-                MoveTowardsPlayer();
+                if (enemyState.StateOfEnemy != EnemyStateEnum.Attacking && 
+                    enemyState.StateOfEnemy != EnemyStateEnum.Damaging)
+                {
+                    enemyState.StateOfEnemy = EnemyStateEnum.Chasing;
+                    MoveTowardsPlayer();
+                }
             }
         }
         #endregion

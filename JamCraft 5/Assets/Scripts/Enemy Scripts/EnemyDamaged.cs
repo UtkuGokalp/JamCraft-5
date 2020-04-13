@@ -23,6 +23,7 @@ namespace JamCraft5.Enemies.Components
         {
             hs = GetComponent<HealthSystem>();
             rb = GetComponent<Rigidbody>();
+            enemyState = GetComponent<EnemyState>();
         }
 
         private void OnTriggerEnter(Collider col)
@@ -38,20 +39,22 @@ namespace JamCraft5.Enemies.Components
 
         IEnumerator GetDamage()
         {
+            EnemyStateEnum currentEnemyState = enemyState.StateOfEnemy;
             enemyState.StateOfEnemy = EnemyStateEnum.Damaging;
             rb.AddRelativeForce(0, 0, 1/*Insert weapon Knockback*/, ForceMode.Impulse);
             hs.DecreaseHealth(wep.ItemData.weaponDamage);
             yield return new WaitForSeconds(0.1f);
-            enemyState.StateOfEnemy = EnemyStateEnum.Idle;
+            enemyState.StateOfEnemy = currentEnemyState;
         }
 
         IEnumerator GetGrenadeDamage()
         {
+            EnemyStateEnum currentEnemyState = enemyState.StateOfEnemy;
             enemyState.StateOfEnemy = EnemyStateEnum.Damaging;
             rb.AddRelativeForce(0,0,1/*Insert grenade Knockback*/, ForceMode.Impulse);
             hs.DecreaseHealth(wep.ItemData.grenadeDamage);
             yield return new WaitForSeconds(0.1f);
-            enemyState.StateOfEnemy = EnemyStateEnum.Idle;
+            enemyState.StateOfEnemy = currentEnemyState;
         }
     }
 }
