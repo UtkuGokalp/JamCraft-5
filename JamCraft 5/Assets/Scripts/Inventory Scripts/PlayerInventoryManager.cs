@@ -2,6 +2,7 @@
 using JamCraft5.Items;
 using JamCraft5.Inventory;
 using System.Collections.Generic;
+using JamCraft5.EventArguments;
 
 namespace JamCraft5.Player.Inventory
 {
@@ -10,7 +11,11 @@ namespace JamCraft5.Player.Inventory
         #region Variables
         [SerializeField]
         private InventoryItem[] startingItems;
+        [SerializeField]
+        private InventoryWeapon[] testWeapons = new InventoryWeapon[4];
         private List<InventorySlot> inventory;
+        private int currentWeaponSlotIndex;
+
         public List<InventorySlot> Inventory
         {
             get
@@ -26,28 +31,62 @@ namespace JamCraft5.Player.Inventory
                 return inventory;
             }
         }
-        private InventorySlot[] weapons = new InventorySlot[4];
+        private InventoryWeaponSlot[] weapons;
         private int gotWep = 0;
-        private InventorySlot selectedWeapon;
-        public InventorySlot SelectedWeapon
+        public InventoryWeaponSlot SelectedWeapon => Weapons[CurrentWeaponSlotIndex];
+        public int CurrentWeaponSlotIndex
+        {
+            get => currentWeaponSlotIndex;
+            private set
+            {
+                if (value >= weapons.Length)
+                {
+                    value = 0;
+                }
+                else if (value < 0)
+                {
+                    value = weapons.Length - 1;
+                }
+
+                currentWeaponSlotIndex = value;
+                OnSelectedWeaponChanged?.Invoke(this, new OnSelectedWeaponChangedEventArgs(currentWeaponSlotIndex, weapons[currentWeaponSlotIndex].ContainedWeapon));
+            }
+        }
+        public InventoryWeaponSlot[] Weapons
         {
             get
             {
-                if (selectedWeapon == null)
+                if (weapons == null)
                 {
-                    selectedWeapon = weapons[0];
+                    const int MAX_WEAPON_COUNT = 4;
+                    weapons = new InventoryWeaponSlot[MAX_WEAPON_COUNT];
+
+                    for (int i = 0; i < MAX_WEAPON_COUNT; i++)
+                    {
+                        weapons[i] = new InventoryWeaponSlot();
+                    }
                 }
-                return selectedWeapon;
+                return weapons;
             }
         }
+        public event System.EventHandler<OnItemAddedEventArgs> OnItemAdded;
+        public event System.EventHandler<OnItemRemovedEventArgs> OnItemRemoved;
+        public event System.EventHandler<OnWeaponAddedEventArgs> OnWeaponAdded;
+        public event System.EventHandler<OnWeaponRemovedEventArgs> OnWeaponRemoved;
+        public event System.EventHandler<OnSelectedWeaponChangedEventArgs> OnSelectedWeaponChanged;
         #endregion
 
         #region Awake
-        private void Awake()
+        private void Start()
         {
             foreach (InventoryItem item in startingItems)
             {
                 AddItem(item);
+            }
+
+            for (int i = 0; i < testWeapons.Length; i++)
+            {
+                AddWeapon(testWeapons[i]);
             }
         }
         #endregion
@@ -55,18 +94,25 @@ namespace JamCraft5.Player.Inventory
         #region Update
         private void Update()
         {
+            //Substracting because mouseScrollDelta is positive when we scroll up but we want
+            //the selection to go up in game (visually), which means decreasing the index.
+            CurrentWeaponSlotIndex -= (int)Input.mouseScrollDelta.y;
+
             if (Input.GetKeyDown(KeyCode.Alpha1) && gotWep > 0)
             {
-                selectedWeapon = weapons[0];
-            } else if (Input.GetKeyDown(KeyCode.Alpha2) && gotWep>1)
+                CurrentWeaponSlotIndex = 0;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && gotWep > 1)
             {
-                selectedWeapon = weapons[1];
-            } else if (Input.GetKeyDown(KeyCode.Alpha3) && gotWep > 2)
+                CurrentWeaponSlotIndex = 1;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && gotWep > 2)
             {
-                selectedWeapon = weapons[2];
-            } else if (Input.GetKeyDown(KeyCode.Alpha4) && gotWep > 3)
+                CurrentWeaponSlotIndex = 2;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4) && gotWep > 3)
             {
-                selectedWeapon = weapons[3];
+                CurrentWeaponSlotIndex = 3;
             }
         }
         #endregion
@@ -82,6 +128,7 @@ namespace JamCraft5.Player.Inventory
             if (inventoryItemData.contains)
             {
                 inventoryItemData.slotContained.ItemCount++;
+                OnItemAdded?.Invoke(this, new OnItemAddedEventArgs(item));
                 return System.ValueTuple.Create(true, item);
             }
             else
@@ -90,6 +137,7 @@ namespace JamCraft5.Player.Inventory
                 InventorySlot lastSlot = Inventory[Inventory.Count - 1];
                 lastSlot.ContainedItem = item;
                 lastSlot.ItemCount = 1;
+                OnItemAdded?.Invoke(this, new OnItemAddedEventArgs(item));
                 return System.ValueTuple.Create(true, item);
             }
         }
@@ -113,9 +161,42 @@ namespace JamCraft5.Player.Inventory
                 {
                     Inventory.Remove(inventoryItemData.slotContained);
                 }
+                OnItemRemoved?.Invoke(this, new OnItemRemovedEventArgs(item));
                 return System.ValueTuple.Create(true, item);
             }
             return System.ValueTuple.Create<bool, InventoryItem>(false, null);
+        }
+        #endregion
+
+        #region AddWeapon
+        public (bool added, InventoryWeapon addedWeapon) AddWeapon(InventoryWeapon weapon)
+        {
+            for (int i = 0; i < Weapons.Length; i++)
+            {
+                if (Weapons[i].ContainedWeapon == null)
+                {
+                    Weapons[i].ContainedWeapon = weapon;
+                    OnWeaponAdded?.Invoke(this, new OnWeaponAddedEventArgs(i, weapon));
+                    return System.ValueTuple.Create(true, weapon);
+                }
+            }
+            return System.ValueTuple.Create<bool, InventoryWeapon>(false, null);
+        }
+        #endregion
+
+        #region RemoveWeapon
+        public (bool added, InventoryWeapon removedWeapon) RemoveWeapon(InventoryWeapon weapon)
+        {
+            for (int i = 0; i < Weapons.Length; i++)
+            {
+                if (Weapons[i].ContainedWeapon == weapon)
+                {
+                    Weapons[i].ContainedWeapon = null;
+                    OnWeaponRemoved?.Invoke(this, new OnWeaponRemovedEventArgs(i, weapon));
+                    return System.ValueTuple.Create(true, weapon);
+                }
+            }
+            return System.ValueTuple.Create<bool, InventoryWeapon>(false, null);
         }
         #endregion
 

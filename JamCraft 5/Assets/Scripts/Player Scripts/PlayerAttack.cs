@@ -2,6 +2,7 @@
 using UnityEngine;
 using JamCraft5.Items;
 using JamCraft5.Inventory;
+using Utility.Development;
 
 namespace JamCraft5.Player.Attack
 {
@@ -21,8 +22,8 @@ namespace JamCraft5.Player.Attack
         #region Awake
         private void Awake()
         {
-            wep = GetComponent<Inventory.PlayerInventoryManager>().SelectedWeapon.ContainedItem;
-           //Make that the wep gets from the inventory
+            wep = GetComponent<Inventory.PlayerInventoryManager>().SelectedWeapon.ContainedWeapon;
+            //Make that the wep gets from the inventory
 
             rotation = GetComponent<JamCraft5.Player.Movement.PlayerRotationController>();
             attackColider = gameObject.AddComponent<BoxCollider>();
@@ -57,7 +58,7 @@ namespace JamCraft5.Player.Attack
         private void Update()
         {
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(MouseButton.LEFT))
             {
                 pressedMouse = true;
                 if (!attacking)
@@ -72,7 +73,7 @@ namespace JamCraft5.Player.Attack
                         StartCoroutine(ComboAttack());
                     }
                 }
-                
+
             }
         }
         #endregion
@@ -102,7 +103,7 @@ namespace JamCraft5.Player.Attack
             {
                 comboAttacks = 0;
             }
-            
+
         }
         #endregion
 
@@ -127,7 +128,8 @@ namespace JamCraft5.Player.Attack
                 yield return new WaitForSeconds(0.1f);//(need to adjust it) Cooldown before continue attacking
                 comboAttacks = 0;
             }
-            else {
+            else
+            {
                 StartCoroutine(Combo());
             }
         }
