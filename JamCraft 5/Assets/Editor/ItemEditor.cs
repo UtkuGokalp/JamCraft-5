@@ -10,8 +10,10 @@ public class ItemEditor : Editor
         ItemsBase Items = (ItemsBase)target;
 
         Items.itemName = EditorGUILayout.TextField("Item name", Items.itemName);
+
         Items.groundedItemPrefab = (GroundedItem)EditorGUILayout.ObjectField("Grounded Item Prefab", Items.groundedItemPrefab, typeof(GroundedItem), true);
 
+        Items.uiIcon = (Sprite)EditorGUILayout.ObjectField("UI Icon", Items.uiIcon, typeof(Sprite), true);
         Items.type = EditorGUILayout.Popup(Items.type, new string[] { "Weapons", "Grenade", "Materials", "Healing" });
         switch (Items.type)
         {

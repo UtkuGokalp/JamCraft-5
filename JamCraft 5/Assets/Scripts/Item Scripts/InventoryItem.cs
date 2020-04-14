@@ -14,7 +14,7 @@ namespace JamCraft5.Items
             set => itemData = value;
         }
         #endregion
-
+        
         #region Constructor
         public InventoryItem(ItemsBase itemData)
         {
