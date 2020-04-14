@@ -3,7 +3,7 @@ using JamCraft5.Items;
 
 namespace JamCraft5.Player.Inventory
 {
-    [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(Collider))]
     [RequireComponent(typeof(PlayerInventoryManager))]
     public class PlayerItemPickupController : MonoBehaviour
     {

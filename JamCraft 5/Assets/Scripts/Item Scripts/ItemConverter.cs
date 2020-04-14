@@ -7,6 +7,11 @@ namespace JamCraft5.Items
         #region ToGroundedItem
         public static GroundedItem ToGroundedItem(Vector3 spawnPosition, InventoryItem inventoryItem)
         {
+            if (inventoryItem.ItemData.groundedItemPrefab == null)
+            {
+                Debug.LogWarning($"Grounded Item Prefab of {inventoryItem.ItemData.name} is null.");
+                return null;
+            }
             return Object.Instantiate(inventoryItem.ItemData.groundedItemPrefab, spawnPosition, inventoryItem.ItemData.groundedItemPrefab.transform.rotation);
         }
         #endregion
