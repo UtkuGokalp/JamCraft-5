@@ -159,8 +159,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dcc5297a4ec8804b810ebf5a1ce2b18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropDistanceMultiplier: 0
+  throwForce: 0
+  collisionIgnoranceTime: 0
   removeItem:
     itemData: {fileID: 11400000, guid: 133385442cb8c6f4d9ea102c3b0d2a06, type: 2}
+  dropKey: 113
 --- !u!114 &373738494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +190,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingItems: []
+  testWeapons:
+  - itemData: {fileID: 0}
+  - itemData: {fileID: 0}
+  - itemData: {fileID: 0}
+  - itemData: {fileID: 0}
 --- !u!114 &373738496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,7 +546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 173e30eb199a21b4299266a57552cfd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseSpeed: 1
+  chaseSpeed: 200
   detectionRange: 7
 --- !u!114 &768157124
 MonoBehaviour:
@@ -653,6 +662,7 @@ GameObject:
   - component: {fileID: 913565937}
   - component: {fileID: 913565936}
   - component: {fileID: 913565935}
+  - component: {fileID: 913565938}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -718,13 +728,27 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913565934}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 16.5, z: 0}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalPosition: {x: 0, y: 14, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
+--- !u!114 &913565938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913565934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f001d7502ad13be4393c218067c51843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerDistance: {x: 0, y: 14, z: -8}
+  xRotation: 50
 --- !u!1 &1161302412
 GameObject:
   m_ObjectHideFlags: 0

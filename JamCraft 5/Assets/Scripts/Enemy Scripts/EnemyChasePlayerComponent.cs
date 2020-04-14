@@ -48,6 +48,8 @@ namespace JamCraft5.Enemies.Components
         {
             Vector3 direction = GameUtility.GetDirection(transformCache.position, GameUtility.PlayerPosition);
             rb.velocity = direction * chaseSpeed * Time.fixedDeltaTime;
+            //TBB
+            transform.rotation = Quaternion.LookRotation(direction);
         }
         #endregion
 
