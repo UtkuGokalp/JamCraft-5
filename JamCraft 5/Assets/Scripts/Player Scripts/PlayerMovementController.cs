@@ -45,43 +45,38 @@ namespace JamCraft5.Player.Movement
             if (!PlayerDashController.Dashing)
             {
                 Vector3 movementDirection = default;
-                //Every transform.right here
+                float yRotation = GeYtRotation();
+                bool facingBackwards = yRotation > 30 && yRotation < 230;
+                int horizontalAxisMultiplier = facingBackwards ? -1 : 1;
+
                 if (playerInput.x < 0)
                 {
                     if (playerInput.z == 0)
                     {
-                        movementDirection = -transform.right;
+                        movementDirection = -transform.right * horizontalAxisMultiplier;
                     }
                     else if (playerInput.z > 0)
                     {
-                        movementDirection.x = -transform.right.x + transform.forward.x;
-                        movementDirection.y = -transform.right.y + transform.forward.y;
-                        movementDirection.z = -transform.right.z + transform.forward.z;
+                        movementDirection = -transform.right * horizontalAxisMultiplier + transform.forward;
                     }
                     else if (playerInput.z < 0)
                     {
-                        movementDirection.x = -transform.right.x + -transform.forward.x;
-                        movementDirection.y = -transform.right.y + -transform.forward.y;
-                        movementDirection.z = -transform.right.z + -transform.forward.z;
+                        movementDirection = -transform.right * horizontalAxisMultiplier + -transform.forward;
                     }
                 }
                 else if (playerInput.x > 0)
                 {
                     if (playerInput.z == 0)
                     {
-                        movementDirection = transform.right;
+                        movementDirection = transform.right * horizontalAxisMultiplier;
                     }
                     else if (playerInput.z > 0)
                     {
-                        movementDirection.x = transform.right.x + transform.forward.x;
-                        movementDirection.y = transform.right.y + transform.forward.y;
-                        movementDirection.z = transform.right.z + transform.forward.z;
+                        movementDirection = transform.right * horizontalAxisMultiplier + transform.forward;
                     }
                     else if (playerInput.z < 0)
                     {
-                        movementDirection.x = transform.right.x + -transform.forward.x;
-                        movementDirection.y = transform.right.y + -transform.forward.y;
-                        movementDirection.z = transform.right.z + -transform.forward.z;
+                        movementDirection = transform.right * horizontalAxisMultiplier + -transform.forward;
                     }
                 }
                 else
@@ -111,6 +106,28 @@ namespace JamCraft5.Player.Movement
                     rb.velocity = rb.velocity.With(movementDirection.x, null, movementDirection.z);
                 }
             }
+        }
+        #endregion
+
+        #region GeYtRotation
+        private float GeYtRotation()
+        {
+            float yRotation = transform.rotation.eulerAngles.y;
+            if (yRotation >= 360)
+            {
+                while (yRotation >= 360)
+                {
+                    yRotation -= 360;
+                }
+            }
+            else if (yRotation < 0)
+            {
+                while (yRotation < 0)
+                {
+                    yRotation += 360;
+                }
+            }
+            return yRotation;
         }
         #endregion
     }
