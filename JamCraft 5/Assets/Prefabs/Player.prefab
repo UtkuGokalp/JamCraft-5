@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 300
+  slowDownMultiplier: 0.5
 --- !u!114 &8949166137121024595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e7f5e60613a9e43bd58d1d0b3a0e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashSpeed: 700
+  dashSpeed: 1000
   dashTime: 0.2
 --- !u!114 &5192326697949500485
 MonoBehaviour:
