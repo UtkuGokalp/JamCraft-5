@@ -12,6 +12,6 @@ public class CameraFollowing : MonoBehaviour
     {
         transform.position = GameUtility.PlayerPosition + playerDistance;
         transform.rotation = Quaternion.Euler(-rotationOffset);
-        // I invert the rotation only for comodity, the usual rotations are about -50º
+        //I invert the rotation only for comodity, the usual rotations are about -50º
     }
 }

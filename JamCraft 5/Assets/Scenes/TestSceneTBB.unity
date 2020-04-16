@@ -748,7 +748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerDistance: {x: 0, y: 14, z: -8}
-  xRotation: 50
+  rotationOffset: {x: -50, y: 0, z: 0}
 --- !u!1 &1161302412
 GameObject:
   m_ObjectHideFlags: 0
