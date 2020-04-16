@@ -12,6 +12,8 @@ namespace JamCraft5.Enemies.Components
         private float chaseSpeed;
         [SerializeField]
         private float detectionRange;
+        [SerializeField]
+        private float rotationSpeed;
         private EnemyState enemyState;
         private Transform transformCache;
         private Rigidbody rb;
@@ -48,8 +50,6 @@ namespace JamCraft5.Enemies.Components
         {
             Vector3 direction = GameUtility.GetDirection(transformCache.position, GameUtility.PlayerPosition);
             rb.velocity = direction * chaseSpeed * Time.fixedDeltaTime;
-            //TBB + Utku :)
-            transform.rotation = Quaternion.LookRotation(direction).ChangeEulerAngles(0, null, 0);
         }
         #endregion
 

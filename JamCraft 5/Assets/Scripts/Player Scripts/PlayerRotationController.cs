@@ -22,7 +22,7 @@ namespace JamCraft5.Player.Movement
             Vector3 target = GameUtility.MousePosition;
             Vector3 direction = GameUtility.GetDirection(transformCache.position, target);
             float rotation = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-            transformCache.rotation = Quaternion.Euler(0, rotation, 0);
+            transformCache.rotation = Quaternion.Euler(transformCache.rotation.eulerAngles.x, rotation, transformCache.rotation.eulerAngles.z);
         }
         #endregion
     }
