@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: -8603149577283645095}
   - component: {fileID: -4797391852414146838}
   - component: {fileID: -5823314428499129626}
+  - component: {fileID: -6921372003699322721}
   m_Layer: 0
   m_Name: Planet2_Red
   m_TagString: Untagged
@@ -163,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseSpeed: 300
   detectionRange: 5
+  rotationSpeed: 0
 --- !u!114 &-4797391852414146838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,3 +191,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d94b6022e29054597716c603d99fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6921372003699322721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878573876465092524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc70025a609c440428241fd83923d766, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 5

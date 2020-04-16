@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3653612909833214173}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000011920929, y: 1.0309825, z: -0.03832005}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1019638989963554332}
@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: -1178669971745672754}
   - component: {fileID: -7814873497642629800}
   - component: {fileID: -8844842752456377396}
+  - component: {fileID: 8947695323381893621}
   m_Layer: 0
   m_Name: Planet1_Grey
   m_TagString: Untagged
@@ -192,6 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseSpeed: 300
   detectionRange: 5
+  rotationSpeed: 100
 --- !u!114 &-7814873497642629800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5833bfc1c2edd114ba8a297aa58ec24b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 3
+  attackRange: 1.1
   attackRate: 2
 --- !u!114 &-8844842752456377396
 MonoBehaviour:
@@ -218,6 +220,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d94b6022e29054597716c603d99fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8947695323381893621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6255070926691689161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc70025a609c440428241fd83923d766, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 5
 --- !u!1 &8501836035741290624
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: -3164908024690243696}
   - component: {fileID: 3906466836656034076}
   - component: {fileID: -2245394262998541202}
+  - component: {fileID: -7592679984993792431}
   m_Layer: 0
   m_Name: Planet3_Grey
   m_TagString: Untagged
@@ -96,9 +97,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.1, z: 0}
 --- !u!114 &8682795354803431228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseSpeed: 300
   detectionRange: 5
+  rotationSpeed: 0
 --- !u!114 &3906466836656034076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +171,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d94b6022e29054597716c603d99fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-7592679984993792431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2622451499605358265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc70025a609c440428241fd83923d766, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 5
 --- !u!1 &8183111336468492670
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8183111336468492670}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000011920929, y: 1.1429607, z: -0.008816436}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8974781396699871852}

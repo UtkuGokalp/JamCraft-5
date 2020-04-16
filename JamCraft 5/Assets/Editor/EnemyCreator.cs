@@ -84,6 +84,7 @@ namespace JamCraft5.Editor
                 AddComponentIfDoesntExist<GroundedItemDropController>();
                 AddComponentIfDoesntExist<EnemyState>();
                 AddComponentIfDoesntExist<EnemyChasePlayerComponent>();
+                AddComponentIfDoesntExist<EnemyRotationComponent>();
 
                 switch (enemyType)
                 {
