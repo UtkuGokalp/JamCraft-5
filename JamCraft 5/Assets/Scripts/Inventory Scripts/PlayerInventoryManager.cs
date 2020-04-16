@@ -23,10 +23,6 @@ namespace JamCraft5.Player.Inventory
                 if (inventory == null)
                 {
                     inventory = new List<InventorySlot>();
-                    foreach (InventoryItem item in startingItems)
-                    {
-                        inventory.Add(new InventorySlot() { ContainedItem = item });
-                    }
                 }
                 return inventory;
             }
@@ -201,7 +197,7 @@ namespace JamCraft5.Player.Inventory
         #endregion
 
         #region HasItem
-        private (bool contains, InventorySlot slotContained) HasItem(InventoryItem item)
+        public (bool contains, InventorySlot slotContained) HasItem(InventoryItem item)
         {
             foreach (InventorySlot slot in Inventory)
             {

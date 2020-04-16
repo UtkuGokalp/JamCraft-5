@@ -1,6 +1,7 @@
 ﻿using JamCraft5.EventArguments;
 using JamCraft5.Player.Inventory;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Test : MonoBehaviour
 {
@@ -18,7 +19,8 @@ public class Test : MonoBehaviour
         for (int i = 0; i < slotIcons.Length; i++)
         {
             slotIcons[i] = slots[i].GetChild(0).GetChild(0).GetChild(0).gameObject;
-            if (slotIcons[i].GetComponentInChildren<UnityEngine.UI.Image>().sprite == null)
+            Image currentImage = slotIcons[i].GetComponentInChildren<Image>();
+            if (currentImage.sprite == null)
             {
                 slotIcons[i].SetActive(false);
             }
@@ -45,7 +47,7 @@ public class Test : MonoBehaviour
 
     private void OnWeaponAdded(object sender, OnWeaponAddedEventArgs e)
     {
-        slotIcons[e.SlotIndex].GetComponent<UnityEngine.UI.Image>().sprite = e.AddedWeapon.ItemData.uiIcon;
+        slotIcons[e.SlotIndex].GetComponent<Image>().sprite = e.AddedWeapon.ItemData.uiIcon;
         slotIcons[e.SlotIndex].SetActive(true);
     }
 }
