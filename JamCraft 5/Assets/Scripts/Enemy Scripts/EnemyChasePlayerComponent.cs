@@ -33,7 +33,7 @@ namespace JamCraft5.Enemies.Components
         {
             if (PlayerIsInDetectionRange)
             {
-                if (enemyState.StateOfEnemy != EnemyStateEnum.Attacking && 
+                if (enemyState.StateOfEnemy != EnemyStateEnum.Attacking &&
                     enemyState.StateOfEnemy != EnemyStateEnum.Damaging)
                 {
                     enemyState.StateOfEnemy = EnemyStateEnum.Chasing;
@@ -48,8 +48,8 @@ namespace JamCraft5.Enemies.Components
         {
             Vector3 direction = GameUtility.GetDirection(transformCache.position, GameUtility.PlayerPosition);
             rb.velocity = direction * chaseSpeed * Time.fixedDeltaTime;
-            //TBB
-            transform.rotation = Quaternion.LookRotation(direction);
+            //TBB + Utku :)
+            transform.rotation = Quaternion.LookRotation(direction).ChangeEulerAngles(0, null, 0);
         }
         #endregion
 

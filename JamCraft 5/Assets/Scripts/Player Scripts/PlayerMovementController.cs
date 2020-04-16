@@ -8,6 +8,8 @@ namespace JamCraft5.Player.Movement
     {
         #region Variables
         [SerializeField]
+        private bool calculateUsingRotation;
+        [SerializeField]
         private float movementSpeed;
         [Range(0, 1)]
         [SerializeField]
@@ -44,6 +46,14 @@ namespace JamCraft5.Player.Movement
         {
             if (!PlayerDashController.Dashing)
             {
+                if (!calculateUsingRotation)
+                {
+                    Vector3 movementVector = playerInput * movementSpeed * Time.fixedDeltaTime;
+                    rb.velocity = rb.velocity.With(movementVector.x, null, movementVector.z);
+                    return;
+                }
+
+
                 Vector3 movementDirection = default;
                 float yRotation = GeYtRotation();
                 bool facingBackwards = yRotation > 30 && yRotation < 230;
