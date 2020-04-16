@@ -12,8 +12,11 @@ namespace JamCraft5.Player.Attack
         JamCraft5.Player.Movement.PlayerRotationController rotation;
 
         private InventoryItem wep;
+        [SerializeField]
+        private Transform bullet;//The bullet for the shotgun, it should have attached the Bullet script
 
         public BoxCollider attackColider { get; private set; }
+        public CapsuleCollider attackCapsColider { get; private set; }
         private bool attacking = false;
         private int comboAttacks = 0;
         private bool pressedMouse = false;//Is here to detect if betwen combo attacks the mouse has been pressed
@@ -27,12 +30,14 @@ namespace JamCraft5.Player.Attack
 
             rotation = GetComponent<JamCraft5.Player.Movement.PlayerRotationController>();
             attackColider = gameObject.AddComponent<BoxCollider>();
-            CreateColider(attackColider);
+            attackColider.enabled = false;
+            attackCapsColider = gameObject.AddComponent<CapsuleCollider>();
+            attackCapsColider.enabled = false;
         }
         #endregion
 
-        #region CreateColider
-        BoxCollider CreateColider(BoxCollider box)
+        #region CreateRectColider
+        BoxCollider CreateRectColider(BoxCollider box)
         {
             /*sumary
              Create a box colider with the range of the current weapon
@@ -48,7 +53,32 @@ namespace JamCraft5.Player.Attack
             }
             else
             {
-                print("There's an error with the weapon range");
+                Debug.LogError("There's an error with the weapon");
+                return null;
+            }
+        }
+        #endregion
+
+        #region CreateHammerColider
+        CapsuleCollider CreateHammerColider(CapsuleCollider box)
+        {
+            /*sumary
+             Create a capsule colider with the radius = range of the current weapon
+             */
+            if (wep != null)
+            {
+                box.isTrigger = true;
+                box.direction = 1;
+                box.center = Vector3.forward * wep.ItemData.weaponRange / 2;
+                box.radius = wep.ItemData.weaponRange / 2;
+                box.height = 2;
+                box.enabled = false;
+                box.tag = "PlayerAttack";//The tag that the enemy will detect
+                return box;
+            }
+            else
+            {
+                Debug.LogError("There's an error with the weapon range");
                 return null;
             }
         }
@@ -64,22 +94,45 @@ namespace JamCraft5.Player.Attack
                 if (!attacking)
                 {
                     attacking = true;
-                    if (comboAttacks == 0)
+                    switch (GetComponent<Inventory.PlayerInventoryManager>().CurrentWeaponSlotIndex)
                     {
-                        StartCoroutine(Attack());
+                        case 0:
+                            CreateRectColider(attackColider);
+                            if (comboAttacks == 0)
+                            {
+                                StartCoroutine(AttackSaber());
+                            }
+                            else if (comboAttacks < 3)//If comboAttacks is < AttacksBeforeCooldown
+                            {
+                                StartCoroutine(ComboAttack());
+                            }
+                            break;
+
+                        case 1:
+                            CreateHammerColider(attackCapsColider);
+                            StartCoroutine(hammerAttack());
+                            break;
+
+                        case 2:
+                            CreateRectColider(attackColider);
+                            StartCoroutine(spearAttack());
+                            break;
+                            
+                        case 3:
+                            StartCoroutine(gunAttack());
+                            break;
                     }
-                    else if (comboAttacks < 3)//If comboAttacks is < AttacksBeforeCooldown
-                    {
-                        StartCoroutine(ComboAttack());
-                    }
+                    
                 }
 
             }
         }
         #endregion
 
+        #region Saber
+
         #region Attack
-        private IEnumerator Attack()
+        private IEnumerator AttackSaber()
         {
             rotation.enabled = false;//for the player not to move while attacking
             //start the attack animation
@@ -134,6 +187,49 @@ namespace JamCraft5.Player.Attack
             }
         }
         #endregion
+
+        #endregion
+
+        #region hammerAttack
+        IEnumerator hammerAttack()
+        {
+            rotation.enabled = false;
+            yield return new WaitForSeconds(0.2f);//fix this value with the animation 
+            attackCapsColider.enabled = true;
+            yield return new WaitForSeconds(0.1f);//fix this value with the animation
+            attackCapsColider.enabled = false;
+            rotation.enabled = true;
+            attacking = false;
+        }
+        #endregion
+
+        #region spearAttack
+        IEnumerator spearAttack()
+        {
+            //The code is essentialy = to hammer. but the times to wait may be changed
+            rotation.enabled = false;
+            yield return new WaitForSeconds(0.2f);//fix this value with the animation 
+            attackCapsColider.enabled = true;
+            yield return new WaitForSeconds(0.1f);//fix this value with the animation
+            attackCapsColider.enabled = false;
+            rotation.enabled = true;
+            attacking = false;
+        }
+        #endregion
+
+        IEnumerator gunAttack()
+        {
+            Transform reference = FindObjectOfType<WeaponPositionReferenceScript>().Trans;
+            rotation.enabled = false;
+            yield return new WaitForSeconds(0.2f);//fix this value with the animation
+            for (int i = Random.Range(3,8); i>0; i--)
+            {
+                Instantiate(bullet, reference);//Assign the hand transform                
+            }
+            yield return new WaitForSeconds(0.1f);//fix this value with the animation
+            rotation.enabled = true;
+            attacking = false;
+        }
     }
 }
 
