@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3113053706834856983}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.95802075, z: 0.078497246}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 82622409767141125}
@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: -8764647795322313657}
   - component: {fileID: -8861160815160884625}
   - component: {fileID: 1139643129200352259}
+  - component: {fileID: -5927010050168168203}
   m_Layer: 0
   m_Name: Planet4_Blue
   m_TagString: Untagged
@@ -192,6 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseSpeed: 300
   detectionRange: 5
+  rotationSpeed: 0
 --- !u!114 &-8861160815160884625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,6 +220,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d94b6022e29054597716c603d99fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5927010050168168203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3523519488083251535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc70025a609c440428241fd83923d766, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 5
 --- !u!1 &7074677722952153253
 GameObject:
   m_ObjectHideFlags: 0
