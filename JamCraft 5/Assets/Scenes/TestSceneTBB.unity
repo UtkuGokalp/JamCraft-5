@@ -207,6 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b60142cb4314c10409832ea051b9564b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bullet: {fileID: 0}
 --- !u!114 &373738497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,7 +232,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01479d659b1d7c42ab96ee3a65fdb8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  calculateUsingRotation: 0
   movementSpeed: 300
+  slowDownMultiplier: 0
 --- !u!114 &373738499
 MonoBehaviour:
   m_ObjectHideFlags: 0
