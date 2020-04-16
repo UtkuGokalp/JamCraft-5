@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Test Item 1
   type: 0
-  amount: 0
+  groundedItemPrefab: {fileID: 7436263840170745683, guid: 8069400e96a2ebf4cb217a5f7039d69b,
+    type: 3}
+  uiIcon: {fileID: 0}
   weaponDamage: 0
   weaponRange: 0
   grenadeDamage: 0
   grenadeRange: 0
   grenadeForce: 0
+  grenadeTime: 0
   matType: 
   healForce: 0

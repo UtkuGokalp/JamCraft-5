@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using JamCraft5.Items;
+using UnityEditor.SceneManagement;
 
 [CustomEditor(typeof(ItemsBase))]
 public class ItemEditor : Editor
@@ -33,6 +34,12 @@ public class ItemEditor : Editor
             case 3:
                 Items.healForce = EditorGUILayout.IntField("Healing Force", Items.healForce);
                 break;
+        }
+
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(Items);
+            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
         }
     }
 
