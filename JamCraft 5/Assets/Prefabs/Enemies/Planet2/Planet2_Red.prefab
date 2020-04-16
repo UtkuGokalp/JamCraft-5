@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseSpeed: 300
   detectionRange: 5
-  rotationSpeed: 0
+  rotationSpeed: 100
 --- !u!114 &-4797391852414146838
 MonoBehaviour:
   m_ObjectHideFlags: 0

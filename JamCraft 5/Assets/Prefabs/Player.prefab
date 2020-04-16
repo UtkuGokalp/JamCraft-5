@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01479d659b1d7c42ab96ee3a65fdb8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  calculateUsingRotation: 1
+  calculateUsingRotation: 0
   movementSpeed: 300
   slowDownMultiplier: 0.5
 --- !u!114 &8949166137121024595
@@ -285,6 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b60142cb4314c10409832ea051b9564b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bullet: {fileID: 0}
 --- !u!114 &5192326697949500484
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -48,72 +48,88 @@ namespace JamCraft5.Player.Movement
             {
                 if (!calculateUsingRotation)
                 {
-                    Vector3 movementVector = playerInput * movementSpeed * Time.fixedDeltaTime;
-                    rb.velocity = rb.velocity.With(movementVector.x, null, movementVector.z);
-                    return;
-                }
-
-
-                Vector3 movementDirection = default;
-                float yRotation = GeYtRotation();
-                bool facingBackwards = yRotation > 30 && yRotation < 230;
-                int horizontalAxisMultiplier = facingBackwards ? -1 : 1;
-
-                if (playerInput.x < 0)
-                {
-                    if (playerInput.z == 0)
+                    Vector3 movementDirection = playerInput * movementSpeed * Time.fixedDeltaTime;
+                    movementDirection.Normalize();
+                    //If there is no input in current frame
+                    if (currentInput.sqrMagnitude == 0)
                     {
-                        movementDirection = -transform.right * horizontalAxisMultiplier;
+                        if (movementDirection.sqrMagnitude > 0)
+                        {
+                            movementDirection *= slowDownMultiplier * Time.fixedDeltaTime;
+                        }
+                        rb.velocity = movementDirection.With(null, rb.velocity.y, null);
                     }
-                    else if (playerInput.z > 0)
+                    else
                     {
-                        movementDirection = -transform.right * horizontalAxisMultiplier + transform.forward;
-                    }
-                    else if (playerInput.z < 0)
-                    {
-                        movementDirection = -transform.right * horizontalAxisMultiplier + -transform.forward;
-                    }
-                }
-                else if (playerInput.x > 0)
-                {
-                    if (playerInput.z == 0)
-                    {
-                        movementDirection = transform.right * horizontalAxisMultiplier;
-                    }
-                    else if (playerInput.z > 0)
-                    {
-                        movementDirection = transform.right * horizontalAxisMultiplier + transform.forward;
-                    }
-                    else if (playerInput.z < 0)
-                    {
-                        movementDirection = transform.right * horizontalAxisMultiplier + -transform.forward;
+                        movementDirection = playerInput * movementSpeed * Time.fixedDeltaTime;
+                        rb.velocity = rb.velocity.With(movementDirection.x, null, movementDirection.z);
                     }
                 }
                 else
                 {
-                    if (playerInput.z > 0)
-                    {
-                        movementDirection = transform.forward;
-                    }
-                    else if (playerInput.z < 0)
-                    {
-                        movementDirection = -transform.forward;
-                    }
-                }
+                    Vector3 movementDirection = default;
+                    float yRotation = GeYtRotation();
+                    bool facingBackwards = yRotation > 30 && yRotation < 230;
+                    int horizontalAxisMultiplier = facingBackwards ? -1 : 1;
 
-                //All axis are 0, no input
-                if (currentInput.magnitude == 0)
-                {
-                    if (movementDirection.magnitude > 0)
+                    if (playerInput.x < 0)
                     {
-                        movementDirection *= slowDownMultiplier * Time.fixedDeltaTime;
+                        if (playerInput.z == 0)
+                        {
+                            movementDirection = -transform.right * horizontalAxisMultiplier;
+                        }
+                        else if (playerInput.z > 0)
+                        {
+                            movementDirection = -transform.right * horizontalAxisMultiplier + transform.forward;
+                        }
+                        else if (playerInput.z < 0)
+                        {
+                            movementDirection = -transform.right * horizontalAxisMultiplier + -transform.forward;
+                        }
                     }
-                    rb.velocity = movementDirection.With(null, rb.velocity.y, null);
-                }
-                else
-                {
-                    movementDirection *= movementSpeed * Time.fixedDeltaTime;
-                    rb.velocity = rb.velocity.With(movementDirection.x, null, movementDirection.z);
+                    else if (playerInput.x > 0)
+                    {
+                        if (playerInput.z == 0)
+                        {
+                            movementDirection = transform.right * horizontalAxisMultiplier;
+                        }
+                        else if (playerInput.z > 0)
+                        {
+                            movementDirection = transform.right * horizontalAxisMultiplier + transform.forward;
+                        }
+                        else if (playerInput.z < 0)
+                        {
+                            movementDirection = transform.right * horizontalAxisMultiplier + -transform.forward;
+                        }
+                    }
+                    else
+                    {
+                        if (playerInput.z > 0)
+                        {
+                            movementDirection = transform.forward;
+                        }
+                        else if (playerInput.z < 0)
+                        {
+                            movementDirection = -transform.forward;
+                        }
+                    }
+
+                    //All axis are 0, no input
+                    if (currentInput.sqrMagnitude == 0)
+                    {
+                        if (movementDirection.sqrMagnitude > 0)
+                        {
+                            movementDirection.Normalize();
+                            movementDirection *= slowDownMultiplier * Time.fixedDeltaTime;
+                        }
+                        rb.velocity = movementDirection.With(null, rb.velocity.y, null);
+                    }
+                    else
+                    {
+                        movementDirection.Normalize();
+                        movementDirection *= movementSpeed * Time.fixedDeltaTime;
+                        rb.velocity = rb.velocity.With(movementDirection.x, null, movementDirection.z);
+                    }
                 }
             }
         }
