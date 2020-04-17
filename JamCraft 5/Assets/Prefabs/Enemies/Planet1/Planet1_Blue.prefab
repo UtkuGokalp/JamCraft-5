@@ -111,8 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 173e30eb199a21b4299266a57552cfd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseSpeed: 0
-  detectionRange: 0
+  chaseSpeed: 300
+  detectionRange: 5
   rotationSpeed: 100
 --- !u!114 &1598921557452656854
 MonoBehaviour:
@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b31813f3822ed56418fdea7b3367c228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 0
-  attackRate: 0
+  attackRange: 3
+  attackRate: 2
 --- !u!114 &5639699592192036330
 MonoBehaviour:
   m_ObjectHideFlags: 0

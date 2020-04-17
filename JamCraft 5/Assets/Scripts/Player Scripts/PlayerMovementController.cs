@@ -3,6 +3,7 @@ using Utility.Development;
 
 namespace JamCraft5.Player.Movement
 {
+    [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerMovementController : MonoBehaviour
     {
@@ -15,6 +16,7 @@ namespace JamCraft5.Player.Movement
         [SerializeField]
         private float slowDownMultiplier;
         private Rigidbody rb;
+        private Animator animator;
         private Vector3 playerInput;
         /// <summary>
         /// Calculated using Input.GetAxisRaw() method, so there'll be no smoothing for this input. This means we can check this variable to see if the player is actually pressing keys in the current frame.
@@ -26,6 +28,7 @@ namespace JamCraft5.Player.Movement
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
+            animator = GetComponent<Animator>();
         }
         #endregion
 
@@ -36,6 +39,15 @@ namespace JamCraft5.Player.Movement
             playerInput.z = Input.GetAxis("Vertical");
             currentInput.x = Input.GetAxisRaw("Horizontal");
             currentInput.z = Input.GetAxisRaw("Vertical");
+
+            if (currentInput.sqrMagnitude != 0)
+            {
+                animator.SetBool("IsRunning", true);
+            }
+            else
+            {
+                animator.SetBool("IsRunning", false);
+            }
 
             playerInput.Normalize();
         }
