@@ -1884,7 +1884,7 @@ PrefabInstance:
     - target: {fileID: 2838741234409970726, guid: a4e290a4de6d6fa44bea66695aaede13,
         type: 3}
       propertyPath: calculateUsingRotation
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5542407526896326624, guid: a4e290a4de6d6fa44bea66695aaede13,
         type: 3}
