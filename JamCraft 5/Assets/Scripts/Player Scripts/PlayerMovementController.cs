@@ -9,17 +9,15 @@ namespace JamCraft5.Player.Movement
     {
         #region Variables
         [SerializeField]
-        private bool calculateUsingRotation;
-        [SerializeField]
         private float movementSpeed;
         [Range(0, 1)]
         [SerializeField]
         private float slowDownMultiplier;
         private Rigidbody rb;
+        private Transform transformCache;
         private Animator animator;
         private Vector3 playerInput;
-
-        private Player.Movement.PlayerRotationController rotationScr;
+        private PlayerRotationController rotationScr;
         /// <summary>
         /// Calculated using Input.GetAxisRaw() method, so there'll be no smoothing for this input. This means we can check this variable to see if the player is actually pressing keys in the current frame.
         /// </summary>
@@ -29,9 +27,10 @@ namespace JamCraft5.Player.Movement
         #region Awake
         private void Awake()
         {
+            transformCache = transform;
             rb = GetComponent<Rigidbody>();
             animator = GetComponent<Animator>();
-            rotationScr = GetComponent<Player.Movement.PlayerRotationController>();
+            rotationScr = GetComponent<PlayerRotationController>();
         }
         #endregion
 
@@ -42,6 +41,7 @@ namespace JamCraft5.Player.Movement
             playerInput.z = Input.GetAxis("Vertical");
             currentInput.x = Input.GetAxisRaw("Horizontal");
             currentInput.z = Input.GetAxisRaw("Vertical");
+            playerInput.Normalize();
 
             if (currentInput.sqrMagnitude != 0)
             {
@@ -52,158 +52,87 @@ namespace JamCraft5.Player.Movement
                 animator.SetBool("IsRunning", false);
             }
 
-            playerInput.Normalize();
-
-            #region RotateNoMouse
-            if (!calculateUsingRotation && !PlayerDashController.Dashing)
+            #region Player Rotation Without Mouse
+            if (!PlayerDashController.Dashing)
             {
                 //Rotate the player model without the mouse
-                switch (Input.GetAxis("Horizontal"))//for some reason I can't switch a Vector3
+                switch (currentInput.x)//for some reason I can't switch a Vector3
                 {
                     case 1:
-                        switch (Input.GetAxisRaw("Vertical"))
+                        switch (currentInput.z)
                         {
                             case 1:
-                                transform.rotation = Quaternion.Euler(0, 45, 0);
+                                transformCache.rotation = Quaternion.Euler(0, 45, 0);
                                 break;
                             case 0:
-                                transform.rotation = Quaternion.Euler(0, 90, 0);
+                                transformCache.rotation = Quaternion.Euler(0, 90, 0);
                                 break;
                             case -1:
-                                transform.rotation = Quaternion.Euler(0, 135, 0);
+                                transformCache.rotation = Quaternion.Euler(0, 135, 0);
                                 break;
                         }
                         break;
                     case 0:
-                        switch (Input.GetAxisRaw("Vertical"))
+                        switch (currentInput.z)
                         {
                             case 1:
-                                transform.rotation = Quaternion.Euler(0, 0, 0);
+                                transformCache.rotation = Quaternion.Euler(0, 0, 0);
                                 break;
                             case -1:
-                                transform.rotation = Quaternion.Euler(0, 180, 0);
+                                transformCache.rotation = Quaternion.Euler(0, 180, 0);
                                 break;
                         }
                         break;
                     case -1:
-                        switch (Input.GetAxisRaw("Vertical"))
+                        switch (currentInput.z)
                         {
                             case 1:
-                                transform.rotation = Quaternion.Euler(0, 315, 0);
+                                transformCache.rotation = Quaternion.Euler(0, 315, 0);
                                 break;
                             case 0:
-                                transform.rotation = Quaternion.Euler(0, 270, 0);
+                                transformCache.rotation = Quaternion.Euler(0, 270, 0);
                                 break;
                             case -1:
-                                transform.rotation = Quaternion.Euler(0, 225, 0);
+                                transformCache.rotation = Quaternion.Euler(0, 225, 0);
                                 break;
                         }
                         break;
                 }
-                #endregion
             }
+            #endregion
         }
         #endregion
-
+        
         #region FixedUpdate
         private void FixedUpdate()
         {
             if (!PlayerDashController.Dashing)
             {
-                if (!calculateUsingRotation)
+                Vector3 movementDirection = playerInput * movementSpeed * Time.fixedDeltaTime;
+                movementDirection.Normalize();
+                //If there is no input in current frame
+                if (currentInput.sqrMagnitude == 0)
                 {
-                    Vector3 movementDirection = playerInput * movementSpeed * Time.fixedDeltaTime;
-                    movementDirection.Normalize();
-                    //If there is no input in current frame
-                    if (currentInput.sqrMagnitude == 0)
+                    rotationScr.enabled = true;
+                    if (movementDirection.sqrMagnitude > 0)
                     {
-                        rotationScr.enabled = true;
-                        if (movementDirection.sqrMagnitude > 0)
-                        {
-                            movementDirection *= slowDownMultiplier * Time.fixedDeltaTime;
-                        }
-                        rb.velocity = movementDirection.With(null, rb.velocity.y, null);
+                        movementDirection *= slowDownMultiplier * Time.fixedDeltaTime;
                     }
-                    else
-                    {
-                        rotationScr.enabled = false;
-                        movementDirection = playerInput * movementSpeed * Time.fixedDeltaTime;
-                        rb.velocity = rb.velocity.With(movementDirection.x, null, movementDirection.z);
-                        
-                    }
+                    rb.velocity = movementDirection.With(null, rb.velocity.y, null);
                 }
                 else
                 {
-                    Vector3 movementDirection = default;
-                    float yRotation = GeYtRotation();
-                    bool facingBackwards = yRotation > 30 && yRotation < 230;
-                    int horizontalAxisMultiplier = facingBackwards ? -1 : 1;
+                    rotationScr.enabled = false;
+                    movementDirection = playerInput * movementSpeed * Time.fixedDeltaTime;
+                    rb.velocity = rb.velocity.With(movementDirection.x, null, movementDirection.z);
 
-                    if (playerInput.x < 0)
-                    {
-                        if (playerInput.z == 0)
-                        {
-                            movementDirection = -transform.right * horizontalAxisMultiplier;
-                        }
-                        else if (playerInput.z > 0)
-                        {
-                            movementDirection = -transform.right * horizontalAxisMultiplier + transform.forward;
-                        }
-                        else if (playerInput.z < 0)
-                        {
-                            movementDirection = -transform.right * horizontalAxisMultiplier + -transform.forward;
-                        }
-                    }
-                    else if (playerInput.x > 0)
-                    {
-                        if (playerInput.z == 0)
-                        {
-                            movementDirection = transform.right * horizontalAxisMultiplier;
-                        }
-                        else if (playerInput.z > 0)
-                        {
-                            movementDirection = transform.right * horizontalAxisMultiplier + transform.forward;
-                        }
-                        else if (playerInput.z < 0)
-                        {
-                            movementDirection = transform.right * horizontalAxisMultiplier + -transform.forward;
-                        }
-                    }
-                    else
-                    {
-                        if (playerInput.z > 0)
-                        {
-                            movementDirection = transform.forward;
-                        }
-                        else if (playerInput.z < 0)
-                        {
-                            movementDirection = -transform.forward;
-                        }
-                    }
-
-                    //All axis are 0, no input
-                    if (currentInput.sqrMagnitude == 0)
-                    {
-                        if (movementDirection.sqrMagnitude > 0)
-                        {
-                            movementDirection.Normalize();
-                            movementDirection *= slowDownMultiplier * Time.fixedDeltaTime;
-                        }
-                        rb.velocity = movementDirection.With(null, rb.velocity.y, null);
-                    }
-                    else
-                    {
-                        movementDirection.Normalize();
-                        movementDirection *= movementSpeed * Time.fixedDeltaTime;
-                        rb.velocity = rb.velocity.With(movementDirection.x, null, movementDirection.z);
-                    }
                 }
             }
         }
         #endregion
 
-        #region GeYtRotation
-        private float GeYtRotation()
+        #region GetYRotation
+        private float GetYRotation()
         {
             float yRotation = transform.rotation.eulerAngles.y;
             if (yRotation >= 360)
