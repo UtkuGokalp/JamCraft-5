@@ -94,7 +94,7 @@ namespace JamCraft5.Enemies.Spawning
         }
         #endregion
 
-        #region StartSpawning
+         #region StartSpawning
         public void StartSpawning()
         {
             currentWaveIndex = 0;
