@@ -94,6 +94,7 @@ namespace JamCraft5.Player.Attack
                 if (!attacking)
                 {
                     attacking = true;
+                    //Test code
                     GetComponent<Animator>().SetBool("IsAttackingWithSword", attacking);
                     switch (GetComponent<Inventory.PlayerInventoryManager>().CurrentWeaponSlotIndex)
                     {
