@@ -57,10 +57,10 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5208865850869828472, guid: bef15e81d4d3acf48b7511cdfc7d7c68, type: 3}
-  - {fileID: 6350104969720256171, guid: bef15e81d4d3acf48b7511cdfc7d7c68, type: 3}
-  - {fileID: -6792773533697327866, guid: bef15e81d4d3acf48b7511cdfc7d7c68, type: 3}
-  - {fileID: -1673581479155543510, guid: bef15e81d4d3acf48b7511cdfc7d7c68, type: 3}
+  - {fileID: 2100000, guid: 54d0287cf1d72b341ae7ca62cd774f03, type: 2}
+  - {fileID: 2100000, guid: b2b8926380e5c2443b9383b8e27d90cb, type: 2}
+  - {fileID: 2100000, guid: 5d6e95d10a3da0e42bd6dd7cf610a6f4, type: 2}
+  - {fileID: 2100000, guid: 127769d53cf1e9145b8ccb46ce1f4d89, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -90,6 +90,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 884810870755339893}
+  - component: {fileID: 504661707859315245}
+  - component: {fileID: 2583524373710864559}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -112,3 +114,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &504661707859315245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4187260324020247654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 533b4ef519a6a5d46a2eb03aa508484d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2583524373710864559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4187260324020247654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 533b4ef519a6a5d46a2eb03aa508484d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

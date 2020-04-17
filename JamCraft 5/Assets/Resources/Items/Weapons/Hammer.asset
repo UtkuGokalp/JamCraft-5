@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e98df8c69f9bd9242b628bd8e7951cfe, type: 3}
-  m_Name: Test Item
+  m_Name: Hammer
   m_EditorClassIdentifier: 
-  itemName: Test Item 1
+  itemName: 
   type: 0
-  groundedItemPrefab: {fileID: 7436263840170745683, guid: 8069400e96a2ebf4cb217a5f7039d69b,
-    type: 3}
+  groundedItemPrefab: {fileID: 0}
   uiIcon: {fileID: 0}
   weaponDamage: 0
   weaponRange: 0
+  holdingPrefab: {fileID: 1885027753158418094, guid: 2a7244c8ecaae0245a073c4850a13633,
+    type: 3}
   grenadeDamage: 0
   grenadeRange: 0
   grenadeForce: 0

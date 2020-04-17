@@ -3,7 +3,12 @@ guid: fa4423cab694ffb469022944b3e36d69
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Titanium_Silver
+    second: {fileID: 2100000, guid: e136c5f6fd4381549b0cb1f3a3b91577, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

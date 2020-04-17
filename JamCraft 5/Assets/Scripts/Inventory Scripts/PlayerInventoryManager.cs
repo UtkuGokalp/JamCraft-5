@@ -26,24 +26,23 @@ namespace JamCraft5.Player.Inventory
             }
         }
         private InventoryWeaponSlot[] weapons;
-        private int gotWep = 0;
         public InventoryWeaponSlot SelectedWeapon => Weapons[CurrentWeaponSlotIndex];
         public int CurrentWeaponSlotIndex
         {
             get => currentWeaponSlotIndex;
             private set
             {
-                if (value >= weapons.Length)
+                if (value >= Weapons.Length)
                 {
                     value = 0;
                 }
                 else if (value < 0)
                 {
-                    value = weapons.Length - 1;
+                    value = Weapons.Length - 1;
                 }
 
                 currentWeaponSlotIndex = value;
-                OnSelectedWeaponChanged?.Invoke(this, new OnSelectedWeaponChangedEventArgs(currentWeaponSlotIndex, weapons[currentWeaponSlotIndex].ContainedWeapon));
+                OnSelectedWeaponChanged?.Invoke(this, new OnSelectedWeaponChangedEventArgs(currentWeaponSlotIndex, Weapons[currentWeaponSlotIndex].ContainedWeapon));
             }
         }
         public InventoryWeaponSlot[] Weapons
@@ -87,19 +86,19 @@ namespace JamCraft5.Player.Inventory
             //the selection to go up in game (visually), which means decreasing the index.
             CurrentWeaponSlotIndex -= (int)Input.mouseScrollDelta.y;
 
-            if (Input.GetKeyDown(KeyCode.Alpha1) && gotWep > 0)
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 CurrentWeaponSlotIndex = 0;
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2) && gotWep > 1)
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 CurrentWeaponSlotIndex = 1;
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha3) && gotWep > 2)
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 CurrentWeaponSlotIndex = 2;
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha4) && gotWep > 3)
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
             {
                 CurrentWeaponSlotIndex = 3;
             }
@@ -160,13 +159,16 @@ namespace JamCraft5.Player.Inventory
         #region AddWeapon
         public (bool added, InventoryWeapon addedWeapon) AddWeapon(InventoryWeapon weapon)
         {
-            for (int i = 0; i < Weapons.Length; i++)
+            if (!HasItem(ItemConverter.ToInventoryItem(weapon)).contains)
             {
-                if (Weapons[i].ContainedWeapon == null)
+                for (int i = 0; i < Weapons.Length; i++)
                 {
-                    Weapons[i].ContainedWeapon = weapon;
-                    OnWeaponAdded?.Invoke(this, new OnWeaponAddedEventArgs(i, weapon));
-                    return System.ValueTuple.Create(true, weapon);
+                    if (Weapons[i].ContainedWeapon == null)
+                    {
+                        Weapons[i].ContainedWeapon = weapon;
+                        OnWeaponAdded?.Invoke(this, new OnWeaponAddedEventArgs(i, weapon));
+                        return System.ValueTuple.Create(true, weapon);
+                    }
                 }
             }
             return System.ValueTuple.Create<bool, InventoryWeapon>(false, null);

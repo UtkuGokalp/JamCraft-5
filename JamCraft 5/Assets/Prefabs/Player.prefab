@@ -637,6 +637,7 @@ GameObject:
   - component: {fileID: 586864812398723181}
   - component: {fileID: 586864812398723182}
   - component: {fileID: 586864812398723183}
+  - component: {fileID: 4884385139387822378}
   - component: {fileID: 1315358949}
   - component: {fileID: 1315358950}
   - component: {fileID: 1232920683594631090}
@@ -754,6 +755,10 @@ MonoBehaviour:
   saberCol: {fileID: 1315358950}
   hammerCol: {fileID: 1315358949}
   spearCol: {fileID: 1232920683594631090}
+  hammerAttackAnimationClip: {fileID: 1827226128182048838, guid: 6568ed067124b4849add2cf4d63eba0f,
+    type: 3}
+  halberdAttackAnimationClip: {fileID: 1827226128182048838, guid: 5ccb35101e132ad4cb55cec7339d6b89,
+    type: 3}
 --- !u!114 &586864812398723180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -809,8 +814,21 @@ MonoBehaviour:
   throwForce: 200
   collisionIgnoranceTime: 0.5
   removeItem:
-    itemData: {fileID: 11400000, guid: 133385442cb8c6f4d9ea102c3b0d2a06, type: 2}
+    itemData: {fileID: 0}
   dropKey: 113
+--- !u!114 &4884385139387822378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8841075825555908083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34a7ce0bfde58f0428adc93b74c133bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponHolder: {fileID: 1798511951}
 --- !u!136 &1315358949
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -900,10 +918,10 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 4362962105363994262, guid: 3c29b4c28fc8f774c9ff2982e2587daf, type: 3}
-  - {fileID: -8848810374240701247, guid: 3c29b4c28fc8f774c9ff2982e2587daf, type: 3}
-  - {fileID: 4913911580219713836, guid: 3c29b4c28fc8f774c9ff2982e2587daf, type: 3}
-  - {fileID: 4955249067623901878, guid: 3c29b4c28fc8f774c9ff2982e2587daf, type: 3}
-  - {fileID: 4946761868874776609, guid: 3c29b4c28fc8f774c9ff2982e2587daf, type: 3}
+  - {fileID: 2100000, guid: 49624b651b7a7fb458c9184e9fba8862, type: 2}
+  - {fileID: 2100000, guid: 0f0cee29d2c865a4fab33493f28b1f03, type: 2}
+  - {fileID: 2100000, guid: 54d0287cf1d72b341ae7ca62cd774f03, type: 2}
+  - {fileID: 2100000, guid: b2b8926380e5c2443b9383b8e27d90cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

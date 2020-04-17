@@ -3,7 +3,12 @@ guid: bfc3f5409723d3844a4c6854968da04e
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Orichalcum_Green
+    second: {fileID: 2100000, guid: 111a2da040121004f9e292f7c63294e0, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

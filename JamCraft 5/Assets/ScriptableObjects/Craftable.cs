@@ -14,7 +14,7 @@ namespace JamCraft5.Crafting
 
         #region Craft
         /// <summary>
-        /// Checks if this item can be crafted and crafts if possible. Calling CanCraft for checking manually is not recommended since it will be relatively expensive.
+        /// Checks if this item can be crafted and returns crafted item if possible. Calling CanCraft for checking manually is not recommended since it will be relatively expensive.
         /// </summary>
         public InventoryItem Craft(PlayerInventoryManager playerInventory)
         {

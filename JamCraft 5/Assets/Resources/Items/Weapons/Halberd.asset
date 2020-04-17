@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e98df8c69f9bd9242b628bd8e7951cfe, type: 3}
-  m_Name: TestWeapon1
+  m_Name: Halberd
   m_EditorClassIdentifier: 
-  itemName: Weapon1
+  itemName: 
   type: 0
   groundedItemPrefab: {fileID: 0}
   uiIcon: {fileID: 0}
-  weaponDamage: 20
-  weaponRange: 5
+  weaponDamage: 0
+  weaponRange: 0
+  holdingPrefab: {fileID: -2358150046258785855, guid: 85de3531a193c244798e85a5b4d28668,
+    type: 3}
   grenadeDamage: 0
   grenadeRange: 0
   grenadeForce: 0

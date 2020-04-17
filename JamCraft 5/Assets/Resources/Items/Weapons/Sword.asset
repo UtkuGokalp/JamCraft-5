@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e98df8c69f9bd9242b628bd8e7951cfe, type: 3}
+  m_Name: Sword
+  m_EditorClassIdentifier: 
+  itemName: 
+  type: 0
+  groundedItemPrefab: {fileID: 0}
+  uiIcon: {fileID: 0}
+  weaponDamage: 0
+  weaponRange: 0
+  holdingPrefab: {fileID: 5795850161917067590, guid: 004a22ba725c2934e96bd25106e2bf59,
+    type: 3}
+  grenadeDamage: 0
+  grenadeRange: 0
+  grenadeForce: 0
+  grenadeTime: 0
+  matType: 
+  healForce: 0

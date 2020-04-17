@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 486828685430461068}
+  - component: {fileID: 5795850161917067590}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -31,6 +32,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5795850161917067590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3502333507141329055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 533b4ef519a6a5d46a2eb03aa508484d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7098949269978501380
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,10 +101,10 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1673581479155543510, guid: 67f5af3fa4eee2040a387bacb7b8d63e, type: 3}
-  - {fileID: 5208865850869828472, guid: 67f5af3fa4eee2040a387bacb7b8d63e, type: 3}
-  - {fileID: 6350104969720256171, guid: 67f5af3fa4eee2040a387bacb7b8d63e, type: 3}
-  - {fileID: -5665847456353555824, guid: 67f5af3fa4eee2040a387bacb7b8d63e, type: 3}
+  - {fileID: 2100000, guid: 127769d53cf1e9145b8ccb46ce1f4d89, type: 2}
+  - {fileID: 2100000, guid: 54d0287cf1d72b341ae7ca62cd774f03, type: 2}
+  - {fileID: 2100000, guid: b2b8926380e5c2443b9383b8e27d90cb, type: 2}
+  - {fileID: 2100000, guid: 23a608cafc534b745857b70d1f2c1530, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

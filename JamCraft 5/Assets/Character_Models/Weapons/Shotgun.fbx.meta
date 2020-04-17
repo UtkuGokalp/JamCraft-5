@@ -3,7 +3,12 @@ guid: bef15e81d4d3acf48b7511cdfc7d7c68
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Adamantium_Red
+    second: {fileID: 2100000, guid: 5d6e95d10a3da0e42bd6dd7cf610a6f4, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

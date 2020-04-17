@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Utility.Development;
+using JamCraft5.Player.Attack;
 
 namespace JamCraft5.Player.Movement
 {
@@ -15,9 +16,6 @@ namespace JamCraft5.Player.Movement
         private Vector3 directionToMouse;
         private Rigidbody rb;
         private Transform transformCache;
-
-        private bool attack; 
-
         public static bool Dashing { get; private set; }
         #endregion
 
@@ -32,8 +30,7 @@ namespace JamCraft5.Player.Movement
         #region Update
         private void Update()
         {
-            attack = GetComponent<Player.Attack.PlayerAttack>().attacking;//It doesn't work in awake
-            if (Input.GetMouseButtonDown(MouseButton.RIGHT) && !attack)
+            if (Input.GetMouseButtonDown(MouseButton.RIGHT) && !PlayerAttack.Attacking)
             {
                 Dash();
             }
@@ -62,10 +59,6 @@ namespace JamCraft5.Player.Movement
 
                 if (currentDashTime <= 0)
                 {
-                    Dashing = false;
-                }
-                else if (attack) {
-                    rb.velocity = Vector3.zero;
                     Dashing = false;
                 }
             }

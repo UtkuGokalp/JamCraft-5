@@ -24,8 +24,14 @@ namespace JamCraft5.Player.Inventory
             GroundedItem groundedItem = collision.gameObject.GetComponent<GroundedItem>();
             if (groundedItem != null)
             {
-                InventoryItem inventoryItem = ItemConverter.ToInventoryItem(groundedItem, true);
-                playerInventoryManager.AddItem(inventoryItem);
+                if (groundedItem.ItemData.type == 0) // If collected item is a weapon
+                {
+                    playerInventoryManager.AddWeapon(ItemConverter.ToInventoryWeapon(groundedItem));
+                }
+                else
+                {
+                    playerInventoryManager.AddItem(ItemConverter.ToInventoryItem(groundedItem, true));
+                }
             }
         }
         #endregion
