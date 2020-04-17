@@ -94,6 +94,7 @@ namespace JamCraft5.Player.Attack
                 if (!attacking)
                 {
                     attacking = true;
+                    GetComponent<Animator>().SetBool("IsAttackingWithSword", attacking);
                     switch (GetComponent<Inventory.PlayerInventoryManager>().CurrentWeaponSlotIndex)
                     {
                         case 0:
@@ -122,7 +123,6 @@ namespace JamCraft5.Player.Attack
                             StartCoroutine(gunAttack());
                             break;
                     }
-                    
                 }
 
             }
