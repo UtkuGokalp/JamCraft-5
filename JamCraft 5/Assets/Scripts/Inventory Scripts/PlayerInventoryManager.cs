@@ -11,8 +11,6 @@ namespace JamCraft5.Player.Inventory
         #region Variables
         [SerializeField]
         private InventoryItem[] startingItems;
-        [SerializeField]
-        private InventoryWeapon[] testWeapons = new InventoryWeapon[4];
         private List<InventorySlot> inventory;
         private int currentWeaponSlotIndex;
 
@@ -23,10 +21,6 @@ namespace JamCraft5.Player.Inventory
                 if (inventory == null)
                 {
                     inventory = new List<InventorySlot>();
-                    foreach (InventoryItem item in startingItems)
-                    {
-                        inventory.Add(new InventorySlot() { ContainedItem = item });
-                    }
                 }
                 return inventory;
             }
@@ -82,11 +76,6 @@ namespace JamCraft5.Player.Inventory
             foreach (InventoryItem item in startingItems)
             {
                 AddItem(item);
-            }
-
-            for (int i = 0; i < testWeapons.Length; i++)
-            {
-                AddWeapon(testWeapons[i]);
             }
         }
         #endregion
@@ -201,7 +190,7 @@ namespace JamCraft5.Player.Inventory
         #endregion
 
         #region HasItem
-        private (bool contains, InventorySlot slotContained) HasItem(InventoryItem item)
+        public (bool contains, InventorySlot slotContained) HasItem(InventoryItem item)
         {
             foreach (InventorySlot slot in Inventory)
             {
