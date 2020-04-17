@@ -18,6 +18,8 @@ namespace JamCraft5.Player.Movement
         private Rigidbody rb;
         private Animator animator;
         private Vector3 playerInput;
+
+        private Player.Movement.PlayerRotationController rotationScr;
         /// <summary>
         /// Calculated using Input.GetAxisRaw() method, so there'll be no smoothing for this input. This means we can check this variable to see if the player is actually pressing keys in the current frame.
         /// </summary>
@@ -29,6 +31,7 @@ namespace JamCraft5.Player.Movement
         {
             rb = GetComponent<Rigidbody>();
             animator = GetComponent<Animator>();
+            rotationScr = GetComponent<Player.Movement.PlayerRotationController>();
         }
         #endregion
 
@@ -50,6 +53,55 @@ namespace JamCraft5.Player.Movement
             }
 
             playerInput.Normalize();
+
+            #region RotateNoMouse
+            if (!calculateUsingRotation && !PlayerDashController.Dashing)
+            {
+                //Rotate the player model without the mouse
+                switch (Input.GetAxis("Horizontal"))//for some reason I can't switch a Vector3
+                {
+                    case 1:
+                        switch (Input.GetAxisRaw("Vertical"))
+                        {
+                            case 1:
+                                transform.rotation = Quaternion.Euler(0, 45, 0);
+                                break;
+                            case 0:
+                                transform.rotation = Quaternion.Euler(0, 90, 0);
+                                break;
+                            case -1:
+                                transform.rotation = Quaternion.Euler(0, 135, 0);
+                                break;
+                        }
+                        break;
+                    case 0:
+                        switch (Input.GetAxisRaw("Vertical"))
+                        {
+                            case 1:
+                                transform.rotation = Quaternion.Euler(0, 0, 0);
+                                break;
+                            case -1:
+                                transform.rotation = Quaternion.Euler(0, 180, 0);
+                                break;
+                        }
+                        break;
+                    case -1:
+                        switch (Input.GetAxisRaw("Vertical"))
+                        {
+                            case 1:
+                                transform.rotation = Quaternion.Euler(0, 315, 0);
+                                break;
+                            case 0:
+                                transform.rotation = Quaternion.Euler(0, 270, 0);
+                                break;
+                            case -1:
+                                transform.rotation = Quaternion.Euler(0, 225, 0);
+                                break;
+                        }
+                        break;
+                }
+                #endregion
+            }
         }
         #endregion
 
@@ -65,6 +117,7 @@ namespace JamCraft5.Player.Movement
                     //If there is no input in current frame
                     if (currentInput.sqrMagnitude == 0)
                     {
+                        rotationScr.enabled = true;
                         if (movementDirection.sqrMagnitude > 0)
                         {
                             movementDirection *= slowDownMultiplier * Time.fixedDeltaTime;
@@ -73,8 +126,10 @@ namespace JamCraft5.Player.Movement
                     }
                     else
                     {
+                        rotationScr.enabled = false;
                         movementDirection = playerInput * movementSpeed * Time.fixedDeltaTime;
                         rb.velocity = rb.velocity.With(movementDirection.x, null, movementDirection.z);
+                        
                     }
                 }
                 else
