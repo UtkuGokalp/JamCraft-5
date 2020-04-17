@@ -10,11 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 682f91c08041b17479e4e4d4e644bf6f, type: 3}
-  m_Name: Test
+  m_Name: Shotgun Recipe
   m_EditorClassIdentifier: 
-  requiredItems:
-  - requiredItemCount: 1
-    item:
-      itemData: {fileID: 11400000, guid: 133385442cb8c6f4d9ea102c3b0d2a06, type: 2}
+  requiredItems: []
   outputItem:
-    itemData: {fileID: 11400000, guid: 34f189ea4376f9d4e98dcc4df8eff09d, type: 2}
+    itemData: {fileID: 11400000, guid: 7b502e894df8e2444b10b43b831870b0, type: 2}

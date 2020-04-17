@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Utility.Development;
+using JamCraft5.Player.Attack;
 
 namespace JamCraft5.Player.Movement
 {
@@ -106,6 +107,10 @@ namespace JamCraft5.Player.Movement
         #region FixedUpdate
         private void FixedUpdate()
         {
+            if (PlayerAttack.Attacking)
+            {
+                rb.velocity = Vector3.zero;
+            }
             if (!PlayerDashController.Dashing)
             {
                 Vector3 movementDirection = playerInput * movementSpeed * Time.fixedDeltaTime;
@@ -125,7 +130,6 @@ namespace JamCraft5.Player.Movement
                     rotationScr.enabled = false;
                     movementDirection = playerInput * movementSpeed * Time.fixedDeltaTime;
                     rb.velocity = rb.velocity.With(movementDirection.x, null, movementDirection.z);
-
                 }
             }
         }

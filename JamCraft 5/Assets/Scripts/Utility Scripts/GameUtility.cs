@@ -66,6 +66,10 @@ namespace Utility.Development
         public const string PLAYER_TAG = "Player";
         public const string PLAYER_LAYER_NAME = "Player";
         public const string GROUNDED_ITEM_LAYER_NAME = "Grounded Item";
+        public const string HAMMER_ATTACK_ANIMATION_TRIGGER_NAME = "HammerAttack";
+        public const string SHOTGUN_ATTACK_ANIMATION_TRIGGER_NAME = "ShotgunAttack";
+        public const string SWORD_ATTACK_ANIMATION_TRIGGER_NAME = "SwordAttack";
+        public const string HALBERD_ATTACK_ANIMATION_TRIGGER_NAME = "HalberdAttack";
         #endregion
 
         #region GetDirection

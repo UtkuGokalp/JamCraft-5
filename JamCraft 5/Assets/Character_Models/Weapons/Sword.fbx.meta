@@ -6,7 +6,27 @@ ModelImporter:
   - first:
       74: 1827226128182048838
     second: Take 001
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dark_Grey1
+    second: {fileID: 2100000, guid: 54d0287cf1d72b341ae7ca62cd774f03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Galtinium_Blue
+    second: {fileID: 2100000, guid: 23a608cafc534b745857b70d1f2c1530, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Light_Grey1
+    second: {fileID: 2100000, guid: b2b8926380e5c2443b9383b8e27d90cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: black1
+    second: {fileID: 2100000, guid: 127769d53cf1e9145b8ccb46ce1f4d89, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

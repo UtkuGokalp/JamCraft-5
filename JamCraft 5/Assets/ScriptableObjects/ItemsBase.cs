@@ -14,6 +14,7 @@ public class ItemsBase : ScriptableObject
 
     public int weaponDamage;
     public int weaponRange;
+    public WeaponPositionReferenceScript holdingPrefab;
 
     public int grenadeDamage;
     public int grenadeRange;

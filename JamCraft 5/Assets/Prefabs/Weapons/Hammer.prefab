@@ -57,10 +57,10 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1673581479155543510, guid: fa4423cab694ffb469022944b3e36d69, type: 3}
-  - {fileID: 5208865850869828472, guid: fa4423cab694ffb469022944b3e36d69, type: 3}
-  - {fileID: 6350104969720256171, guid: fa4423cab694ffb469022944b3e36d69, type: 3}
-  - {fileID: -2617078865645518913, guid: fa4423cab694ffb469022944b3e36d69, type: 3}
+  - {fileID: 2100000, guid: 127769d53cf1e9145b8ccb46ce1f4d89, type: 2}
+  - {fileID: 2100000, guid: 54d0287cf1d72b341ae7ca62cd774f03, type: 2}
+  - {fileID: 2100000, guid: b2b8926380e5c2443b9383b8e27d90cb, type: 2}
+  - {fileID: 2100000, guid: e136c5f6fd4381549b0cb1f3a3b91577, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -90,6 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4647188330177769739}
+  - component: {fileID: 1885027753158418094}
   m_Layer: 0
   m_Name: Hammer
   m_TagString: Untagged
@@ -112,3 +113,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1885027753158418094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8513343655535231768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 533b4ef519a6a5d46a2eb03aa508484d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

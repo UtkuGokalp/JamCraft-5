@@ -21,6 +21,7 @@ public class ItemEditor : Editor
             case 0:
                 Items.weaponDamage = EditorGUILayout.IntField("Damage", Items.weaponDamage);
                 Items.weaponRange = EditorGUILayout.IntField("Range", Items.weaponRange);
+                Items.holdingPrefab = (WeaponPositionReferenceScript)EditorGUILayout.ObjectField("Prefab To Hold In Hand", Items.holdingPrefab, typeof(WeaponPositionReferenceScript), false);
                 break;
             case 1:
                 Items.grenadeDamage = EditorGUILayout.IntField("Damage", Items.grenadeDamage);
