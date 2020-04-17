@@ -16,9 +16,14 @@ namespace JamCraft5.Player.Attack
         [SerializeField]
         private Transform bullet;//The bullet for the shotgun, it should have attached the Bullet script
 
-        public BoxCollider attackColider { get; private set; }
-        public CapsuleCollider attackCapsColider { get; private set; }
-        private bool attacking = false;
+        [SerializeField]
+        private BoxCollider saberCol;
+        [SerializeField]
+        private CapsuleCollider hammerCol;
+        [SerializeField]
+        private BoxCollider spearCol;
+
+        public bool attacking { get; private set;}
         private int comboAttacks = 0;
         private bool pressedMouse = false;//Is here to detect if betwen combo attacks the mouse has been pressed
         #endregion
@@ -35,61 +40,11 @@ namespace JamCraft5.Player.Attack
                 wep = new InventoryItem(new ItemsBase());
                 wep.ItemData.weaponRange = 2;
             }
+
+            attacking = false;
+
             rotation = GetComponent<JamCraft5.Player.Movement.PlayerRotationController>();
-            attackColider = gameObject.AddComponent<BoxCollider>();
-            attackColider.isTrigger = true;
-            attackColider.enabled = false;
-            attackCapsColider = gameObject.AddComponent<CapsuleCollider>();
-            attackCapsColider.isTrigger = true;
-            attackCapsColider.enabled = false;
-        }
-        #endregion
-
-        #region CreateRectColider
-        BoxCollider CreateRectColider(BoxCollider box)
-        {
-            /*sumary
-             Create a box colider with the range of the current weapon
-             */
-            if (wep != null)
-            {
-                box.isTrigger = true;
-                box.size = new Vector3(0.8f, 1, wep.ItemData.weaponRange);
-                box.center = Vector3.forward * wep.ItemData.weaponRange / 2;
-                box.enabled = false;
-                box.tag = "PlayerAttack";//The tag that the enemy will detect
-                return box;
-            }
-            else
-            {
-                Debug.LogError("There's an error with the weapon");
-                return null;
-            }
-        }
-        #endregion
-
-        #region CreateHammerColider
-        CapsuleCollider CreateHammerColider(CapsuleCollider box)
-        {
-            /*sumary
-             Create a capsule colider with the radius = range of the current weapon
-             */
-            if (wep != null)
-            {
-                box.isTrigger = true;
-                box.direction = 1;
-                box.center = Vector3.forward * wep.ItemData.weaponRange / 2;
-                box.radius = wep.ItemData.weaponRange / 2;
-                box.height = 2;
-                box.enabled = false;
-                box.tag = "PlayerAttack";//The tag that the enemy will detect
-                return box;
-            }
-            else
-            {
-                Debug.LogError("There's an error with the weapon range");
-                return null;
-            }
+            pMov = GetComponent<JamCraft5.Player.Movement.PlayerMovementController>();
         }
         #endregion
 
@@ -105,10 +60,11 @@ namespace JamCraft5.Player.Attack
                     attacking = true;
                     //Test code
                     GetComponent<Animator>().SetBool("IsAttackingWithSword", attacking);
+
                     switch (GetComponent<Inventory.PlayerInventoryManager>().CurrentWeaponSlotIndex)
                     {
                         case 0:
-                            CreateRectColider(attackColider);
+                            
                             if (comboAttacks == 0)
                             {
                                 StartCoroutine(AttackSaber());
@@ -118,15 +74,13 @@ namespace JamCraft5.Player.Attack
                                 StartCoroutine(ComboAttack());
                             }
                             break;
-
                         case 1:
-                            CreateHammerColider(attackCapsColider);
-                            StartCoroutine(hammerAttack());
+                            StartCoroutine(AttackBase(hammerCol, 2f, 2f));//fix the times with animations
+
                             break;
 
                         case 2:
-                            CreateRectColider(attackColider);
-                            StartCoroutine(spearAttack());
+                            StartCoroutine(AttackBase(spearCol, 2f, 2f));//fix the times with animations
                             break;
                             
                         case 3:
@@ -148,9 +102,9 @@ namespace JamCraft5.Player.Attack
             pMov.enabled = false;
             //start the attack animation
             yield return new WaitForSeconds(0.2f);//fix this value with the animation
-            attackColider.enabled = true;
+            saberCol.enabled = true;
             yield return new WaitForSeconds(0.1f);//fix this value with the animation
-            attackColider.enabled = false;
+            saberCol.enabled = false;
             rotation.enabled = true;
             pMov.enabled = true;
             attacking = false;
@@ -158,7 +112,7 @@ namespace JamCraft5.Player.Attack
         }
         #endregion
 
-        #region Combo
+        #region ComboCount
         private IEnumerator Combo()
         {
             pressedMouse = false;
@@ -184,9 +138,9 @@ namespace JamCraft5.Player.Attack
             pMov.enabled = false;
             //start the attck animation
             yield return new WaitForSeconds(0.1f);//the combo attacks would be faster
-            attackColider.enabled = true;
+            saberCol.enabled = true;
             yield return new WaitForSeconds(0.05f);//the combo attacks would be faster
-            attackColider.enabled = false;
+            saberCol.enabled = false;
             rotation.enabled = true;
             pMov.enabled = true;
             attacking = false;
@@ -204,52 +158,39 @@ namespace JamCraft5.Player.Attack
 
         #endregion
 
-        #region hammerAttack
-        IEnumerator hammerAttack()
-        {
-            rotation.enabled = false;
-            pMov.enabled = false;
-            yield return new WaitForSeconds(0.2f);//fix this value with the animation 
-            attackCapsColider.enabled = true;
-            yield return new WaitForSeconds(0.1f);//fix this value with the animation
-            attackCapsColider.enabled = false;
-            rotation.enabled = true;
-            pMov.enabled = true;
-            attacking = false;
-        }
-        #endregion
-
-        #region spearAttack
-        IEnumerator spearAttack()
-        {
-            //The code is essentialy = to hammer. but the times to wait may be changed
-            rotation.enabled = false;
-            pMov.enabled = false;
-            yield return new WaitForSeconds(0.2f);//fix this value with the animation 
-            attackCapsColider.enabled = true;
-            yield return new WaitForSeconds(0.1f);//fix this value with the animation
-            attackCapsColider.enabled = false;
-            rotation.enabled = true;
-            pMov.enabled = true;
-            attacking = false;
-        }
-        #endregion
-
+        #region gunAttack
         IEnumerator gunAttack()
         {
-            Transform reference = FindObjectOfType<WeaponPositionReferenceScript>().Trans;
+            Transform reference = FindObjectOfType<WeaponPositionReferenceScript>().GetTrans();
             rotation.enabled = false;
             pMov.enabled = false;
             yield return new WaitForSeconds(0.2f);//fix this value with the animation
             for (int i = Random.Range(3,8); i>0; i--)
             {
-                Instantiate(bullet, reference);//Assign the hand transform                
+                Instantiate(bullet, reference.position, reference.rotation, null);//Assign the hand transform                
             }
             yield return new WaitForSeconds(0.1f);//fix this value with the animation
             rotation.enabled = true;
             pMov.enabled = true;
             attacking = false;
         }
+        #endregion
+
+        #region AttackBase
+        IEnumerator AttackBase(Collider box, float T1, float T2)
+        {
+            rotation.enabled = false;
+            pMov.enabled = false;
+            yield return new WaitForSeconds(T1);//fix this value with the animation 
+            //caps.enabled = true;
+            box.enabled = true;
+            yield return new WaitForSeconds(T2);//fix this value with the animation
+            box.enabled = false;
+            rotation.enabled = true;
+            pMov.enabled = true;
+            attacking = false;
+        }
+        #endregion
     }
 }
 

@@ -35,7 +35,7 @@ namespace JamCraft5.Enemies.Components
 
         private void OnTriggerEnter(Collider col)
         {
-            if (col.CompareTag("PlayerAttack"))
+            if (col.CompareTag("Player"))
             {
                 StartCoroutine(GetDamage());
             } else if (col.CompareTag("GrenadeExplosion"))
