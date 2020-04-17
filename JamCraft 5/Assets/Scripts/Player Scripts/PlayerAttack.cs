@@ -10,6 +10,7 @@ namespace JamCraft5.Player.Attack
     {
         #region Variables
         JamCraft5.Player.Movement.PlayerRotationController rotation;
+        JamCraft5.Player.Movement.PlayerMovementController pMov;
 
         private InventoryItem wep;
         [SerializeField]
@@ -27,11 +28,19 @@ namespace JamCraft5.Player.Attack
         {
             wep = GetComponent<Inventory.PlayerInventoryManager>().SelectedWeapon.ContainedWeapon;
             //Make that the wep gets from the inventory
-
+            
+            //TEST
+            if (wep == null)
+            {
+                wep = new InventoryItem(new ItemsBase());
+                wep.ItemData.weaponRange = 2;
+            }
             rotation = GetComponent<JamCraft5.Player.Movement.PlayerRotationController>();
             attackColider = gameObject.AddComponent<BoxCollider>();
+            attackColider.isTrigger = true;
             attackColider.enabled = false;
             attackCapsColider = gameObject.AddComponent<CapsuleCollider>();
+            attackCapsColider.isTrigger = true;
             attackCapsColider.enabled = false;
         }
         #endregion
@@ -136,12 +145,14 @@ namespace JamCraft5.Player.Attack
         private IEnumerator AttackSaber()
         {
             rotation.enabled = false;//for the player not to move while attacking
+            pMov.enabled = false;
             //start the attack animation
             yield return new WaitForSeconds(0.2f);//fix this value with the animation
             attackColider.enabled = true;
             yield return new WaitForSeconds(0.1f);//fix this value with the animation
             attackColider.enabled = false;
             rotation.enabled = true;
+            pMov.enabled = true;
             attacking = false;
             StartCoroutine(Combo());
         }
@@ -170,12 +181,14 @@ namespace JamCraft5.Player.Attack
              */
             attacking = true;
             rotation.enabled = false;
+            pMov.enabled = false;
             //start the attck animation
             yield return new WaitForSeconds(0.1f);//the combo attacks would be faster
             attackColider.enabled = true;
             yield return new WaitForSeconds(0.05f);//the combo attacks would be faster
             attackColider.enabled = false;
             rotation.enabled = true;
+            pMov.enabled = true;
             attacking = false;
             if (comboAttacks > 1)//comboAttacks = numberOfAttacksBeforeCooldown(3) - 2 
             {
@@ -195,11 +208,13 @@ namespace JamCraft5.Player.Attack
         IEnumerator hammerAttack()
         {
             rotation.enabled = false;
+            pMov.enabled = false;
             yield return new WaitForSeconds(0.2f);//fix this value with the animation 
             attackCapsColider.enabled = true;
             yield return new WaitForSeconds(0.1f);//fix this value with the animation
             attackCapsColider.enabled = false;
             rotation.enabled = true;
+            pMov.enabled = true;
             attacking = false;
         }
         #endregion
@@ -209,11 +224,13 @@ namespace JamCraft5.Player.Attack
         {
             //The code is essentialy = to hammer. but the times to wait may be changed
             rotation.enabled = false;
+            pMov.enabled = false;
             yield return new WaitForSeconds(0.2f);//fix this value with the animation 
             attackCapsColider.enabled = true;
             yield return new WaitForSeconds(0.1f);//fix this value with the animation
             attackCapsColider.enabled = false;
             rotation.enabled = true;
+            pMov.enabled = true;
             attacking = false;
         }
         #endregion
@@ -222,6 +239,7 @@ namespace JamCraft5.Player.Attack
         {
             Transform reference = FindObjectOfType<WeaponPositionReferenceScript>().Trans;
             rotation.enabled = false;
+            pMov.enabled = false;
             yield return new WaitForSeconds(0.2f);//fix this value with the animation
             for (int i = Random.Range(3,8); i>0; i--)
             {
@@ -229,6 +247,7 @@ namespace JamCraft5.Player.Attack
             }
             yield return new WaitForSeconds(0.1f);//fix this value with the animation
             rotation.enabled = true;
+            pMov.enabled = true;
             attacking = false;
         }
     }
