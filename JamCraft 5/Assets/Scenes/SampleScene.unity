@@ -731,6 +731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f001d7502ad13be4393c218067c51843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smoothing: 0.2
   playerDistance: {x: 3, y: 10.6, z: -8.6}
   rotationOffset: {x: -46, y: 9, z: 0}
 --- !u!1 &826943749
@@ -1888,7 +1889,7 @@ PrefabInstance:
     - target: {fileID: 5542407526896326624, guid: a4e290a4de6d6fa44bea66695aaede13,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 0.512
       objectReference: {fileID: 0}
     - target: {fileID: 5542407526896326624, guid: a4e290a4de6d6fa44bea66695aaede13,
         type: 3}
