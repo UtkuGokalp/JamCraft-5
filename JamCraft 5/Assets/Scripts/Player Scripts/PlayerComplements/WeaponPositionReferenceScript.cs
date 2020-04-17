@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class WeaponPositionReferenceScript : MonoBehaviour
 {
-    private Transform trans => transform;
-    public Transform Trans
+    public Transform GetTrans()
     {
-        get { return trans; }
+        return transform;
     }
 }

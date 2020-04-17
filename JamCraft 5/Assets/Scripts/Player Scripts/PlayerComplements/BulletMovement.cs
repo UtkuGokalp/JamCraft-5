@@ -9,7 +9,7 @@ namespace JamCraft5.Player.Attack
         [SerializeField]
         private float TimeToDie;
         [SerializeField]
-        private int bulletError;
+        private float bulletError;
         [SerializeField]
         private int speed;
 
