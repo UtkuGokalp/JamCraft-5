@@ -24,8 +24,13 @@ namespace JamCraft5.Player.Attack
         private AnimationClip hammerAttackAnimationClip;
         [SerializeField]
         private AnimationClip halberdAttackAnimationClip;
+        [SerializeField]
+        private AnimationClip swordAttackAnimationClip;
+        [SerializeField]
+        private AnimationClip shotgunAttackAnimationClip;
 
         public static bool Attacking { get; private set; }
+
         private int comboAttacks = 0;
         private bool pressedMouse = false;//Is here to detect if betwen combo attacks the mouse has been pressed
         private PlayerInventoryManager playerInventoryManager;
@@ -87,10 +92,8 @@ namespace JamCraft5.Player.Attack
         #region Attack
         private IEnumerator AttackSaber()
         {
-            //start the attack animation
-            yield return new WaitForSeconds(0.2f);//fix this value with the animation
             saberCol.enabled = true;
-            yield return new WaitForSeconds(0.1f);//fix this value with the animation
+            yield return new WaitForSeconds(swordAttackAnimationClip.length);//fix this value with the animation
             saberCol.enabled = false;
             Attacking = false;
             StartCoroutine(Combo());
@@ -118,10 +121,8 @@ namespace JamCraft5.Player.Attack
              needed to adjust the times of the animation and balance it         
              */
             Attacking = true;
-            //start the attck animation
-            yield return new WaitForSeconds(0.1f);//the combo attacks would be faster
             saberCol.enabled = true;
-            yield return new WaitForSeconds(0.05f);//the combo attacks would be faster
+            yield return new WaitForSeconds(swordAttackAnimationClip.length);//the combo attacks would be faster
             saberCol.enabled = false;
             Attacking = false;
             if (comboAttacks > 1)//comboAttacks = numberOfAttacksBeforeCooldown(3) - 2 
@@ -144,12 +145,11 @@ namespace JamCraft5.Player.Attack
             WeaponPositionReferenceScript reference = FindObjectOfType<WeaponPositionReferenceScript>();
             if (reference != null)
             {
-                yield return new WaitForSeconds(0.2f);//fix this value with the animation
                 for (int i = Random.Range(3, 8); i > 0; i--)
                 {
                     Instantiate(bullet, reference.GetTrans().position, reference.GetTrans().rotation, null);//Assign the hand transform                
                 }
-                yield return new WaitForSeconds(0.1f);//fix this value with the animation 
+                yield return new WaitForSeconds(shotgunAttackAnimationClip.length);//fix this value with the animation
                 Attacking = false;
             }
             else { Debug.LogError("Null gun reference!"); }
@@ -158,11 +158,10 @@ namespace JamCraft5.Player.Attack
 
         #region AttackBase
         IEnumerator AttackBase(Collider box, float T2)
-        { 
-            //HERE
+        {
             box.enabled = true;
             yield return new WaitForSeconds(T2);//fix this value with the animation
-            box.enabled = false; 
+            box.enabled = false;
             Attacking = false;
         }
         #endregion
