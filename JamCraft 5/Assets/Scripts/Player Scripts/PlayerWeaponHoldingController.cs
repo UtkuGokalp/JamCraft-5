@@ -21,7 +21,7 @@ namespace JamCraft5.Player.Weapon
             playerInventoryManager = GetComponent<PlayerInventoryManager>();
         }
         #endregion
-
+        
         #region OnEnable
         private void OnEnable()
         {

@@ -54,7 +54,7 @@ namespace JamCraft5.Player.Movement
             }
 
             #region Player Rotation Without Mouse
-            if (!PlayerDashController.Dashing)
+            if (!PlayerDashController.Dashing && !PlayerAttack.Attacking)
             {
                 //Rotate the player model without the mouse
                 switch (currentInput.x)//for some reason I can't switch a Vector3
@@ -110,6 +110,7 @@ namespace JamCraft5.Player.Movement
             if (PlayerAttack.Attacking)
             {
                 rb.velocity = Vector3.zero;
+                return;
             }
             if (!PlayerDashController.Dashing)
             {

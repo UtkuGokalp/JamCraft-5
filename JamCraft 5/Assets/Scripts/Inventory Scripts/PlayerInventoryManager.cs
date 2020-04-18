@@ -11,6 +11,8 @@ namespace JamCraft5.Player.Inventory
         #region Variables
         [SerializeField]
         private InventoryItem[] startingItems;
+        [SerializeField]
+        private InventoryWeapon[] testWeapons;
         private List<InventorySlot> inventory;
         private int currentWeaponSlotIndex;
 
@@ -75,6 +77,11 @@ namespace JamCraft5.Player.Inventory
             foreach (InventoryItem item in startingItems)
             {
                 AddItem(item);
+            }
+
+            foreach (InventoryWeapon weapon in testWeapons)
+            {
+                AddWeapon(weapon);
             }
         }
         #endregion
