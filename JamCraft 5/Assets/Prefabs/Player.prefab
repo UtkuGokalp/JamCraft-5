@@ -637,6 +637,7 @@ GameObject:
   - component: {fileID: 586864812398723181}
   - component: {fileID: 586864812398723182}
   - component: {fileID: 4884385139387822378}
+  - component: {fileID: 3256037577516662107}
   - component: {fileID: 1315358949}
   - component: {fileID: 1315358950}
   - component: {fileID: 1232920683594631090}
@@ -815,7 +816,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponHolder: {fileID: 1798511951}
-  nextWeapon: {fileID: 11400000, guid: e7120f3026c679643b98f371d6df1cb7, type: 2}
+--- !u!114 &3256037577516662107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8841075825555908083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f70dd52c843601468976471f6dc51da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Dash: 1
 --- !u!136 &1315358949
 CapsuleCollider:
   m_ObjectHideFlags: 0
