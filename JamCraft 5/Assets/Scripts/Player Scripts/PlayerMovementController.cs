@@ -135,11 +135,8 @@ namespace JamCraft5.Player.Movement
                     rb.velocity = rb.velocity.With(movementDirection.x, null, movementDirection.z);
                 }
             }
-<<<<<<< HEAD
-            
-=======
->>>>>>> HeroOfSkies(Utku)
         }
+        
         #endregion
 
         #region GetYRotation
