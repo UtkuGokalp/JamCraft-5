@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using Utility.Health;
+using System.Reflection;
 using JamCraft5.Enemies;
 using JamCraft5.Items.Controllers;
 using JamCraft5.Enemies.Components;
@@ -13,7 +15,8 @@ namespace JamCraft5.Editor
         {
             Grey,
             Blue,
-            Red
+            Red,
+            Green
         }
         #endregion
 
@@ -52,6 +55,10 @@ namespace JamCraft5.Editor
                 {
                     enemyType = EnemyType.Red;
                 }
+                else if (prefabName.Contains("green"))
+                {
+                    enemyType = EnemyType.Green;
+                }
             }
 
             lastFrameEnemyPrefab = enemyPrefab;
@@ -81,23 +88,42 @@ namespace JamCraft5.Editor
                     collider.direction = 1;
                 }
 
+                AddComponentIfDoesntExist<HealthSystem>();
                 AddComponentIfDoesntExist<GroundedItemDropController>();
                 AddComponentIfDoesntExist<EnemyState>();
-                AddComponentIfDoesntExist<EnemyChasePlayerComponent>();
-                AddComponentIfDoesntExist<EnemyRotationComponent>();
+                AddComponentIfDoesntExist<EnemyDamaged>();
+                AddComponentIfDoesntExist<GroundedItemDropController>();
 
+                var enemyChasePlayerComponent = AddComponentIfDoesntExist<EnemyChasePlayerComponent>();
+                typeof(EnemyChasePlayerComponent).GetField("chaseSpeed", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(enemyChasePlayerComponent, 300);
+                typeof(EnemyChasePlayerComponent).GetField("detectionRange", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(enemyChasePlayerComponent, 5);
+
+                var enemyRotationComponent = AddComponentIfDoesntExist<EnemyRotationComponent>();
+                typeof(EnemyRotationComponent).GetField("rotationSpeed", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(enemyRotationComponent, 5);
+
+
+                EnemyAttackBaseComponent enemyAttackBase = null;
                 switch (enemyType)
                 {
                     case EnemyType.Grey:
-                        AddComponentIfDoesntExist<EnemyMeleeAttackComponent>();
+                        //attackRange
+                        //attackRate
+                        enemyAttackBase = AddComponentIfDoesntExist<EnemyMeleeAttackComponent>();
                         break;
                     case EnemyType.Blue:
-                        AddComponentIfDoesntExist<EnemyRangedAttackComponent>();
+                        enemyAttackBase = AddComponentIfDoesntExist<EnemyRangedAttackComponent>();
                         break;
                     case EnemyType.Red:
-                        AddComponentIfDoesntExist<EnemyMeleeAttackComponent>();
+                        enemyAttackBase = AddComponentIfDoesntExist<EnemyMeleeAttackComponent>();
+                        break;
+                    case EnemyType.Green:
+                        enemyAttackBase = AddComponentIfDoesntExist<EnemyMeleeAttackComponent>();
                         break;
                 }
+                typeof(EnemyAttackBaseComponent).GetField("attackRange", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(enemyAttackBase, 1.2f);
+                typeof(EnemyAttackBaseComponent).GetField("attackRate", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(enemyAttackBase, 2);
+
+                AddComponentIfDoesntExist<EnemyAnimationController>();
 
                 Debug.Log("Done.");
 

@@ -70,6 +70,7 @@ namespace Utility.Development
         public const string SHOTGUN_ATTACK_ANIMATION_TRIGGER_NAME = "ShotgunAttack";
         public const string SWORD_ATTACK_ANIMATION_TRIGGER_NAME = "SwordAttack";
         public const string HALBERD_ATTACK_ANIMATION_TRIGGER_NAME = "HalberdAttack";
+        public const string ENEMY_DEAD_ANIMATION_TRIGGER_NAME = "Dead";
         #endregion
 
         #region GetDirection
