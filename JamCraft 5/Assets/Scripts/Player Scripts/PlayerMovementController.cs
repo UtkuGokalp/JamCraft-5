@@ -136,6 +136,7 @@ namespace JamCraft5.Player.Movement
                 }
             }
         }
+        
         #endregion
 
         #region GetYRotation

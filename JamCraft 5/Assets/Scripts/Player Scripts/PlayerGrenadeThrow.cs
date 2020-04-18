@@ -21,7 +21,7 @@ namespace JamCraft5.Player.Attack
         private MeshRenderer render;
         private Rigidbody rb;
         private SphereCollider col, colision;
-        public int throwingForce = 10;
+        public int throwingForce = 50;
         private bool cooldown = false;
         #endregion
 
@@ -35,7 +35,7 @@ namespace JamCraft5.Player.Attack
             rb = GetComponent<Rigidbody>();
             rb.useGravity = false;
 
-            
+            GrenadeCheck();
             col = gameObject.AddComponent<SphereCollider>();
             col = CreateColider(col);
             colision = gameObject.AddComponent<SphereCollider>();//another collider for the grenade not to fall into the ground
@@ -48,7 +48,7 @@ namespace JamCraft5.Player.Attack
         {
             coli.isTrigger = true;
             coli.radius = grenades.ContainedItem.ItemData.grenadeRange;
-            coli.tag = "GrenadeExplosion";
+            coli.tag = "Player";
             coli.enabled = false;
             return coli;
         }
@@ -57,7 +57,7 @@ namespace JamCraft5.Player.Attack
         #region GrenadeCheck
         void GrenadeCheck()
         {
-            foreach (InventorySlot i in GetComponent<Inventory.PlayerInventoryManager>().Inventory)
+            foreach (InventorySlot i in GetComponentInParent<Inventory.PlayerInventoryManager>().Inventory)
             {
                 if (i.ContainedItem.ItemData.type == 1)
                 {
@@ -67,7 +67,14 @@ namespace JamCraft5.Player.Attack
             if (grenades == null)
             {
                 grenades = new InventorySlot();
-                grenades.ItemCount = 0;
+                //grenades.ItemCount = 0;
+                //TEST
+                grenades.ItemCount = 5;
+                grenades.ContainedItem = new InventoryItem(new ItemsBase());
+                grenades.ContainedItem.ItemData.type = 1;
+                grenades.ContainedItem.ItemData.grenadeRange = 10;
+                grenades.ContainedItem.ItemData.grenadeForce = 10;
+                grenades.ContainedItem.ItemData.grenadeTime = 10;
             }
             grenadesLeft = grenades.ItemCount;
         }
@@ -76,7 +83,7 @@ namespace JamCraft5.Player.Attack
         #region Update
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F) && !cooldown)
+            if (Input.GetKeyDown(KeyCode.G) && !cooldown)
             {
                 GrenadeCheck();
                 if (grenadesLeft >= 1)
@@ -95,6 +102,7 @@ namespace JamCraft5.Player.Attack
             render.enabled = true;
 
             yield return new WaitForSeconds(1f);//fix it with the animation (player throwing grenade)
+            transform.position = transform.parent.position +Vector3.up;
             transform.parent = null;
             rb.velocity = Vector3.zero;
             rb.useGravity = true;
@@ -108,8 +116,10 @@ namespace JamCraft5.Player.Attack
             yield return new WaitForSeconds(0.1f);
             col.enabled = false;
             colision.enabled = false;
+            rb.useGravity = false;
             transform.parent = hand.transform;
             transform.position = Vector3.zero;
+            rb.velocity = Vector3.zero;
             yield return new WaitForSeconds(0.5f);//cooldown before new grenade
             cooldown = false;
         }
