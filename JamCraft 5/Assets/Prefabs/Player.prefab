@@ -630,6 +630,7 @@ GameObject:
   - component: {fileID: 2647324395739500873}
   - component: {fileID: 5936449911908571249}
   - component: {fileID: 8841075825555908084}
+  - component: {fileID: 8633679349533344788}
   - component: {fileID: 2838741234409970726}
   - component: {fileID: 4331333372374744699}
   - component: {fileID: 29490162301874524}
@@ -713,6 +714,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8633679349533344788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8841075825555908083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63d37342872a17147ac80f07758a6da8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 20
+  maxHealth: 20
 --- !u!114 &2838741234409970726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -791,6 +806,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingItems: []
+  startingWeapons:
+  - itemData: {fileID: 11400000, guid: da828594965190647817e61e03de7801, type: 2}
 --- !u!114 &586864812398723182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,7 +833,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponHolder: {fileID: 1798511951}
---- !u!114 &3256037577516662107
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -828,7 +844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f70dd52c843601468976471f6dc51da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dash: 1
+  Dash: 
 --- !u!136 &1315358949
 CapsuleCollider:
   m_ObjectHideFlags: 0

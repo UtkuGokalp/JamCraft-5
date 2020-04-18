@@ -22,7 +22,14 @@ namespace JamCraft5.Crafting
             {
                 foreach (RecipeItem item in recipe.RequiredItems)
                 {
-                    playerInventory.RemoveItem(item.Item, item.RequiredItemCount);
+                    if (item.Item.ItemData.type == 0) //If weapon
+                    {
+                        playerInventory.RemoveWeapon(ItemConverter.ToInventoryWeapon(item.Item));
+                    }
+                    else
+                    {
+                        playerInventory.RemoveItem(item.Item, item.RequiredItemCount);
+                    }
                 }
                 return recipe.OutputItem;
             }
@@ -38,18 +45,44 @@ namespace JamCraft5.Crafting
         {
             if (recipe.OutputItem.ItemData.type == 0) //If output item is a weapon
             {
-                return !playerInventory.HasWeapon(ItemConverter.ToInventoryWeapon(recipe.OutputItem)).contains;
-            }
-
-            foreach (RecipeItem item in recipe.RequiredItems)
-            {
-                var itemData = playerInventory.HasItem(item.Item);
-                if (!itemData.contains || itemData.slotContained.ItemCount < item.RequiredItemCount)
+                if (playerInventory.HasWeapon(ItemConverter.ToInventoryWeapon(recipe.OutputItem)).contains)
                 {
                     return false;
                 }
+
+                foreach (RecipeItem item in recipe.RequiredItems)
+                {
+                    if (item.Item.ItemData.type == 0) // If weapon
+                    {
+                        var weaponData = playerInventory.HasWeapon(ItemConverter.ToInventoryWeapon(item.Item));
+                        if (!weaponData.contains || weaponData.slotContained.ItemCount < item.RequiredItemCount)
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        var itemData = playerInventory.HasItem(item.Item);
+                        if (!itemData.contains || itemData.slotContained.ItemCount < item.RequiredItemCount)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return true;
             }
-            return true;
+            else
+            {
+                foreach (RecipeItem item in recipe.RequiredItems)
+                {
+                    var itemData = playerInventory.HasItem(item.Item);
+                    if (!itemData.contains || itemData.slotContained.ItemCount < item.RequiredItemCount)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
         }
         #endregion
     }

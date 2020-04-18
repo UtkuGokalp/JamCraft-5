@@ -11,6 +11,8 @@ namespace JamCraft5.Player.Inventory
         #region Variables
         [SerializeField]
         private InventoryItem[] startingItems;
+        [SerializeField]
+        private InventoryWeapon[] startingWeapons;
         private List<InventorySlot> inventory;
         private int currentWeaponSlotIndex;
 
@@ -69,12 +71,17 @@ namespace JamCraft5.Player.Inventory
         public event System.EventHandler<OnSelectedWeaponChangedEventArgs> OnSelectedWeaponChanged;
         #endregion
 
-        #region Awake
+        #region Start
         private void Start()
         {
             foreach (InventoryItem item in startingItems)
             {
                 AddItem(item);
+            }
+
+            foreach (InventoryWeapon weapon in startingWeapons)
+            {
+                AddWeapon(weapon);
             }
         }
         #endregion
@@ -82,9 +89,12 @@ namespace JamCraft5.Player.Inventory
         #region Update
         private void Update()
         {
-            //Substracting because mouseScrollDelta is positive when we scroll up but we want
-            //the selection to go up in game (visually), which means decreasing the index.
-            CurrentWeaponSlotIndex -= (int)Input.mouseScrollDelta.y;
+            if (!Attack.PlayerAttack.Attacking)
+            {
+                //Substracting because mouseScrollDelta is positive when we scroll up but we want
+                //the selection to go up in game (visually), which means decreasing the index.
+                CurrentWeaponSlotIndex -= (int)Input.mouseScrollDelta.y;
+            }
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
@@ -210,7 +220,7 @@ namespace JamCraft5.Player.Inventory
             return System.ValueTuple.Create<bool, InventorySlot>(false, null);
         }
         #endregion
-        
+
         #region HasWeapon
         public (bool contains, InventoryWeaponSlot slotContained) HasWeapon(InventoryWeapon weapon)
         {
