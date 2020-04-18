@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Utility.Development;
+using JamCraft5.Player.Attack;
 
 namespace JamCraft5.Player.Movement
 {
@@ -19,10 +20,13 @@ namespace JamCraft5.Player.Movement
         #region Update
         private void Update()
         {
-            Vector3 target = GameUtility.MousePosition;
-            Vector3 direction = GameUtility.GetDirection(transformCache.position, target);
-            float rotation = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-            transformCache.rotation = Quaternion.Euler(transformCache.rotation.eulerAngles.x, rotation, transformCache.rotation.eulerAngles.z);
+            if (!PlayerAttack.Attacking)
+            {
+                Vector3 target = GameUtility.MousePosition;
+                Vector3 direction = GameUtility.GetDirection(transformCache.position, target);
+                float rotation = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+                transformCache.rotation = Quaternion.Euler(transformCache.rotation.eulerAngles.x, rotation, transformCache.rotation.eulerAngles.z);
+            }
         }
         #endregion
     }

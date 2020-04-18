@@ -759,6 +759,10 @@ MonoBehaviour:
     type: 3}
   halberdAttackAnimationClip: {fileID: 1827226128182048838, guid: 5ccb35101e132ad4cb55cec7339d6b89,
     type: 3}
+  swordAttackAnimationClip: {fileID: 1827226128182048838, guid: d6832fc1fad9ddc4b9b3b12ff068d852,
+    type: 3}
+  shotgunAttackAnimationClip: {fileID: 1827226128182048838, guid: 51433b4c238d72245912202eb7a042f8,
+    type: 3}
 --- !u!114 &586864812398723180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,6 +790,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingItems: []
+  testWeapons:
+  - itemData: {fileID: 11400000, guid: da828594965190647817e61e03de7801, type: 2}
+  - itemData: {fileID: 11400000, guid: 7da412edad529b444a9d1357f7494140, type: 2}
+  - itemData: {fileID: 11400000, guid: 4f97640bb59d96b4da724a3761c9d372, type: 2}
+  - itemData: {fileID: 11400000, guid: 7b502e894df8e2444b10b43b831870b0, type: 2}
 --- !u!114 &586864812398723182
 MonoBehaviour:
   m_ObjectHideFlags: 0
