@@ -36,6 +36,11 @@ namespace JamCraft5.Crafting
         /// </summary>
         public bool CanCraft(PlayerInventoryManager playerInventory)
         {
+            if (recipe.OutputItem.ItemData.type == 0) //If output item is a weapon
+            {
+                return !playerInventory.HasWeapon(ItemConverter.ToInventoryWeapon(recipe.OutputItem)).contains;
+            }
+
             foreach (RecipeItem item in recipe.RequiredItems)
             {
                 var itemData = playerInventory.HasItem(item.Item);

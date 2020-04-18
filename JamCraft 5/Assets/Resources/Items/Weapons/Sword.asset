@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e98df8c69f9bd9242b628bd8e7951cfe, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Sword
   type: 0
   groundedItemPrefab: {fileID: 0}
   uiIcon: {fileID: 0}

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Hammer Recipe
   m_EditorClassIdentifier: 
   requiredItems:
-  - requiredItemCount: 1
+  - requiredItemCount: 10
     item:
-      itemData: {fileID: 11400000, guid: 7b502e894df8e2444b10b43b831870b0, type: 2}
+      itemData: {fileID: 11400000, guid: 0443f58d202f7734d83698af6db2bc67, type: 2}
   outputItem:
     itemData: {fileID: 11400000, guid: 7da412edad529b444a9d1357f7494140, type: 2}
