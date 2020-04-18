@@ -16,5 +16,8 @@ MonoBehaviour:
   - requiredItemCount: 10
     item:
       itemData: {fileID: 11400000, guid: 0443f58d202f7734d83698af6db2bc67, type: 2}
+  - requiredItemCount: 1
+    item:
+      itemData: {fileID: 11400000, guid: da828594965190647817e61e03de7801, type: 2}
   outputItem:
     itemData: {fileID: 11400000, guid: 7da412edad529b444a9d1357f7494140, type: 2}

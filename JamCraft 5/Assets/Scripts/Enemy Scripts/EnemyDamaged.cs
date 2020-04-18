@@ -1,9 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Utility.Health;
-using JamCraft5.Inventory;
 using JamCraft5.Items;
+using JamCraft5.Player.Inventory;
 
 namespace JamCraft5.Enemies.Components
 {
@@ -15,8 +14,8 @@ namespace JamCraft5.Enemies.Components
         private Rigidbody rb;
         private EnemyState enemyState;
 
-        private InventoryItem wep;
         private InventoryItem grenade;
+        private PlayerInventoryManager playerInventoryManager;
         #endregion
 
         private void Awake()
@@ -24,13 +23,8 @@ namespace JamCraft5.Enemies.Components
             hs = GetComponent<HealthSystem>();
             rb = GetComponent<Rigidbody>();
             enemyState = GetComponent<EnemyState>();
-
-
-            wep = new InventoryItem(new ItemsBase());
-            wep.ItemData.weaponDamage = 10;
+            playerInventoryManager = GetComponent<PlayerInventoryManager>();
             grenade = new InventoryItem(new ItemsBase());
-            wep.ItemData.grenadeDamage = 10;
-
         }
 
         private void OnTriggerEnter(Collider col)
@@ -49,7 +43,7 @@ namespace JamCraft5.Enemies.Components
             EnemyStateEnum currentEnemyState = enemyState.StateOfEnemy;
             enemyState.StateOfEnemy = EnemyStateEnum.Damaging;
             rb.AddRelativeForce(0, 0, 1/*Insert weapon Knockback*/, ForceMode.Impulse);
-            hs.DecreaseHealth(wep.ItemData.weaponDamage);
+            hs.DecreaseHealth(playerInventoryManager.SelectedWeapon.ContainedWeapon.ItemData.weaponDamage);
             yield return new WaitForSeconds(0.1f);
             enemyState.StateOfEnemy = currentEnemyState;
         }
