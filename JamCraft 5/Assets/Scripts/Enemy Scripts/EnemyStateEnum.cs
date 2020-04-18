@@ -5,6 +5,7 @@
 		Idle,
 		Chasing,
 		Attacking,
-        Damaging
+        Damaging,
+		Dead
 	}
 }

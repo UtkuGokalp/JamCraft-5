@@ -15,6 +15,8 @@ namespace JamCraft5.Enemies.Components
         private float timeLeftForNextAttack;
         private EnemyState enemyState;
         private Transform transformCache;
+
+        public float AttackRange => attackRange;
         public bool InAttackRange => Vector3.Distance(transformCache.position, GameUtility.PlayerPosition) < attackRange;
         #endregion
 
