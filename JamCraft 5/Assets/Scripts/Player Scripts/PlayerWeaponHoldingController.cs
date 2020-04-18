@@ -12,8 +12,6 @@ namespace JamCraft5.Player.Weapon
         private Transform weaponHolder;
         private GameObject[] weaponsObtained;
         private PlayerInventoryManager playerInventoryManager;
-        [SerializeField]
-        private Crafting.Craftable weapon;
         #endregion
 
         #region Awake
@@ -42,18 +40,6 @@ namespace JamCraft5.Player.Weapon
         }
         #endregion
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                var t = weapon.Craft(playerInventoryManager);
-                if (t != null)
-                {
-                    playerInventoryManager.AddWeapon(Items.ItemConverter.ToInventoryWeapon(t));
-                }
-            }
-        }
-
         #region OnWeaponAdded
         private void OnWeaponAdded(object sender, OnWeaponAddedEventArgs e)
         {
@@ -64,10 +50,12 @@ namespace JamCraft5.Player.Weapon
         }
         #endregion
 
-        private void OnWeaponRemoved(object sender,OnWeaponRemovedEventArgs e)
+        #region OnWeaponRemoved
+        private void OnWeaponRemoved(object sender, OnWeaponRemovedEventArgs e)
         {
             Destroy(weaponsObtained[e.SlotIndex]);
         }
+        #endregion
 
         #region OnSelectedWeaponChanged
         private void OnSelectedWeaponChanged(object sender, OnSelectedWeaponChangedEventArgs e)
