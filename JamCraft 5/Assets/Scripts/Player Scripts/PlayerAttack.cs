@@ -152,6 +152,7 @@ namespace JamCraft5.Player.Attack
                 yield return new WaitForSeconds(shotgunAttackAnimationClip.length);//fix this value with the animation
                 Attacking = false;
             }
+            else { Debug.LogError("Null gun reference!"); }
         }
         #endregion
 
