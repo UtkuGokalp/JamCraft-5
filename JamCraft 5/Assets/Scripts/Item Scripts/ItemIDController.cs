@@ -1,13 +1,20 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using System.Reflection;
 
-namespace JamCraft5.Editor
+namespace JamCraft5.Items.Controllers
 {
-    public class ItemIDController : UnityEditor.Editor
+    public class ItemIDController : MonoBehaviour
     {
+        #region Awake
+        private void Awake()
+        {
+            CreateUniqueIDs();
+        }
+        #endregion
+
         #region CreateUniqueIDs
-        [MenuItem("Tools/Create Unique IDs")]
+        [ContextMenu("Create Unique IDs")]
+        [UnityEditor.MenuItem("Tools/Create Unique IDs")]
         public static void CreateUniqueIDs()
         {
             ItemsBase[] items = Resources.LoadAll<ItemsBase>("Items");
@@ -19,7 +26,6 @@ namespace JamCraft5.Editor
                 PropertyInfo propertyInfo = type.GetProperty(nameof(currentItem.ID));
                 propertyInfo.SetValue(currentItem, i);
             }
-            Debug.Log("All items are set to have unique IDs.");
         } 
         #endregion
     }
