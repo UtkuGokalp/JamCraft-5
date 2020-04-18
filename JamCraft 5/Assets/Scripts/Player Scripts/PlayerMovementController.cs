@@ -134,7 +134,7 @@ namespace JamCraft5.Player.Movement
                     rb.velocity = rb.velocity.With(movementDirection.x, null, movementDirection.z);
                 }
             }
-            else { Debug.LogAssertion("the player dashed"); }
+            
         }
         #endregion
 
