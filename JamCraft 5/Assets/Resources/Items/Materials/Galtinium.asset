@@ -10,19 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e98df8c69f9bd9242b628bd8e7951cfe, type: 3}
-  m_Name: Hammer
+  m_Name: Galtinium
   m_EditorClassIdentifier: 
-  itemName: Hammer
-  type: 0
+  itemName: Galtinium
+  type: 2
   groundedItemPrefab: {fileID: 0}
   uiIcon: {fileID: 0}
   weaponDamage: 0
   weaponRange: 0
-  holdingPrefab: {fileID: 1885027753158418094, guid: 2a7244c8ecaae0245a073c4850a13633,
-    type: 3}
+  holdingPrefab: {fileID: 0}
   grenadeDamage: 0
   grenadeRange: 0
   grenadeForce: 0
   grenadeTime: 0
-  matType: 
+  matType: Galtinium
   healForce: 0

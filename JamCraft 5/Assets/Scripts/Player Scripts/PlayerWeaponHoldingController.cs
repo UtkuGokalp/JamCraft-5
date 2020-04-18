@@ -12,6 +12,9 @@ namespace JamCraft5.Player.Weapon
         private Transform weaponHolder;
         private GameObject[] weaponsObtained;
         private PlayerInventoryManager playerInventoryManager;
+
+        [SerializeField]
+        private Crafting.Craftable weapon;
         #endregion
 
         #region Awake
@@ -21,7 +24,7 @@ namespace JamCraft5.Player.Weapon
             playerInventoryManager = GetComponent<PlayerInventoryManager>();
         }
         #endregion
-        
+
         #region OnEnable
         private void OnEnable()
         {
@@ -37,6 +40,18 @@ namespace JamCraft5.Player.Weapon
             playerInventoryManager.OnSelectedWeaponChanged -= OnSelectedWeaponChanged;
         }
         #endregion
+
+        private void Update()
+        {
+            if (Input.GetMouseButtonDown(Utility.Development.MouseButton.MIDDLE))
+            {
+                var t = weapon.Craft(playerInventoryManager);
+                if (t != null)
+                {
+                    playerInventoryManager.AddWeapon(Items.ItemConverter.ToInventoryWeapon(t));
+                }
+            }
+        }
 
         #region OnWeaponAdded
         private void OnWeaponAdded(object sender, OnWeaponAddedEventArgs e)

@@ -71,6 +71,7 @@ namespace JamCraft5.Player.Movement
             }
         }
         #endregion
+
         IEnumerator ApplyCooldown()
         {
             yield return new WaitForSeconds(cooldown);
