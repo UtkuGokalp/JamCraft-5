@@ -190,7 +190,7 @@ namespace JamCraft5.Player.Inventory
         {
             for (int i = 0; i < Weapons.Length; i++)
             {
-                if (Weapons[i].ContainedWeapon == weapon)
+                if (Weapons[i].ContainedWeapon.ItemData.ID == weapon.ItemData.ID)
                 {
                     Weapons[i].ContainedWeapon = null;
                     OnWeaponRemoved?.Invoke(this, new OnWeaponRemovedEventArgs(i, weapon));
