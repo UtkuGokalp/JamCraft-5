@@ -11,8 +11,6 @@ namespace JamCraft5.Player.Inventory
         #region Variables
         [SerializeField]
         private InventoryItem[] startingItems;
-        [SerializeField]
-        private InventoryWeapon[] testWeapons;
         private List<InventorySlot> inventory;
         private int currentWeaponSlotIndex;
 
@@ -77,11 +75,6 @@ namespace JamCraft5.Player.Inventory
             foreach (InventoryItem item in startingItems)
             {
                 AddItem(item);
-            }
-
-            foreach (InventoryWeapon weapon in testWeapons)
-            {
-                AddWeapon(weapon);
             }
         }
         #endregion
@@ -166,7 +159,7 @@ namespace JamCraft5.Player.Inventory
         #region AddWeapon
         public (bool added, InventoryWeapon addedWeapon) AddWeapon(InventoryWeapon weapon)
         {
-            if (!HasItem(ItemConverter.ToInventoryItem(weapon)).contains)
+            if (!HasWeapon(weapon).contains)
             {
                 for (int i = 0; i < Weapons.Length; i++)
                 {
@@ -203,6 +196,8 @@ namespace JamCraft5.Player.Inventory
         {
             foreach (InventorySlot slot in Inventory)
             {
+                //In editor, if inspector is set to debug mode and if the contained item is expected to be null
+                //this will give an error because slot.ContainedWeapon will not be null. Otherwise, this code works fine.
                 if (slot.ContainedItem == null)
                 {
                     continue;
@@ -213,6 +208,26 @@ namespace JamCraft5.Player.Inventory
                 }
             }
             return System.ValueTuple.Create<bool, InventorySlot>(false, null);
+        }
+        #endregion
+        
+        #region HasWeapon
+        public (bool contains, InventoryWeaponSlot slotContained) HasWeapon(InventoryWeapon weapon)
+        {
+            //In editor, if inspector is set to debug mode, this will give an error
+            //because slot.ContainedWeapon will not be null. Otherwise, this code works fine.
+            foreach (InventoryWeaponSlot slot in Weapons)
+            {
+                if (slot.ContainedWeapon == null)
+                {
+                    continue;
+                }
+                if (slot.ContainedWeapon.ItemData.ID == weapon.ItemData.ID)
+                {
+                    return System.ValueTuple.Create(true, slot);
+                }
+            }
+            return System.ValueTuple.Create<bool, InventoryWeaponSlot>(false, null);
         }
         #endregion
     }
