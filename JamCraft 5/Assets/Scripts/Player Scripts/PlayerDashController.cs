@@ -45,7 +45,7 @@ namespace JamCraft5.Player.Movement
         #region Dash
         private void Dash()
         {
-            if (!Dashing && !coolD && !Attack.PlayerAttack.Attacking)
+            if (!Dashing && !coolD && !Attack.PlayerAttack.Attacking && GetComponent<PlayerUnlocking>().Dash)
             {           
                 directionToMouse = GameUtility.GetDirectionToMouse(transformCache.position);
                 currentDashTime = dashTime;
@@ -59,7 +59,7 @@ namespace JamCraft5.Player.Movement
         {
             if (Dashing)
             {
-                transform.localScale = new Vector3(4, 3.5f,6.7f);
+                transform.localScale = new Vector3(4, 3.3f,6f);
                 rb.velocity = directionToMouse * dashSpeed * Time.fixedDeltaTime;
                 currentDashTime -= Time.fixedDeltaTime;
 
