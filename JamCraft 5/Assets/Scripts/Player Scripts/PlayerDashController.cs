@@ -59,6 +59,7 @@ namespace JamCraft5.Player.Movement
         {
             if (Dashing)
             {
+                transform.localScale = new Vector3(4, 3.5f,6.7f);
                 rb.velocity = directionToMouse * dashSpeed * Time.fixedDeltaTime;
                 currentDashTime -= Time.fixedDeltaTime;
 
@@ -66,16 +67,19 @@ namespace JamCraft5.Player.Movement
                 {
                     Dashing = false;
                     coolD = true;
+                    transform.localScale = new Vector3(4, 4, 4);
                     StartCoroutine(ApplyCooldown());
                 }
             }
         }
         #endregion
 
+        #region ApplyCooldown
         IEnumerator ApplyCooldown()
         {
             yield return new WaitForSeconds(cooldown);
             coolD = false;
         }
+        #endregion
     }
 }
