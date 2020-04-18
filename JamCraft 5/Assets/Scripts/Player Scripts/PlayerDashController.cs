@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using Utility.Development;
 using JamCraft5.Player.Attack;
 
@@ -12,6 +13,10 @@ namespace JamCraft5.Player.Movement
         private float dashSpeed;
         [SerializeField]
         private float dashTime;
+        [SerializeField]
+        private float cooldown;
+        private bool coolD = false;
+
         private float currentDashTime;
         private Vector3 directionToMouse;
         private Rigidbody rb;
@@ -40,8 +45,8 @@ namespace JamCraft5.Player.Movement
         #region Dash
         private void Dash()
         {
-            if (!Dashing)
-            {
+            if (!Dashing && !coolD && !Attack.PlayerAttack.Attacking)
+            {           
                 directionToMouse = GameUtility.GetDirectionToMouse(transformCache.position);
                 currentDashTime = dashTime;
                 Dashing = true;
@@ -60,9 +65,16 @@ namespace JamCraft5.Player.Movement
                 if (currentDashTime <= 0)
                 {
                     Dashing = false;
+                    coolD = true;
+                    StartCoroutine(ApplyCooldown());
                 }
             }
         }
         #endregion
+        IEnumerator ApplyCooldown()
+        {
+            yield return new WaitForSeconds(cooldown);
+            coolD = false;
+        }
     }
 }
