@@ -30,12 +30,14 @@ public class Test : MonoBehaviour
     private void OnEnable()
     {
         playerInventoryManager.OnWeaponAdded += OnWeaponAdded;
+        playerInventoryManager.OnWeaponRemoved += OnWeaponRemoved;
         playerInventoryManager.OnSelectedWeaponChanged += OnSelectedWeaponChanged;
     }
 
     private void OnDisable()
     {
         playerInventoryManager.OnWeaponAdded -= OnWeaponAdded;
+        playerInventoryManager.OnWeaponRemoved -= OnWeaponRemoved;
         playerInventoryManager.OnSelectedWeaponChanged -= OnSelectedWeaponChanged;
     }
 
@@ -49,5 +51,11 @@ public class Test : MonoBehaviour
     {
         slotIcons[e.SlotIndex].GetComponent<Image>().sprite = e.AddedWeapon.ItemData.uiIcon;
         slotIcons[e.SlotIndex].SetActive(true);
+    }
+
+    private void OnWeaponRemoved(object sender, OnWeaponRemovedEventArgs e)
+    {
+        slotIcons[e.SlotIndex].GetComponent<Image>().sprite = null;
+        slotIcons[e.SlotIndex].SetActive(false);
     }
 }

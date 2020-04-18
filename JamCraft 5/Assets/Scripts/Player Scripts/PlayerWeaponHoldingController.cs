@@ -42,17 +42,17 @@ namespace JamCraft5.Player.Weapon
         }
         #endregion
 
-        //private void Update()
-        //{
-        //    if (Input.GetKeyDown(KeyCode.C))
-        //    {
-        //        var t = weapon.Craft(playerInventoryManager);
-        //        if (t != null)
-        //        {
-        //            playerInventoryManager.AddWeapon(Items.ItemConverter.ToInventoryWeapon(t));
-        //        }
-        //    }
-        //}
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                var t = weapon.Craft(playerInventoryManager);
+                if (t != null)
+                {
+                    playerInventoryManager.AddWeapon(Items.ItemConverter.ToInventoryWeapon(t));
+                }
+            }
+        }
 
         #region OnWeaponAdded
         private void OnWeaponAdded(object sender, OnWeaponAddedEventArgs e)

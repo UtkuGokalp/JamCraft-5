@@ -21,6 +21,7 @@ namespace JamCraft5.Player.Movement
         private Vector3 directionToMouse;
         private Rigidbody rb;
         private Transform transformCache;
+        private PlayerUnlocking playerUnlockController;
         public static bool Dashing { get; private set; }
         #endregion
 
@@ -29,6 +30,7 @@ namespace JamCraft5.Player.Movement
         {
             transformCache = transform;
             rb = GetComponent<Rigidbody>();
+            playerUnlockController = GetComponent<PlayerUnlocking>();
         }
         #endregion
 
@@ -45,8 +47,8 @@ namespace JamCraft5.Player.Movement
         #region Dash
         private void Dash()
         {
-            if (!Dashing && !coolD && !Attack.PlayerAttack.Attacking && GetComponent<PlayerUnlocking>().Dash)
-            {           
+            if (!Dashing && !coolD && !PlayerAttack.Attacking && playerUnlockController.Dash)
+            {
                 directionToMouse = GameUtility.GetDirectionToMouse(transformCache.position);
                 currentDashTime = dashTime;
                 Dashing = true;

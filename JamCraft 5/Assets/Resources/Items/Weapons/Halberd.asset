@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Hallberd
   type: 0
   groundedItemPrefab: {fileID: 0}
-  uiIcon: {fileID: 0}
+  uiIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   weaponDamage: 0
   weaponRange: 0
   holdingPrefab: {fileID: -2358150046258785855, guid: 85de3531a193c244798e85a5b4d28668,
