@@ -593,8 +593,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 173e30eb199a21b4299266a57552cfd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseSpeed: 300
-  detectionRange: 5
+  chaseSpeed: 350
+  detectionRange: 13
 --- !u!114 &6220136580349126207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,7 +621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 2
-  damage: 0
+  damage: 1
 --- !u!114 &8838530181379406555
 MonoBehaviour:
   m_ObjectHideFlags: 0

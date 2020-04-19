@@ -79,9 +79,9 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2aa24a3cc0922684c9a7604fc4f22768, type: 2}
-  - {fileID: 2100000, guid: 0e2f3f53581b2d74fad4db68a38877fd, type: 2}
-  - {fileID: 2100000, guid: 8158e5a75b33b4b488098d503f5bec32, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -498,8 +498,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 173e30eb199a21b4299266a57552cfd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseSpeed: 300
-  detectionRange: 5
+  chaseSpeed: 275
+  detectionRange: 10
 --- !u!114 &7668778760096198663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc70025a609c440428241fd83923d766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 5
+  rotationSpeed: 7
 --- !u!114 &-6385168914886215351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,9 +525,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5833bfc1c2edd114ba8a297aa58ec24b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 1.2
-  attackRate: 2
-  damage: 0
+  attackRange: 2
+  damage: 1
 --- !u!114 &8353841527874852590
 MonoBehaviour:
   m_ObjectHideFlags: 0

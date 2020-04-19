@@ -99,6 +99,7 @@ namespace JamCraft5.Enemies.Components
         {
             groundedItemDropController.DropItems();
             animator.SetTrigger("Dead");
+            GetComponent<EnemyChasePlayerComponent>().enabled = false;
             yield return new WaitForSeconds(deathAnimation.length);
             Destroy(gameObject);
         }
