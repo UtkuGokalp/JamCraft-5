@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 2423845574694578339}
   - component: {fileID: 6699170460717650581}
   - component: {fileID: 1136232434691894892}
+  - component: {fileID: 1625972687736719939}
+  - component: {fileID: 7778524016954487261}
+  - component: {fileID: 1838623127340028511}
   m_Layer: 0
   m_Name: Cobalt_Scrap
   m_TagString: Untagged
@@ -78,3 +81,47 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &1625972687736719939
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727239779743193776}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 2540817853737639666, guid: 32a280dcbbc49c444b1c60b928e0b3a2, type: 3}
+--- !u!54 &7778524016954487261
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727239779743193776}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1838623127340028511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727239779743193776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d02a074ac6b06e428a6d267003f366f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropChance: 31
+  itemData: {fileID: 11400000, guid: 3c2d1654066903740bf17237f90bb942, type: 2}

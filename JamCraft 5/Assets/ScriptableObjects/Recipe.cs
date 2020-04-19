@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using JamCraft5.Items;
 using System.Collections.Generic;
+using JamCraft5.Items.Controllers;
 
 namespace JamCraft5.Crafting
 {
@@ -20,6 +21,11 @@ namespace JamCraft5.Crafting
         #region OnValidate
         private void OnValidate()
         {
+            if (!ItemIDController.AllItemsHaveUniqueIDs())
+            {
+                ItemIDController.CreateUniqueIDs();
+            }
+
             foreach (RecipeItem item in requiredItems)
             {
                 if (item.RequiredItemCount < 1)

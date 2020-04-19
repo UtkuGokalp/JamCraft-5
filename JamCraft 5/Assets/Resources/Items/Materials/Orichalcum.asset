@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e98df8c69f9bd9242b628bd8e7951cfe, type: 3}
-  m_Name: Galtinium
+  m_Name: Orichalcum
   m_EditorClassIdentifier: 
-  itemName: Galtinium
+  itemName: Orichalcum
   type: 2
-  groundedItemPrefab: {fileID: 6464453158526925962, guid: 6e7da17cccf174747af3abee8f44e476,
+  groundedItemPrefab: {fileID: 7216902271312568736, guid: 33b5f710a8dbc7b40b0b7235b5bb8781,
     type: 3}
   uiIcon: {fileID: 0}
   weaponDamage: 0
@@ -24,5 +24,5 @@ MonoBehaviour:
   grenadeRange: 0
   grenadeForce: 0
   grenadeTime: 0
-  matType: Galtinium
+  matType: Orichalcum
   healForce: 0
