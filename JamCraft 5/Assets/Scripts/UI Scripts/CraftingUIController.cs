@@ -22,8 +22,8 @@ public class CraftingUIController : MonoBehaviour
     private Text itemName;
     [SerializeField]
     private Text materialsNec;
-
     private Craftable recip;
+
     private PlayerInventoryManager inv;
 
     private void Awake()

@@ -74,6 +74,8 @@ namespace JamCraft5.Editor
                     return;
                 }
 
+                enemyPrefab.transform.localScale = Vector3.one * 4;
+
                 Rigidbody rb = AddComponentIfDoesntExist<Rigidbody>();
                 rb.constraints = RigidbodyConstraints.FreezeRotation;
                 rb.mass = 100;
