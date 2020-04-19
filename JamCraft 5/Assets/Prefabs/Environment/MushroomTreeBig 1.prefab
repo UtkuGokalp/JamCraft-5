@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 72842034578797441}
   - component: {fileID: 8202165374123384049}
   - component: {fileID: 4890472942988777587}
+  - component: {fileID: 1541696172200070470}
   m_Layer: 0
   m_Name: MushroomTreeBig 1
   m_TagString: Untagged
@@ -80,3 +81,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &1541696172200070470
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769841287898853992}
+  m_Material: {fileID: 13400000, guid: 2b4ac251c3b6af442ad8fbef10c79035, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.36
+  m_Height: 4.18
+  m_Direction: 1
+  m_Center: {x: -0.027076721, y: 1.7976794, z: -0.01}

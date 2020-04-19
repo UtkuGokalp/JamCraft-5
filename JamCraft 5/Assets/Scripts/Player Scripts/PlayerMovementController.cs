@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Utility.Development;
 using JamCraft5.Player.Attack;
+using JamCraft5.Audio;
 
 namespace JamCraft5.Player.Movement
 {
@@ -11,6 +12,8 @@ namespace JamCraft5.Player.Movement
         #region Variables
         [SerializeField]
         private float movementSpeed;
+        [SerializeField]
+        private float footstepSoundRate;
         [Range(0, 1)]
         [SerializeField]
         private float slowDownMultiplier;
@@ -30,6 +33,13 @@ namespace JamCraft5.Player.Movement
             transformCache = transform;
             rb = GetComponent<Rigidbody>();
             animator = GetComponent<Animator>();
+        }
+        #endregion
+
+        #region Start
+        private void Start()
+        {
+            InvokeRepeating(nameof(PlayFootstepSound), 0, footstepSoundRate);
         }
         #endregion
 
@@ -155,6 +165,16 @@ namespace JamCraft5.Player.Movement
                 }
             }
             return yRotation;
+        }
+        #endregion
+
+        #region PlayFootstepSound
+        private void PlayFootstepSound()
+        {
+            if (!PlayerUnlocking.playerPause && !PlayerAttack.Attacking && currentInput.sqrMagnitude != 0)
+            {
+                AudioManager.Instance.PlayAudio(Audio.AudioType.FootstepSound);
+            }
         }
         #endregion
     }

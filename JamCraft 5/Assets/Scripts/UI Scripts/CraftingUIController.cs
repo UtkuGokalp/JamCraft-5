@@ -56,7 +56,7 @@ public class CraftingUIController : MonoBehaviour
         alertTxt.enabled = false;
         recip = null;
         itemName.enabled = false;
-        materialsNec.enabled = false; 
+        materialsNec.enabled = false;
     }
 
     public void Exit()
@@ -77,7 +77,7 @@ public class CraftingUIController : MonoBehaviour
         materialsNec.text = "";
         foreach (RecipeItem r in recip.Recipe.RequiredItems)
         {
-            materialsNec.text += r.Item.ItemData.itemName.ToString() + " x" + r.RequiredItemCount.ToString() + ", ";
+            materialsNec.text += r.Item.ItemData.itemName + " x" + r.RequiredItemCount + System.Environment.NewLine;
         }
     }
 
@@ -88,10 +88,11 @@ public class CraftingUIController : MonoBehaviour
         if (i != null)
         {
             inv.AddItem(i);
-        } else
+        }
+        else
         {
             StartCoroutine(Alert());
-        }       
+        }
     }
 
     private IEnumerator Alert()
