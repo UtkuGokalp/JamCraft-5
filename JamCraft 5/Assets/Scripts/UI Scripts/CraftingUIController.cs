@@ -14,6 +14,10 @@ public class CraftingUIController : MonoBehaviour
     private Canvas mainCanv;//The canvas of the life, weapons...
     [SerializeField]
     private List<Craftable> craftableList;
+    [SerializeField]
+    private Button D1;
+    [SerializeField]
+    private Button D2;
 
     [Header("Canvas Components")]
     [SerializeField]
@@ -91,7 +95,18 @@ public class CraftingUIController : MonoBehaviour
         }
         else
         {
-            StartCoroutine(Alert());
+            if(recip.Recipe.OutputItem.ItemData.itemName == "Dash1")
+            {
+                GetComponent<PlayerUnlocking>().Dash = true;
+                D1.enabled = false;
+            } else if(recip.Recipe.OutputItem.ItemData.itemName == "Dash2")
+            {
+                GetComponent<PlayerUnlocking>().Dash2 = true;
+                D2.enabled = false;
+            } else
+            {
+                StartCoroutine(Alert());
+            }
         }
     }
 
