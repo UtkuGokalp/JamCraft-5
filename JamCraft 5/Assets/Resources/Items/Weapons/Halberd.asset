@@ -16,7 +16,7 @@ MonoBehaviour:
   type: 0
   groundedItemPrefab: {fileID: 0}
   uiIcon: {fileID: 21300000, guid: 0ccff381bc7a3674cb0460d559239bb7, type: 3}
-  weaponDamage: 0
+  weaponDamage: 10
   weaponRange: 0
   holdingPrefab: {fileID: -2358150046258785855, guid: 85de3531a193c244798e85a5b4d28668,
     type: 3}
