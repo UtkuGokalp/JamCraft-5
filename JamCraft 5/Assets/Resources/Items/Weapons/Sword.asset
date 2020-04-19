@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Sword
   type: 0
   groundedItemPrefab: {fileID: 0}
-  uiIcon: {fileID: 0}
+  uiIcon: {fileID: 21300000, guid: eb1bf4ad9a839b345b7342741d0a4bee, type: 3}
   weaponDamage: 10
   weaponRange: 0
   holdingPrefab: {fileID: 5795850161917067590, guid: 004a22ba725c2934e96bd25106e2bf59,
