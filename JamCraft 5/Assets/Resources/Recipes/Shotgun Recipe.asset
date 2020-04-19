@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 682f91c08041b17479e4e4d4e644bf6f, type: 3}
   m_Name: Shotgun Recipe
   m_EditorClassIdentifier: 
-  requiredItems: []
+  requiredItems:
+  - requiredItemCount: 1
+    item:
+      itemData: {fileID: 0}
   outputItem:
     itemData: {fileID: 11400000, guid: 7b502e894df8e2444b10b43b831870b0, type: 2}

@@ -17,12 +17,15 @@ public class CraftingUIController : MonoBehaviour
 
     [Header("Canvas Components")]
     [SerializeField]
-    private Dropdown craftablesDrop;
-    [SerializeField]
     private Text alertTxt;
+    [SerializeField]
+    private Text itemName;
+    [SerializeField]
+    private Text description;
+    [SerializeField]
+    private Text materialsNec;
 
-    private List<Dropdown.OptionData> craftablesOptions;
-    
+    private Craftable recip;
     private PlayerInventoryManager inv;
 
     private void Awake()
@@ -52,13 +55,10 @@ public class CraftingUIController : MonoBehaviour
         canv.enabled = true;
         mainCanv.GetComponent<Blacker>().blacker = true;
         PlayerUnlocking.playerPause = true;
-
-
-        foreach (Craftable r in craftableList)
-        {
-            craftablesDrop.options.Add(new Dropdown.OptionData());
-            craftablesDrop.options[craftablesDrop.options.Count-1].text = r.recipe.OutputItem.ItemData.itemName;
-        }
+        recip = null;
+        itemName.enabled = false;
+        description.enabled = false;
+        materialsNec.enabled = false; 
     }
 
     public void Exit()
@@ -69,24 +69,35 @@ public class CraftingUIController : MonoBehaviour
 
     }
 
-    public void Craft()
+    public void SelectCraft(int i)
     {
-        foreach (Craftable r in craftableList)
+        recip = craftableList[i];
+        itemName.enabled = true;
+        description.enabled = true;
+        materialsNec.enabled = true;
+
+        itemName.text = recip.name;
+        description.text = recip.recipe.ToString();
+        materialsNec.text = "";
+        foreach (RecipeItem r in recip.recipe.RequiredItems)
         {
-            
-            if (r.recipe.OutputItem.ItemData.itemName == craftablesDrop.itemText.ToString())
-            {
-                InventoryItem i = r.Craft(inv);
-                if (i != null)
-                {
-                    inv.AddItem(i);
-                } else
-                {
-                    StartCoroutine(Alert());
-                }
-            }
+            materialsNec.text += r.Item.ItemData.itemName.ToString() + " x" + r.RequiredItemCount.ToString() + ", ";
         }
     }
+
+    public void Craft()
+    {
+        if (recip == null) StartCoroutine(Alert());
+        InventoryItem i = recip.Craft(inv);
+        if (i != null)
+        {
+            inv.AddItem(i);
+        } else
+        {
+            StartCoroutine(Alert());
+        }       
+    }
+
     private IEnumerator Alert()
     {
         alertTxt.enabled = true;
