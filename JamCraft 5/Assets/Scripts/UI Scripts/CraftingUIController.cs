@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using JamCraft5.Crafting;
 using JamCraft5.Player.Inventory;
 using JamCraft5.Items;
+using Utility.Development;
 
 public class CraftingUIController : MonoBehaviour
 {
@@ -40,9 +42,10 @@ public class CraftingUIController : MonoBehaviour
     {
         if (other.CompareTag("CraftSpace") && Input.GetKeyDown(KeyCode.E))
         {
-            if ()
+            if (JamCraft5.Player.Inventory.PlayerCarriedItemController.CarriedItemCollected)
             {
 
+                SceneManager.LoadScene("Main Menu");
             }
             Enable();
         }
