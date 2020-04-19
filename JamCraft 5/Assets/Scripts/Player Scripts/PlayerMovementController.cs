@@ -59,12 +59,13 @@ namespace JamCraft5.Player.Movement
         #region FixedUpdate
         private void FixedUpdate()
         {
-            if (PlayerAttack.Attacking)
+            if (PlayerAttack.Attacking || PlayerUnlocking.playerPause)
             {
                 rb.velocity = Vector3.zero;
+                animator.SetBool("IsRunning", false);
                 return;
             }
-            if (!PlayerDashController.Dashing && !PlayerUnlocking.playerPause)
+            if (!PlayerDashController.Dashing)
             {
                 Vector3 movementDirection = playerInput * movementSpeed * Time.fixedDeltaTime;
                 movementDirection.Normalize();
