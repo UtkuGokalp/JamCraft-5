@@ -55,6 +55,7 @@ public class CraftingUIController : MonoBehaviour
         canv.enabled = true;
         mainCanv.GetComponent<Blacker>().blacker = true;
         PlayerUnlocking.playerPause = true;
+        alertTxt.enabled = false;
         recip = null;
         itemName.enabled = false;
         description.enabled = false;
