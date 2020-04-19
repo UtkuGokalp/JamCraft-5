@@ -8,6 +8,7 @@ using JamCraft5.Items.Controllers;
 
 namespace JamCraft5.Enemies.Components
 {
+    [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(EnemyState))]
     [RequireComponent(typeof(GroundedItemDropController))]
     public class EnemyDamaged : MonoBehaviour
@@ -17,6 +18,8 @@ namespace JamCraft5.Enemies.Components
         private Rigidbody rb;
         private EnemyState enemyState;
 
+        private Animator animator;
+        private AnimationClip deathAnimation;
         private InventoryItem grenade;
         private PlayerInventoryManager playerInventoryManager;
         private GroundedItemDropController groundedItemDropController;
@@ -24,12 +27,25 @@ namespace JamCraft5.Enemies.Components
 
         private void Awake()
         {
-            hs = GetComponent<HealthSystem>();
             rb = GetComponent<Rigidbody>();
+            hs = GetComponent<HealthSystem>();
+            animator = GetComponent<Animator>();
             enemyState = GetComponent<EnemyState>();
             playerInventoryManager = GameUtility.Player.GetComponent<PlayerInventoryManager>();
             groundedItemDropController = GetComponent<GroundedItemDropController>();
             grenade = new InventoryItem(new ItemsBase());
+        }
+
+        private void Start()
+        {
+            foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips)
+            {
+                if (clip.name.ToLower().Contains("death"))
+                {
+                    deathAnimation = clip;
+                    break;
+                }
+            }
         }
 
         private void OnEnable()
@@ -41,8 +57,6 @@ namespace JamCraft5.Enemies.Components
         {
             hs.OnDeath -= OnDeath;
         }
-
-
 
         private void OnTriggerEnter(Collider col)
         {
@@ -78,7 +92,14 @@ namespace JamCraft5.Enemies.Components
 
         private void OnDeath()
         {
+            StartCoroutine(OnDeathCoroutine());
+        }
+
+        private IEnumerator OnDeathCoroutine()
+        {
             groundedItemDropController.DropItems();
+            animator.SetTrigger("Dead");
+            yield return new WaitForSeconds(deathAnimation.length);
             Destroy(gameObject);
         }
     }

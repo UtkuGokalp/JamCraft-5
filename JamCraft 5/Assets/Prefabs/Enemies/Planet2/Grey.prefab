@@ -350,8 +350,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d37342872a17147ac80f07758a6da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  maxHealth: 20
+  health: 10
+  maxHealth: 10
 --- !u!114 &885670443414182152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,6 +423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 1.2
   attackRate: 2
+  damage: 0
 --- !u!114 &-5921662567730315384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,9 +557,9 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2aa24a3cc0922684c9a7604fc4f22768, type: 2}
+  - {fileID: 2100000, guid: 0e2f3f53581b2d74fad4db68a38877fd, type: 2}
+  - {fileID: 2100000, guid: 8158e5a75b33b4b488098d503f5bec32, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

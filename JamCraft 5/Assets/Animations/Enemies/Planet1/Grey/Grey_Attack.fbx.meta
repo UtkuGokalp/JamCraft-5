@@ -6,9 +6,24 @@ ModelImporter:
   - first:
       74: 1827226128182048838
     second: Grey_Attack
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dark_Grey
+    second: {fileID: 2100000, guid: 0e2f3f53581b2d74fad4db68a38877fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Light_Grey
+    second: {fileID: 2100000, guid: 8158e5a75b33b4b488098d503f5bec32, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: black
+    second: {fileID: 2100000, guid: 2aa24a3cc0922684c9a7604fc4f22768, type: 2}
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
