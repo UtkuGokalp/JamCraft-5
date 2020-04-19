@@ -79,9 +79,11 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -525,8 +527,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5833bfc1c2edd114ba8a297aa58ec24b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+
   attackRange: 2
   damage: 1
+
 --- !u!114 &8353841527874852590
 MonoBehaviour:
   m_ObjectHideFlags: 0
