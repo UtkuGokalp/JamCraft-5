@@ -40,6 +40,10 @@ public class CraftingUIController : MonoBehaviour
     {
         if (other.CompareTag("CraftSpace") && Input.GetKeyDown(KeyCode.E))
         {
+            if (true)
+            {
+
+            }
             Enable();
         }
     }
