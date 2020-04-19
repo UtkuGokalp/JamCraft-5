@@ -79,11 +79,9 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -470,11 +468,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe90f22626047a43bdff8bfb3bf8063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPossibleItemsCount: 0
-  maxPossibleItemsCount: 0
-  possibleItems: []
-  minDefiniteItemsCount: 0
-  maxDefiniteItemsCount: 0
+  minPossibleItemsCount: 1
+  maxPossibleItemsCount: 4
+  possibleItems:
+  - {fileID: 7373313013325010932, guid: 5dc756055e1127d43b0a6c58395df52e, type: 3}
+  - {fileID: 1838623127340028511, guid: e9708727f9bd47345bcd62f46a304584, type: 3}
+  - {fileID: 6464453158526925962, guid: 6e7da17cccf174747af3abee8f44e476, type: 3}
+  - {fileID: 7216902271312568736, guid: 33b5f710a8dbc7b40b0b7235b5bb8781, type: 3}
+  minDefiniteItemsCount: 1
+  maxDefiniteItemsCount: 16
   definiteItems: []
 --- !u!114 &-2037379946386124091
 MonoBehaviour:
@@ -527,10 +529,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5833bfc1c2edd114ba8a297aa58ec24b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-
   attackRange: 2
   damage: 1
-
 --- !u!114 &8353841527874852590
 MonoBehaviour:
   m_ObjectHideFlags: 0
