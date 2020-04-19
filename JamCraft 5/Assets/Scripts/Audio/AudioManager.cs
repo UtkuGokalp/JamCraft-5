@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Utility.Development;
 
 namespace JamCraft5.Audio
 {
@@ -11,6 +12,10 @@ namespace JamCraft5.Audio
         private AudioSource lightSaberSoundSource;
         [SerializeField]
         private AudioSource laserPistolSoundSource;
+        [SerializeField]
+        private AudioSource idleTrack;
+        [SerializeField]
+        private AudioSource combatTrack;
         [SerializeField]
         private AudioSource[] footstepSoundSources;
         public static AudioManager Instance { get; private set; }
@@ -28,6 +33,8 @@ namespace JamCraft5.Audio
             {
                 Destroy(gameObject);
             }
+            idleTrack.FadeIn(.5f, 1f);
+            idleTrack.Play();
         }
         #endregion
 
@@ -49,6 +56,24 @@ namespace JamCraft5.Audio
                     laserPistolSoundSource.Play();
                     break;
             }
+        }
+        #endregion
+
+        #region PassToIdleTrack
+        public void PassToIdleTrack()
+        {
+            idleTrack.FadeIn(.5f, 1f);
+            combatTrack.FadeOut(.5f);
+            idleTrack.Play();
+        }
+        #endregion
+
+        #region PassToCombatTrack
+        public void PassToCombatTrack()
+        {
+            combatTrack.FadeIn(.5f, 1f);
+            idleTrack.FadeOut(.5f);
+            combatTrack.Play();
         }
         #endregion
     }

@@ -1437,6 +1437,7 @@ MonoBehaviour:
   smoothing: 0.2
   playerDistance: {x: 3, y: 10.6, z: -8.6}
   rotationOffset: {x: -46, y: 9, z: 0}
+
 --- !u!1 &826943749
 GameObject:
   m_ObjectHideFlags: 0
@@ -3714,10 +3715,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
-      propertyPath: craftableList.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
       propertyPath: canv
       value: 
       objectReference: {fileID: 1468374834}
@@ -3734,33 +3731,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 20978129}
     - target: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
-      propertyPath: description
-      value: 
-      objectReference: {fileID: 1027465857}
-    - target: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
       propertyPath: materialsNec
       value: 
       objectReference: {fileID: 695778343}
-    - target: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
-      propertyPath: craftableList.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: f165ad1a3da166e4490eb1a5389441dc,
-        type: 2}
-    - target: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
-      propertyPath: craftableList.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 3d3cbb96f445b9d4c854e0b872836f57,
-        type: 2}
-    - target: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
-      propertyPath: craftableList.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: 88a1f233097502e429c9f43c1cd533b1,
-        type: 2}
-    - target: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
-      propertyPath: craftableList.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: e7120f3026c679643b98f371d6df1cb7,
-        type: 2}
     - target: {fileID: 5542407526896326624, guid: a4e290a4de6d6fa44bea66695aaede13,
         type: 3}
       propertyPath: m_LocalPosition.x
