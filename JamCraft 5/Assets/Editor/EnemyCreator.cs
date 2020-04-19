@@ -5,6 +5,7 @@ using System.Reflection;
 using JamCraft5.Enemies;
 using JamCraft5.Items.Controllers;
 using JamCraft5.Enemies.Components;
+using Utility.Development;
 
 namespace JamCraft5.Editor
 {
@@ -83,9 +84,10 @@ namespace JamCraft5.Editor
                 if (enemyPrefab.GetComponent<Collider>() == null)
                 {
                     CapsuleCollider collider = enemyPrefab.AddComponent<CapsuleCollider>();
-                    collider.radius = 0.5f;
-                    collider.height = 2;
+                    collider.radius = 0.125f;
+                    collider.height = 0.5f;
                     collider.direction = 1;
+                    collider.center = Vector3.zero.With(null, 0.06f, null);
                 }
 
                 AddComponentIfDoesntExist<HealthSystem>();
@@ -120,7 +122,7 @@ namespace JamCraft5.Editor
                         enemyAttackBase = AddComponentIfDoesntExist<EnemyMeleeAttackComponent>();
                         break;
                 }
-                typeof(EnemyAttackBaseComponent).GetField("attackRange", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(enemyAttackBase, 1.2f);
+                typeof(EnemyAttackBaseComponent).GetField("attackRange", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(enemyAttackBase, 2);
                 typeof(EnemyAttackBaseComponent).GetField("attackRate", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(enemyAttackBase, 2);
 
                 AddComponentIfDoesntExist<EnemyAnimationController>();
