@@ -3,6 +3,7 @@ using System.Collections;
 using Utility.Development;
 using JamCraft5.Player.Inventory;
 using JamCraft5.Player.Movement;
+using JamCraft5.Audio;
 
 namespace JamCraft5.Player.Attack
 {
@@ -67,6 +68,7 @@ namespace JamCraft5.Player.Attack
                             {
                                 StartCoroutine(ComboAttack());
                             }
+                            AudioManager.Instance.PlayAudio(Audio.AudioType.LightSaberSound);
                             break;
                         case 1:
                             animator.SetTrigger(GameUtility.HAMMER_ATTACK_ANIMATION_TRIGGER_NAME);
@@ -79,6 +81,7 @@ namespace JamCraft5.Player.Attack
                         case 3:
                             animator.SetTrigger(GameUtility.SHOTGUN_ATTACK_ANIMATION_TRIGGER_NAME);
                             StartCoroutine(gunAttack());
+                            AudioManager.Instance.PlayAudio(Audio.AudioType.LaserPistolSound);
                             break;
                     }
                 }

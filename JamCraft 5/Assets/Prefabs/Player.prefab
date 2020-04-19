@@ -673,10 +673,10 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8841075825555908083}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 2b4ac251c3b6af442ad8fbef10c79035, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.125
+  m_Radius: 0.07
   m_Height: 0.55
   m_Direction: 1
   m_Center: {x: 0, y: 0.26, z: 0.02}
@@ -742,6 +742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 300
+  footstepSoundRate: 0.5
   slowDownMultiplier: 0.5
 --- !u!114 &4331333372374744699
 MonoBehaviour:
@@ -912,6 +913,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canv: {fileID: 0}
   mainCanv: {fileID: 0}
+  craftableList: []
+  craftablesDrop: {fileID: 0}
+  alertTxt: {fileID: 0}
+  itemName: {fileID: 0}
+  materialsNec: {fileID: 0}
 --- !u!1 &8864353323958645018
 GameObject:
   m_ObjectHideFlags: 0
