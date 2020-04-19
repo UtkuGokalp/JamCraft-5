@@ -350,8 +350,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d37342872a17147ac80f07758a6da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  maxHealth: 20
+  health: 10
+  maxHealth: 10
 --- !u!114 &885670443414182152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,6 +423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 1.2
   attackRate: 2
+  damage: 0
 --- !u!114 &-5921662567730315384
 MonoBehaviour:
   m_ObjectHideFlags: 0

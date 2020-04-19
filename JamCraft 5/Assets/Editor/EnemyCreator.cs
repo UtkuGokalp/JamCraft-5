@@ -123,7 +123,6 @@ namespace JamCraft5.Editor
                         break;
                 }
                 typeof(EnemyAttackBaseComponent).GetField("attackRange", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(enemyAttackBase, 2);
-                typeof(EnemyAttackBaseComponent).GetField("attackRate", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(enemyAttackBase, 2);
 
                 AddComponentIfDoesntExist<EnemyAnimationController>();
 
