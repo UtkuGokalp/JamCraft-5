@@ -37,7 +37,7 @@ namespace JamCraft5.Player.Movement
         #region Update
         private void Update()
         {
-            if (Input.GetMouseButtonDown(MouseButton.RIGHT) && !PlayerAttack.Attacking)
+            if (Input.GetMouseButtonDown(MouseButton.RIGHT))
             {
                 Dash();
             }
@@ -47,6 +47,7 @@ namespace JamCraft5.Player.Movement
         #region Dash
         private void Dash()
         {
+            if (GetComponent<PlayerUnlocking>().Dash2) cooldown = 0.5f;
             if (!Dashing && !coolD && !PlayerAttack.Attacking && !PlayerUnlocking.playerPause && playerUnlockController.Dash)
             {
                 directionToMouse = GameUtility.GetDirectionToMouse(transformCache.position);
