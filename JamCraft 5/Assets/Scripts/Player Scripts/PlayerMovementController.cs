@@ -18,7 +18,6 @@ namespace JamCraft5.Player.Movement
         private Transform transformCache;
         private Animator animator;
         private Vector3 playerInput;
-        private PlayerRotationController rotationScr;
         /// <summary>
         /// Calculated using Input.GetAxisRaw() method, so there'll be no smoothing for this input. This means we can check this variable to see if the player is actually pressing keys in the current frame.
         /// </summary>
@@ -31,13 +30,13 @@ namespace JamCraft5.Player.Movement
             transformCache = transform;
             rb = GetComponent<Rigidbody>();
             animator = GetComponent<Animator>();
-            rotationScr = GetComponent<PlayerRotationController>();
         }
         #endregion
 
         #region Update
         private void Update()
         {
+            if (PlayerUnlocking.playerPause) return;
             playerInput.x = Input.GetAxis("Horizontal");
             playerInput.z = Input.GetAxis("Vertical");
             currentInput.x = Input.GetAxisRaw("Horizontal");
@@ -53,56 +52,7 @@ namespace JamCraft5.Player.Movement
                 animator.SetBool("IsRunning", false);
             }
 
-            #region Player Rotation Without Mouse
-            if (!PlayerDashController.Dashing && !PlayerAttack.Attacking)
-            {
-                //Rotate the player model without the mouse
-                switch (currentInput.x)//for some reason I can't switch a Vector3
-                {
-                    case 1:
-                        switch (currentInput.z)
-                        {
-                            case 1:
-                                transformCache.rotation = Quaternion.Euler(0, 45, 0);
-                                break;
-                            case 0:
-                                transformCache.rotation = Quaternion.Euler(0, 90, 0);
-                                break;
-                            case -1:
-                                transformCache.rotation = Quaternion.Euler(0, 135, 0);
-                                break;
-                        }
-                        break;
-                    case 0:
-                        switch (currentInput.z)
-                        {
-                            case 1:
-                                transformCache.rotation = Quaternion.Euler(0, 0, 0);
-                                break;
-                            case -1:
-                                transformCache.rotation = Quaternion.Euler(0, 180, 0);
-                                break;
-                        }
-                        break;
-                    case -1:
-                        switch (currentInput.z)
-                        {
-                            case 1:
-                                transformCache.rotation = Quaternion.Euler(0, 315, 0);
-                                break;
-                            case 0:
-                                transformCache.rotation = Quaternion.Euler(0, 270, 0);
-                                break;
-                            case -1:
-                                transformCache.rotation = Quaternion.Euler(0, 225, 0);
-                                break;
-                        }
-                        break;
-                }
-            }
-            else { rotationScr.enabled = true; }
-
-            #endregion
+            
         }
         #endregion
 
@@ -114,14 +64,13 @@ namespace JamCraft5.Player.Movement
                 rb.velocity = Vector3.zero;
                 return;
             }
-            if (!PlayerDashController.Dashing)
+            if (!PlayerDashController.Dashing && !PlayerUnlocking.playerPause)
             {
                 Vector3 movementDirection = playerInput * movementSpeed * Time.fixedDeltaTime;
                 movementDirection.Normalize();
                 //If there is no input in current frame
                 if (currentInput.sqrMagnitude == 0)
                 {
-                    rotationScr.enabled = true;
                     if (movementDirection.sqrMagnitude > 0)
                     {
                         movementDirection *= slowDownMultiplier * Time.fixedDeltaTime;
@@ -130,9 +79,58 @@ namespace JamCraft5.Player.Movement
                 }
                 else
                 {
-                    rotationScr.enabled = false;
                     movementDirection = playerInput * movementSpeed * Time.fixedDeltaTime;
                     rb.velocity = rb.velocity.With(movementDirection.x, null, movementDirection.z);
+                    #region Player Rotation Without Mouse
+                    
+                    
+                        //Rotate the player model without the mouse
+                        switch (currentInput.x)//for some reason I can't switch a Vector3
+                        {
+                            case 1:
+                                switch (currentInput.z)
+                                {
+                                    case 1:
+                                        transformCache.rotation = Quaternion.Euler(0, 45, 0);
+                                        break;
+                                    case 0:
+                                        transformCache.rotation = Quaternion.Euler(0, 90, 0);
+                                        break;
+                                    case -1:
+                                        transformCache.rotation = Quaternion.Euler(0, 135, 0);
+                                        break;
+                                }
+                                break;
+                            case 0:
+                                switch (currentInput.z)
+                                {
+                                    case 1:
+                                        transformCache.rotation = Quaternion.Euler(0, 0, 0);
+                                        break;
+                                    case -1:
+                                        transformCache.rotation = Quaternion.Euler(0, 180, 0);
+                                        break;
+                                }
+                                break;
+                            case -1:
+                                switch (currentInput.z)
+                                {
+                                    case 1:
+                                        transformCache.rotation = Quaternion.Euler(0, 315, 0);
+                                        break;
+                                    case 0:
+                                        transformCache.rotation = Quaternion.Euler(0, 270, 0);
+                                        break;
+                                    case -1:
+                                        transformCache.rotation = Quaternion.Euler(0, 225, 0);
+                                        break;
+                                }
+                                break;
+                        }
+                    
+                    
+
+                    #endregion
                 }
             }
         }

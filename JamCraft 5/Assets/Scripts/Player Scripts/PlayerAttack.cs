@@ -49,7 +49,7 @@ namespace JamCraft5.Player.Attack
         #region Update
         private void Update()
         {
-            if (Input.GetMouseButtonDown(MouseButton.LEFT) && !PlayerDashController.Dashing)
+            if (Input.GetMouseButtonDown(MouseButton.LEFT) && !PlayerDashController.Dashing && !PlayerUnlocking.playerPause)
             {
                 pressedMouse = true;
                 if (!Attacking && playerInventoryManager.Weapons[playerInventoryManager.CurrentWeaponSlotIndex].ContainedWeapon != null)
