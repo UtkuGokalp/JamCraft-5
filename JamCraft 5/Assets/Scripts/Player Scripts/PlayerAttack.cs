@@ -85,7 +85,6 @@ namespace JamCraft5.Player.Attack
                             break;
                     }
                 }
-
             }
         }
         #endregion
