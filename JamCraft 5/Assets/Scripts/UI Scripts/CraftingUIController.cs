@@ -38,7 +38,7 @@ public class CraftingUIController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("CraftSpace") && Input.GetKeyDown(KeyCode.T))
+        if (other.CompareTag("CraftSpace") && Input.GetKeyDown(KeyCode.E))
         {
             Enable();
         }
