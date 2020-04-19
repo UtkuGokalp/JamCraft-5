@@ -858,7 +858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f70dd52c843601468976471f6dc51da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dash: 0
+  Dash: 1
 --- !u!136 &1315358949
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -913,8 +913,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canv: {fileID: 0}
   mainCanv: {fileID: 0}
-  craftableList: []
-  craftablesDrop: {fileID: 0}
+  craftableList:
+  - {fileID: 11400000, guid: e7120f3026c679643b98f371d6df1cb7, type: 2}
+  - {fileID: 11400000, guid: 3d3cbb96f445b9d4c854e0b872836f57, type: 2}
+  - {fileID: 11400000, guid: f165ad1a3da166e4490eb1a5389441dc, type: 2}
+  - {fileID: 11400000, guid: 88a1f233097502e429c9f43c1cd533b1, type: 2}
   alertTxt: {fileID: 0}
   itemName: {fileID: 0}
   materialsNec: {fileID: 0}
