@@ -21,8 +21,6 @@ public class CraftingUIController : MonoBehaviour
     [SerializeField]
     private Text itemName;
     [SerializeField]
-    private Text description;
-    [SerializeField]
     private Text materialsNec;
     private Craftable recip;
 
@@ -58,7 +56,6 @@ public class CraftingUIController : MonoBehaviour
         alertTxt.enabled = false;
         recip = null;
         itemName.enabled = false;
-        description.enabled = false;
         materialsNec.enabled = false; 
     }
 
@@ -74,13 +71,11 @@ public class CraftingUIController : MonoBehaviour
     {
         recip = craftableList[i];
         itemName.enabled = true;
-        description.enabled = true;
         materialsNec.enabled = true;
 
-        itemName.text = recip.name;
-        description.text = recip.recipe.ToString();
+        itemName.text = recip.Recipe.OutputItem.ItemData.itemName;
         materialsNec.text = "";
-        foreach (RecipeItem r in recip.recipe.RequiredItems)
+        foreach (RecipeItem r in recip.Recipe.RequiredItems)
         {
             materialsNec.text += r.Item.ItemData.itemName.ToString() + " x" + r.RequiredItemCount.ToString() + ", ";
         }
