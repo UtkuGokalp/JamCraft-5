@@ -1070,7 +1070,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 642303104}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5337230949926815737}
+        m_MethodName: Craft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &642303104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1738,7 +1749,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1062204800}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5337230949926815737}
+        m_MethodName: SelectCraft
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1062204800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2043,7 +2065,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1293850138}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5337230949926815737}
+        m_MethodName: SelectCraft
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1293850138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2865,7 +2898,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1916276462}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5337230949926815737}
+        m_MethodName: SelectCraft
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1916276462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3057,7 +3101,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1952519661}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5337230949926815737}
+        m_MethodName: SelectCraft
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1952519661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3492,3 +3547,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
+--- !u!114 &5337230949926815737 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13,
+    type: 3}
+  m_PrefabInstance: {fileID: 5337230949926815736}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaaf15bf445d951449c6653655d9650f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
