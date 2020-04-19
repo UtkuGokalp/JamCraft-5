@@ -22,7 +22,7 @@ public class CraftingUIController : MonoBehaviour
     private Text alertTxt;
 
     private List<Dropdown.OptionData> craftablesOptions;
-    
+
     private PlayerInventoryManager inv;
 
     private void Awake()
@@ -57,7 +57,7 @@ public class CraftingUIController : MonoBehaviour
         foreach (Craftable r in craftableList)
         {
             craftablesDrop.options.Add(new Dropdown.OptionData());
-            craftablesDrop.options[craftablesDrop.options.Count-1].text = r.recipe.OutputItem.ItemData.itemName;
+            craftablesDrop.options[craftablesDrop.options.Count - 1].text = r.Recipe.OutputItem.ItemData.itemName;
         }
     }
 
@@ -73,14 +73,15 @@ public class CraftingUIController : MonoBehaviour
     {
         foreach (Craftable r in craftableList)
         {
-            
-            if (r.recipe.OutputItem.ItemData.itemName == craftablesDrop.itemText.ToString())
+
+            if (r.Recipe.OutputItem.ItemData.itemName == craftablesDrop.itemText.ToString())
             {
                 InventoryItem i = r.Craft(inv);
                 if (i != null)
                 {
                     inv.AddItem(i);
-                } else
+                }
+                else
                 {
                     StartCoroutine(Alert());
                 }

@@ -26,6 +26,10 @@ namespace JamCraft5.Items.Controllers
                 PropertyInfo propertyInfo = type.GetProperty(nameof(currentItem.ID));
                 propertyInfo.SetValue(currentItem, i);
             }
+
+#if UNITY_EDITOR
+            Debug.Log("All items now have unique IDs.");
+#endif
         } 
         #endregion
     }
