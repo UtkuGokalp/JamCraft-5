@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using JamCraft5.Audio;
 using Utility.Development;
 
 namespace JamCraft5.Enemies.Components

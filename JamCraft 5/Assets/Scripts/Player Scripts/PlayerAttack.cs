@@ -29,8 +29,37 @@ namespace JamCraft5.Player.Attack
         private AnimationClip swordAttackAnimationClip;
         [SerializeField]
         private AnimationClip shotgunAttackAnimationClip;
+        private static PlayerAttack instance;
 
-        public static bool Attacking { get; private set; }
+        private static bool attacking;
+        public static bool Attacking
+        {
+            get
+            {
+                return attacking;
+            }
+            private set
+            {
+                attacking = value;
+                if (AudioManager.Instance != null)
+                {
+                    if (attacking)
+                    {
+                        if (!AudioManager.Instance.PlayingCombatTrack)
+                        {
+                            AudioManager.Instance.PassToCombatTrack();
+                        }
+                    }
+                    else
+                    {
+                        if (!AudioManager.Instance.PlayingIdleTrack)
+                        {
+                            instance.Invoke(nameof(PassToIdleTrack), 2f);
+                        }
+                    }
+                }
+            }
+        }
 
         private int comboAttacks = 0;
         private bool pressedMouse = false;//Is here to detect if betwen combo attacks the mouse has been pressed
@@ -41,7 +70,7 @@ namespace JamCraft5.Player.Attack
         #region Awake
         private void Awake()
         {
-            Attacking = false;
+            instance = this;
             animator = GetComponent<Animator>();
             playerInventoryManager = GetComponent<PlayerInventoryManager>();
         }
@@ -165,6 +194,13 @@ namespace JamCraft5.Player.Attack
             yield return new WaitForSeconds(T2);//fix this value with the animation
             box.enabled = false;
             Attacking = false;
+        }
+        #endregion
+        
+        #region PassToIdleTrack
+        private void PassToIdleTrack()
+        {
+            AudioManager.Instance.PassToIdleTrack();
         }
         #endregion
     }
