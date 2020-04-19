@@ -1437,7 +1437,6 @@ MonoBehaviour:
   smoothing: 0.2
   playerDistance: {x: 3, y: 10.6, z: -8.6}
   rotationOffset: {x: -46, y: 9, z: 0}
-
 --- !u!1 &826943749
 GameObject:
   m_ObjectHideFlags: 0

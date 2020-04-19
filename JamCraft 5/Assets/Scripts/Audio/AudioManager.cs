@@ -18,6 +18,8 @@ namespace JamCraft5.Audio
         private AudioSource combatTrack;
         [SerializeField]
         private AudioSource[] footstepSoundSources;
+        public bool PlayingIdleTrack { get; private set; }
+        public bool PlayingCombatTrack { get; private set; }
         public static AudioManager Instance { get; private set; }
         #endregion
 
@@ -35,6 +37,7 @@ namespace JamCraft5.Audio
             }
             idleTrack.FadeIn(.5f, 1f);
             idleTrack.Play();
+            PlayingIdleTrack = true;
         }
         #endregion
 
@@ -58,13 +61,15 @@ namespace JamCraft5.Audio
             }
         }
         #endregion
-
+        
         #region PassToIdleTrack
         public void PassToIdleTrack()
         {
             idleTrack.FadeIn(.5f, 1f);
             combatTrack.FadeOut(.5f);
             idleTrack.Play();
+            PlayingIdleTrack = true;
+            PlayingCombatTrack = false;
         }
         #endregion
 
@@ -74,6 +79,8 @@ namespace JamCraft5.Audio
             combatTrack.FadeIn(.5f, 1f);
             idleTrack.FadeOut(.5f);
             combatTrack.Play();
+            PlayingIdleTrack = false;
+            PlayingCombatTrack = true;
         }
         #endregion
     }
