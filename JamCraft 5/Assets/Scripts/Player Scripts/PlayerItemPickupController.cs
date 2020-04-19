@@ -21,6 +21,13 @@ namespace JamCraft5.Player.Inventory
         #region OnCollisionEnter
         private void OnCollisionEnter(Collision collision)
         {
+            if (collision.gameObject.CompareTag("WinItem"))
+            {
+                PlayerCarriedItemController.CarriedItemCollected = true;
+                Destroy(collision.gameObject);
+                return;
+            }
+
             GroundedItem groundedItem = collision.gameObject.GetComponent<GroundedItem>();
             if (groundedItem != null)
             {
