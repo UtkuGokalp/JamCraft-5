@@ -23,7 +23,7 @@ namespace JamCraft5.Player.Attack
 
             box = gameObject.AddComponent<BoxCollider>();
             box.isTrigger = true;
-            box.tag = "PlayerAttack";
+            box.tag = "Player";
 
             transform.Rotate(Random.Range(-bulletError, bulletError), Random.Range(-bulletError, bulletError), Random.Range(-bulletError,bulletError));
         }

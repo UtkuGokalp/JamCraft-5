@@ -20,7 +20,7 @@ namespace JamCraft5.Player.Movement
         #region Update
         private void Update()
         {
-            if (!PlayerAttack.Attacking)
+            if (!PlayerAttack.Attacking && ((Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0) || PlayerDashController.Dashing) && !PlayerUnlocking.playerPause)
             {
                 Vector3 target = GameUtility.MousePosition;
                 Vector3 direction = GameUtility.GetDirection(transformCache.position, target);
