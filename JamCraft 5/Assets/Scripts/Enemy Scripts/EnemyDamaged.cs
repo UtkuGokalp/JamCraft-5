@@ -77,6 +77,7 @@ namespace JamCraft5.Enemies.Components
             enemyState.StateOfEnemy = EnemyStateEnum.Damaging;
             rb.AddRelativeForce(0, 0, 1/*Insert weapon Knockback*/, ForceMode.Impulse);
             hs.DecreaseHealth(playerInventoryManager.SelectedWeapon.ContainedWeapon.ItemData.weaponDamage);
+            if (!hs.IsAlive) OnDeath();
             yield return new WaitForSeconds(0.1f);
             enemyState.StateOfEnemy = currentEnemyState;
         }
