@@ -6,5 +6,6 @@ public class PlayerUnlocking : MonoBehaviour
 {
   
     public bool Dash = false;
+    public static bool playerPause = false;
     
 }

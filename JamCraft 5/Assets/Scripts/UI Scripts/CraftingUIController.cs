@@ -9,23 +9,29 @@ public class CraftingUIController : MonoBehaviour
     private Canvas canv;
     [SerializeField]
     private Canvas mainCanv;//The canvas of the life, weapons...
-    private bool active = false;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("CrafSpace") && Input.GetKeyDown(KeyCode.E))
+        if (other.CompareTag("CraftSpace") && Input.GetKeyDown(KeyCode.E))
         {
             canv.enabled = true;
             mainCanv.GetComponent<Blacker>().blacker = true;
+            PlayerUnlocking.playerPause = true;
         }
     }
 
     private void Update()
     {
-        if (active)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            canv.enabled = false;
-            mainCanv.GetComponent<Blacker>().blacker = true;
+            Exit();
         }
+    }
+    public void Exit()
+    {
+        mainCanv.GetComponent<Blacker>().blacker = false;
+        PlayerUnlocking.playerPause = false;
+        canv.enabled = false;
+
     }
 }
