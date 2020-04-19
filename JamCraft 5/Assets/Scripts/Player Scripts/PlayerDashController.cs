@@ -47,7 +47,7 @@ namespace JamCraft5.Player.Movement
         #region Dash
         private void Dash()
         {
-            if (!Dashing && !coolD && !PlayerAttack.Attacking && playerUnlockController.Dash)
+            if (!Dashing && !coolD && !PlayerAttack.Attacking && !PlayerUnlocking.playerPause && playerUnlockController.Dash)
             {
                 directionToMouse = GameUtility.GetDirectionToMouse(transformCache.position);
                 currentDashTime = dashTime;

@@ -102,7 +102,7 @@ namespace JamCraft5.Player.Attack
             render.enabled = true;
 
             yield return new WaitForSeconds(1f);//fix it with the animation (player throwing grenade)
-            transform.position = transform.parent.position +Vector3.up;
+            transform.position = transform.parent.position + Vector3.up;
             transform.parent = null;
             rb.velocity = Vector3.zero;
             rb.useGravity = true;
