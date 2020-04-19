@@ -23,6 +23,7 @@ namespace JamCraft5.Enemies.Components
         private InventoryItem grenade;
         private PlayerInventoryManager playerInventoryManager;
         private GroundedItemDropController groundedItemDropController;
+        private bool dying;
         #endregion
 
         private void Awake()
@@ -92,7 +93,11 @@ namespace JamCraft5.Enemies.Components
 
         private void OnDeath()
         {
-            StartCoroutine(OnDeathCoroutine());
+            if (!dying)
+            {
+                dying = true;
+                StartCoroutine(OnDeathCoroutine());
+            }
         }
 
         private IEnumerator OnDeathCoroutine()

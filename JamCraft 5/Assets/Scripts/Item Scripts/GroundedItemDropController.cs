@@ -48,6 +48,10 @@ namespace JamCraft5.Items.Controllers
         public void DropItems()
         {
             //Calculate and drop possible items.
+            if (this.possibleItems.Length == 0)
+            {
+                goto dropDefiniteItems;
+            }
             int itemChance = Random.Range(0, maxPossibleChance);
             List<GroundedItem> possibleItems = new List<GroundedItem>();
             foreach (GroundedItem item in this.possibleItems)
@@ -65,7 +69,12 @@ namespace JamCraft5.Items.Controllers
                 Instantiate(randomPossibleItem, transformCache.position, randomPossibleItem.TransformCache.rotation);
             }
 
+            dropDefiniteItems:
             //Drop definite items.
+            if (definiteItems.Length == 0)
+            {
+                return;
+            }
             int definiteItemCount = Random.Range(minDefiniteItemsCount, maxDefiniteItemsCount);
             for (int i = 0; i < definiteItemCount; i++)
             {
