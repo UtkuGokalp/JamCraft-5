@@ -43,7 +43,7 @@ namespace JamCraft5.Player.Movement
             currentInput.z = Input.GetAxisRaw("Vertical");
             playerInput.Normalize();
 
-            if (currentInput.sqrMagnitude != 0)
+            if (currentInput.sqrMagnitude != 0 && !PlayerAttack.Attacking && !PlayerUnlocking.playerPause)
             {
                 animator.SetBool("IsRunning", true);
             }
@@ -51,8 +51,6 @@ namespace JamCraft5.Player.Movement
             {
                 animator.SetBool("IsRunning", false);
             }
-
-            
         }
         #endregion
 
@@ -83,59 +81,59 @@ namespace JamCraft5.Player.Movement
                     movementDirection = playerInput * movementSpeed * Time.fixedDeltaTime;
                     rb.velocity = rb.velocity.With(movementDirection.x, null, movementDirection.z);
                     #region Player Rotation Without Mouse
-                    
-                    
-                        //Rotate the player model without the mouse
-                        switch (currentInput.x)//for some reason I can't switch a Vector3
-                        {
-                            case 1:
-                                switch (currentInput.z)
-                                {
-                                    case 1:
-                                        transformCache.rotation = Quaternion.Euler(0, 45, 0);
-                                        break;
-                                    case 0:
-                                        transformCache.rotation = Quaternion.Euler(0, 90, 0);
-                                        break;
-                                    case -1:
-                                        transformCache.rotation = Quaternion.Euler(0, 135, 0);
-                                        break;
-                                }
-                                break;
-                            case 0:
-                                switch (currentInput.z)
-                                {
-                                    case 1:
-                                        transformCache.rotation = Quaternion.Euler(0, 0, 0);
-                                        break;
-                                    case -1:
-                                        transformCache.rotation = Quaternion.Euler(0, 180, 0);
-                                        break;
-                                }
-                                break;
-                            case -1:
-                                switch (currentInput.z)
-                                {
-                                    case 1:
-                                        transformCache.rotation = Quaternion.Euler(0, 315, 0);
-                                        break;
-                                    case 0:
-                                        transformCache.rotation = Quaternion.Euler(0, 270, 0);
-                                        break;
-                                    case -1:
-                                        transformCache.rotation = Quaternion.Euler(0, 225, 0);
-                                        break;
-                                }
-                                break;
-                        }
-                    
-                    
+
+
+                    //Rotate the player model without the mouse
+                    switch (currentInput.x)//for some reason I can't switch a Vector3
+                    {
+                        case 1:
+                            switch (currentInput.z)
+                            {
+                                case 1:
+                                    transformCache.rotation = Quaternion.Euler(0, 45, 0);
+                                    break;
+                                case 0:
+                                    transformCache.rotation = Quaternion.Euler(0, 90, 0);
+                                    break;
+                                case -1:
+                                    transformCache.rotation = Quaternion.Euler(0, 135, 0);
+                                    break;
+                            }
+                            break;
+                        case 0:
+                            switch (currentInput.z)
+                            {
+                                case 1:
+                                    transformCache.rotation = Quaternion.Euler(0, 0, 0);
+                                    break;
+                                case -1:
+                                    transformCache.rotation = Quaternion.Euler(0, 180, 0);
+                                    break;
+                            }
+                            break;
+                        case -1:
+                            switch (currentInput.z)
+                            {
+                                case 1:
+                                    transformCache.rotation = Quaternion.Euler(0, 315, 0);
+                                    break;
+                                case 0:
+                                    transformCache.rotation = Quaternion.Euler(0, 270, 0);
+                                    break;
+                                case -1:
+                                    transformCache.rotation = Quaternion.Euler(0, 225, 0);
+                                    break;
+                            }
+                            break;
+                    }
+
+
 
                     #endregion
                 }
             }
         }
-        
+
         #endregion
 
         #region GetYRotation

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Reflection;
+using System.Collections.Generic;
 
 namespace JamCraft5.Items.Controllers
 {
@@ -30,7 +31,28 @@ namespace JamCraft5.Items.Controllers
 #if UNITY_EDITOR
             Debug.Log("All items now have unique IDs.");
 #endif
-        } 
+        }
+        #endregion
+
+        #region AllItemsHaveUniqueIDs
+        public static bool AllItemsHaveUniqueIDs()
+        {
+            ItemsBase[] items = Resources.LoadAll<ItemsBase>("Items");
+            List<int> ids = new List<int>();
+
+            foreach (ItemsBase item in items)
+            {
+                if (ids.Contains(item.ID))
+                {
+                    return false;
+                }
+                else
+                {
+                    ids.Add(item.ID);
+                }
+            }
+            return true;
+        }
         #endregion
     }
 }

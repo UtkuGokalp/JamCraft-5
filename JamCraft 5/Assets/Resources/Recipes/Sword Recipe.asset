@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 682f91c08041b17479e4e4d4e644bf6f, type: 3}
   m_Name: Sword Recipe
   m_EditorClassIdentifier: 
-  requiredItems:
-  - requiredItemCount: 10
-    item:
-      itemData: {fileID: 11400000, guid: d24959ea1ad9b974eb8e81c6e4590d88, type: 2}
+  requiredItems: []
   outputItem:
     itemData: {fileID: 11400000, guid: da828594965190647817e61e03de7801, type: 2}

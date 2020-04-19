@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e98df8c69f9bd9242b628bd8e7951cfe, type: 3}
-  m_Name: Titanium
+  m_Name: Cobalt
   m_EditorClassIdentifier: 
-  itemName: Titanium
+  itemName: Cobalt
   type: 2
-  groundedItemPrefab: {fileID: 0}
+  groundedItemPrefab: {fileID: 1838623127340028511, guid: e9708727f9bd47345bcd62f46a304584,
+    type: 3}
   uiIcon: {fileID: 0}
   weaponDamage: 0
   weaponRange: 0
@@ -23,5 +24,5 @@ MonoBehaviour:
   grenadeRange: 0
   grenadeForce: 0
   grenadeTime: 0
-  matType: Titanium
+  matType: Cobalt
   healForce: 0
