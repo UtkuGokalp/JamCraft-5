@@ -3,10 +3,13 @@ using UnityEngine;
 using Utility.Health;
 using JamCraft5.Items;
 using JamCraft5.Player.Inventory;
+using Utility.Development;
+using JamCraft5.Items.Controllers;
 
 namespace JamCraft5.Enemies.Components
 {
     [RequireComponent(typeof(EnemyState))]
+    [RequireComponent(typeof(GroundedItemDropController))]
     public class EnemyDamaged : MonoBehaviour
     {
         #region Variables
@@ -16,6 +19,7 @@ namespace JamCraft5.Enemies.Components
 
         private InventoryItem grenade;
         private PlayerInventoryManager playerInventoryManager;
+        private GroundedItemDropController groundedItemDropController;
         #endregion
 
         private void Awake()
@@ -23,16 +27,30 @@ namespace JamCraft5.Enemies.Components
             hs = GetComponent<HealthSystem>();
             rb = GetComponent<Rigidbody>();
             enemyState = GetComponent<EnemyState>();
-            playerInventoryManager = GetComponent<PlayerInventoryManager>();
+            playerInventoryManager = GameUtility.Player.GetComponent<PlayerInventoryManager>();
+            groundedItemDropController = GetComponent<GroundedItemDropController>();
             grenade = new InventoryItem(new ItemsBase());
         }
 
+        private void OnEnable()
+        {
+            hs.OnDeath += OnDeath;
+        }
+
+        private void OnDisable()
+        {
+            hs.OnDeath -= OnDeath;
+        }
+
+
+
         private void OnTriggerEnter(Collider col)
         {
-            if (col.CompareTag("Player"))
+            if (col.CompareTag(GameUtility.PLAYER_TAG))
             {
                 StartCoroutine(GetDamage());
-            } else if (col.CompareTag("GrenadeExplosion"))
+            }
+            else if (col.CompareTag("GrenadeExplosion"))
             {
                 StartCoroutine(GetGrenadeDamage());
             }
@@ -52,10 +70,16 @@ namespace JamCraft5.Enemies.Components
         {
             EnemyStateEnum currentEnemyState = enemyState.StateOfEnemy;
             enemyState.StateOfEnemy = EnemyStateEnum.Damaging;
-            rb.AddRelativeForce(0,0,1/*Insert grenade Knockback*/, ForceMode.Impulse);
+            rb.AddRelativeForce(0, 0, 1/*Insert grenade Knockback*/, ForceMode.Impulse);
             hs.DecreaseHealth(grenade.ItemData.grenadeDamage);
             yield return new WaitForSeconds(0.1f);
             enemyState.StateOfEnemy = currentEnemyState;
+        }
+
+        private void OnDeath()
+        {
+            groundedItemDropController.DropItems();
+            Destroy(gameObject);
         }
     }
 }

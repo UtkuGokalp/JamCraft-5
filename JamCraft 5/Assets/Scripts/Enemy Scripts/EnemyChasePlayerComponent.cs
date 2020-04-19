@@ -12,12 +12,11 @@ namespace JamCraft5.Enemies.Components
         private float chaseSpeed;
         [SerializeField]
         private float detectionRange;
-        [SerializeField]
-        private float rotationSpeed;
         private EnemyState enemyState;
         private Transform transformCache;
         private Rigidbody rb;
 
+        public float DetectionRange => detectionRange;
         public bool PlayerIsInDetectionRange => Vector3.Distance(transformCache.position, GameUtility.PlayerPosition) < detectionRange;
         #endregion
 
@@ -35,11 +34,21 @@ namespace JamCraft5.Enemies.Components
         {
             if (PlayerIsInDetectionRange)
             {
-                if (enemyState.StateOfEnemy != EnemyStateEnum.Attacking &&
-                    enemyState.StateOfEnemy != EnemyStateEnum.Damaging)
+                if (enemyState.StateOfEnemy != EnemyStateEnum.Damaging)
                 {
-                    enemyState.StateOfEnemy = EnemyStateEnum.Chasing;
-                    MoveTowardsPlayer();
+                    if (enemyState.StateOfEnemy != EnemyStateEnum.Attacking)
+                    {
+                        enemyState.StateOfEnemy = EnemyStateEnum.Chasing;
+                        MoveTowardsPlayer();
+                    }
+                    else
+                    {
+                        rb.velocity = Vector3.zero;
+                    }
+                }
+                else
+                {
+                    rb.velocity = Vector3.zero;
                 }
             }
         }
