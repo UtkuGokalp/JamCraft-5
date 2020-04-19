@@ -4,34 +4,77 @@ using Utility.Development;
 namespace JamCraft5.Enemies.Components
 {
     [DisallowMultipleComponent]
+    [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(EnemyState))]
     public abstract class EnemyAttackBaseComponent : MonoBehaviour
     {
         #region Variables
         [SerializeField]
         private float attackRange;
-        [SerializeField]
         private float attackRate;
         private float timeLeftForNextAttack;
+        private Animator animator;
         private EnemyState enemyState;
         private Transform transformCache;
 
-        public float AttackRange => attackRange;
-        public bool InAttackRange => Vector3.Distance(transformCache.position, GameUtility.PlayerPosition) < attackRange;
-        #endregion
-
-        #region Awake
-        private void Awake()
+        protected float AttackRate
         {
-            transformCache = transform;
-            enemyState = GetComponent<EnemyState>();
+            get
+            {
+                if (attackRate == default)
+                {
+                    foreach (AnimationClip clip in AnimatorComponent.runtimeAnimatorController.animationClips)
+                    {
+                        if (clip.name.ToLower().Contains("attack"))
+                        {
+                            attackRate = clip.length;
+                        }
+                    }
+                }
+                return attackRate;
+            }
         }
+        private Animator AnimatorComponent
+        {
+            get
+            {
+                if (animator == null)
+                {
+                    animator = GetComponent<Animator>();
+                }
+                return animator;
+            }
+        }
+        private EnemyState EnemyState
+        {
+            get
+            {
+                if (enemyState == null)
+                {
+                    enemyState = GetComponent<EnemyState>();
+                }
+                return enemyState;
+            }
+        }
+        protected Transform TransformCache
+        {
+            get
+            {
+                if (transformCache == null)
+                {
+                    transformCache = transform;
+                }
+                return transformCache;
+            }
+        }
+        public float AttackRange => attackRange;
+        public bool InAttackRange => Vector3.Distance(TransformCache.position, GameUtility.PlayerPosition) < attackRange;
         #endregion
 
         #region Update
         private void Update()
         {
-            if (enemyState.StateOfEnemy == EnemyStateEnum.Damaging)
+            if (EnemyState.StateOfEnemy == EnemyStateEnum.Damaging)
             {
                 timeLeftForNextAttack = 0;
                 return;
@@ -40,9 +83,9 @@ namespace JamCraft5.Enemies.Components
             {
                 if (timeLeftForNextAttack <= 0)
                 {
-                    enemyState.StateOfEnemy = EnemyStateEnum.Attacking;
+                    EnemyState.StateOfEnemy = EnemyStateEnum.Attacking;
                     AttackOnce();
-                    timeLeftForNextAttack = attackRate;
+                    timeLeftForNextAttack = AttackRate;
                 }
                 else
                 {
@@ -52,7 +95,7 @@ namespace JamCraft5.Enemies.Components
             else
             {
                 timeLeftForNextAttack = 0;
-                enemyState.StateOfEnemy = EnemyStateEnum.Idle;
+                EnemyState.StateOfEnemy = EnemyStateEnum.Idle;
             }
         }
         #endregion
@@ -72,7 +115,7 @@ namespace JamCraft5.Enemies.Components
         #endregion
 
         #region OnDrawGizmosSelected
-        private void OnDrawGizmosSelected()
+        protected virtual void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, attackRange);
