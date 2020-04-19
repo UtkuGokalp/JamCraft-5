@@ -7,6 +7,9 @@ namespace JamCraft5.Player.Movement
     public class PlayerRotationController : MonoBehaviour
     {
         #region Variables
+        [Range(0, 1)]
+        [SerializeField]
+        private float lerpSpeed;
         private Transform transformCache;
         #endregion
 
@@ -25,7 +28,8 @@ namespace JamCraft5.Player.Movement
                 Vector3 target = GameUtility.MousePosition;
                 Vector3 direction = GameUtility.GetDirection(transformCache.position, target);
                 float rotation = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-                transformCache.rotation = Quaternion.Euler(transformCache.rotation.eulerAngles.x, rotation, transformCache.rotation.eulerAngles.z);
+                Quaternion desiredRotation = Quaternion.Euler(transformCache.rotation.eulerAngles.x, rotation, transformCache.rotation.eulerAngles.z);
+                transformCache.rotation = Quaternion.Slerp(transformCache.rotation, desiredRotation, lerpSpeed);
             }
         }
         #endregion
