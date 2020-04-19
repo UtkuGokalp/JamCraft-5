@@ -296,7 +296,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b51b92ff90b90af4794a5af0985f3555, type: 2}
+  - {fileID: 0}
   - {fileID: 2100000, guid: 959b29f55917dd342a9e8620cc866abc, type: 2}
   - {fileID: 2100000, guid: 45f10a1168fa92948b92218097b427f1, type: 2}
   m_StaticBatchInfo:
@@ -698,8 +698,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 173e30eb199a21b4299266a57552cfd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseSpeed: 300
-  detectionRange: 5
+  chaseSpeed: 250
+  detectionRange: 10
 --- !u!114 &4190819817831015913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -726,7 +726,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 2
-  attackRate: 2
   damage: 2
 --- !u!114 &2222923715862623713
 MonoBehaviour:
