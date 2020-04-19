@@ -9,7 +9,7 @@ namespace JamCraft5.Crafting
     {
         #region Variables
         [SerializeField]
-        private Recipe recipe;
+        public Recipe recipe { get; private set; }
         #endregion
 
         #region Craft
