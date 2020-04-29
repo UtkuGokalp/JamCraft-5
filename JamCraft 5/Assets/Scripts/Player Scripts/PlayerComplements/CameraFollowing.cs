@@ -3,21 +3,30 @@ using Utility.Development;
 
 public class CameraFollowing : MonoBehaviour
 {
+    #region Variables
     [Range(0, 1)]
     [SerializeField]
     private float smoothing;
     [SerializeField]
-    private Vector3 playerDistance;
-    [SerializeField]
-    private Vector3 rotationOffset;
+    private Vector3 offsetFromPlayer;
+    public Vector3 OffsetFromPlayer { get; set; }
+    #endregion
 
+    #region Awake
+    private void Awake()
+    {
+        //Set the first offset from player to the value set from the editor.
+        //This is a separate variable so that changing the value from code
+        //doesn't somehow affect the orginal value permanantly.
+        OffsetFromPlayer = offsetFromPlayer;
+    }
+    #endregion
+
+    #region FixedUpdate
     private void FixedUpdate()
     {
-        Vector3 desiredPosition = GameUtility.PlayerPosition + playerDistance;
+        Vector3 desiredPosition = GameUtility.PlayerPosition + OffsetFromPlayer;
         transform.position = Vector3.Slerp(transform.position, desiredPosition, smoothing);
-
-        Quaternion desiredRotation = Quaternion.Euler(-rotationOffset);
-        transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, smoothing);
-        //I invert the rotation only for comodity, the usual rotations are about -50º
     }
+    #endregion
 }

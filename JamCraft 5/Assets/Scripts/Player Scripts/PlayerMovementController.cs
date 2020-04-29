@@ -76,20 +76,20 @@ namespace JamCraft5.Player.Movement
             if (!PlayerDashController.Dashing)
             {
                 Vector3 movementDirection = playerInput * movementSpeed * Time.fixedDeltaTime;
-                movementDirection.Normalize();
                 //If there is no input in current frame
                 if (currentInput.sqrMagnitude == 0)
                 {
                     if (movementDirection.sqrMagnitude > 0)
                     {
+                        movementDirection.Normalize();
                         movementDirection *= slowDownMultiplier * Time.fixedDeltaTime;
                     }
                     rb.velocity = movementDirection.With(null, rb.velocity.y, null);
                 }
                 else
                 {
-                    movementDirection = playerInput * movementSpeed * Time.fixedDeltaTime;
                     rb.velocity = rb.velocity.With(movementDirection.x, null, movementDirection.z);
+
                     #region Player Rotation Without Mouse
 
 
