@@ -37,7 +37,7 @@ namespace JamCraft5.Player.Movement
         #region Update
         private void Update()
         {
-            if (Input.GetMouseButtonDown(MouseButton.RIGHT))
+            if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
             {
                 Dash();
             }
@@ -62,7 +62,7 @@ namespace JamCraft5.Player.Movement
         {
             if (Dashing)
             {
-                transform.localScale = new Vector3(4, 3.3f,6f);
+                transform.localScale = new Vector3(4, 3.3f, 6f);
                 rb.velocity = directionToMouse * dashSpeed * Time.fixedDeltaTime;
                 currentDashTime -= Time.fixedDeltaTime;
 
