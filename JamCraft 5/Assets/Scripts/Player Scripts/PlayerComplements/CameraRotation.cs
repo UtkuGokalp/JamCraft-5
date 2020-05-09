@@ -12,7 +12,7 @@ namespace JamCraft5.Camera
         private Transform transformCache;
         private CameraFollowing cameraPlayerFollowController;
         public static float CurrentRotationAngle { get; private set; }
-        public static bool RotatingCamera => Input.GetMouseButton(MouseButton.MIDDLE);
+        public static bool RotatingCamera => Input.GetMouseButton(MouseButton.RIGHT);
         #endregion
 
         #region Awake
