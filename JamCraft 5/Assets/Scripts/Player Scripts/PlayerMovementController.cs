@@ -2,6 +2,7 @@
 using Utility.Development;
 using JamCraft5.Player.Attack;
 using JamCraft5.Audio;
+using JamCraft5.Camera;
 
 namespace JamCraft5.Player.Movement
 {
@@ -24,7 +25,7 @@ namespace JamCraft5.Player.Movement
         /// <summary>
         /// Calculated using Input.GetAxisRaw() method, so there'll be no smoothing for this input. This means we can check this variable to see if the player is actually pressing keys in the current frame.
         /// </summary>
-        private Vector3 currentInput;
+        private Vector3 rawPlayerInput;
         #endregion
 
         #region Awake
@@ -46,14 +47,17 @@ namespace JamCraft5.Player.Movement
         #region Update
         private void Update()
         {
-            if (PlayerUnlocking.playerPause) return;
+            if (PlayerUnlocking.playerPause)
+            {
+                return;
+            }
             playerInput.x = Input.GetAxis("Horizontal");
             playerInput.z = Input.GetAxis("Vertical");
-            currentInput.x = Input.GetAxisRaw("Horizontal");
-            currentInput.z = Input.GetAxisRaw("Vertical");
+            rawPlayerInput.x = Input.GetAxisRaw("Horizontal");
+            rawPlayerInput.z = Input.GetAxisRaw("Vertical");
             playerInput.Normalize();
 
-            if (currentInput.sqrMagnitude != 0 && !PlayerAttack.Attacking && !PlayerUnlocking.playerPause)
+            if (rawPlayerInput.sqrMagnitude != 0 && !PlayerAttack.Attacking && !PlayerUnlocking.playerPause)
             {
                 animator.SetBool("IsRunning", true);
             }
@@ -63,7 +67,7 @@ namespace JamCraft5.Player.Movement
             }
         }
         #endregion
-
+        
         #region FixedUpdate
         private void FixedUpdate()
         {
@@ -76,8 +80,11 @@ namespace JamCraft5.Player.Movement
             if (!PlayerDashController.Dashing)
             {
                 Vector3 movementDirection = playerInput * movementSpeed * Time.fixedDeltaTime;
+
+                movementDirection = Quaternion.AngleAxis(CameraRotation.CurrentRotationAngle, Vector3.up) * movementDirection;
+
                 //If there is no input in current frame
-                if (currentInput.sqrMagnitude == 0)
+                if (rawPlayerInput.sqrMagnitude == 0)
                 {
                     if (movementDirection.sqrMagnitude > 0)
                     {
@@ -89,89 +96,16 @@ namespace JamCraft5.Player.Movement
                 else
                 {
                     rb.velocity = rb.velocity.With(movementDirection.x, null, movementDirection.z);
-
-                    #region Player Rotation Without Mouse
-
-
-                    //Rotate the player model without the mouse
-                    switch (currentInput.x)//for some reason I can't switch a Vector3
-                    {
-                        case 1:
-                            switch (currentInput.z)
-                            {
-                                case 1:
-                                    transformCache.rotation = Quaternion.Euler(0, 45, 0);
-                                    break;
-                                case 0:
-                                    transformCache.rotation = Quaternion.Euler(0, 90, 0);
-                                    break;
-                                case -1:
-                                    transformCache.rotation = Quaternion.Euler(0, 135, 0);
-                                    break;
-                            }
-                            break;
-                        case 0:
-                            switch (currentInput.z)
-                            {
-                                case 1:
-                                    transformCache.rotation = Quaternion.Euler(0, 0, 0);
-                                    break;
-                                case -1:
-                                    transformCache.rotation = Quaternion.Euler(0, 180, 0);
-                                    break;
-                            }
-                            break;
-                        case -1:
-                            switch (currentInput.z)
-                            {
-                                case 1:
-                                    transformCache.rotation = Quaternion.Euler(0, 315, 0);
-                                    break;
-                                case 0:
-                                    transformCache.rotation = Quaternion.Euler(0, 270, 0);
-                                    break;
-                                case -1:
-                                    transformCache.rotation = Quaternion.Euler(0, 225, 0);
-                                    break;
-                            }
-                            break;
-                    }
-
-
-
-                    #endregion
                 }
             }
         }
 
-        #endregion
-
-        #region GetYRotation
-        private float GetYRotation()
-        {
-            float yRotation = transform.rotation.eulerAngles.y;
-            if (yRotation >= 360)
-            {
-                while (yRotation >= 360)
-                {
-                    yRotation -= 360;
-                }
-            }
-            else if (yRotation < 0)
-            {
-                while (yRotation < 0)
-                {
-                    yRotation += 360;
-                }
-            }
-            return yRotation;
-        }
         #endregion
 
         #region PlayFootstepSound
         private void PlayFootstepSound()
         {
-            if (!PlayerUnlocking.playerPause && !PlayerAttack.Attacking && currentInput.sqrMagnitude != 0)
+            if (!PlayerUnlocking.playerPause && !PlayerAttack.Attacking && rawPlayerInput.sqrMagnitude != 0)
             {
                 AudioManager.Instance.PlayAudio(Audio.AudioType.FootstepSound);
             }

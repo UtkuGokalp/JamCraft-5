@@ -1,34 +1,39 @@
 ﻿using UnityEngine;
 using Utility.Development;
 
-[RequireComponent(typeof(CameraFollowing))]
-public class CameraRotation : MonoBehaviour
+namespace JamCraft5.Camera
 {
-    #region Variables
-    [SerializeField]
-    private float sensitivity;
-    private Transform transformCache;
-    private CameraFollowing cameraPlayerFollowController;
-    public static bool RotatingCamera => Input.GetMouseButton(MouseButton.MIDDLE);
-    #endregion
-
-    #region Awake
-    private void Awake()
+    [RequireComponent(typeof(CameraFollowing))]
+    public class CameraRotation : MonoBehaviour
     {
-        transformCache = transform;
-        cameraPlayerFollowController = GetComponent<CameraFollowing>();
-    }
-    #endregion
+        #region Variables
+        [SerializeField]
+        private float sensitivity;
+        private Transform transformCache;
+        private CameraFollowing cameraPlayerFollowController;
+        public static float CurrentRotationAngle { get; private set; }
+        public static bool RotatingCamera => Input.GetMouseButton(MouseButton.MIDDLE);
+        #endregion
 
-    #region Update
-    private void Update()
-    {
-        if (RotatingCamera)
+        #region Awake
+        private void Awake()
         {
-            float rotationAngle = sensitivity * Input.GetAxis("Mouse X");
-            transformCache.RotateAround(GameUtility.PlayerPosition, Vector3.up, rotationAngle);
-            cameraPlayerFollowController.OffsetFromPlayer = Quaternion.AngleAxis(rotationAngle, Vector3.up) * cameraPlayerFollowController.OffsetFromPlayer;
+            transformCache = transform;
+            cameraPlayerFollowController = GetComponent<CameraFollowing>();
         }
+        #endregion
+
+        #region Update
+        private void Update()
+        {
+            if (RotatingCamera)
+            {
+                float rotationAngle = sensitivity * Input.GetAxis("Mouse X");
+                CurrentRotationAngle += rotationAngle;
+                transformCache.RotateAround(GameUtility.PlayerPosition, Vector3.up, rotationAngle);
+                cameraPlayerFollowController.OffsetFromPlayer = Quaternion.AngleAxis(rotationAngle, Vector3.up) * cameraPlayerFollowController.OffsetFromPlayer;
+            }
+        }
+        #endregion
     }
-    #endregion
 }
