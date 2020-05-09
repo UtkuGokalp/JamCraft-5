@@ -9,7 +9,7 @@ public class CameraFollowing : MonoBehaviour
     private float smoothing;
     [SerializeField]
     private Vector3 offsetFromPlayer;
-    public Vector3 OffsetFromPlayer { get; set; }
+    public Vector3 OffsetFromPlayer { get => offsetFromPlayer; set => offsetFromPlayer = value; }
     #endregion
 
     #region Awake
