@@ -5,10 +5,10 @@ namespace Utility.Development
     public static class GameUtility
     {
         #region Variables
-        private static GameObject player;
-        private static Transform playerTransform;
         private static Camera mainCam;
-
+        private static GameObject player;
+        private static Collider playerCollider;
+        private static Transform playerTransform;
         public static Camera MainCam
         {
             get
@@ -57,6 +57,17 @@ namespace Utility.Development
                     playerTransform = Player.transform;
                 }
                 return playerTransform;
+            }
+        }
+        public static Collider PlayerCollider
+        {
+            get
+            {
+                if (playerCollider == null)
+                {
+                    playerCollider = Player.GetComponent<Collider>();
+                }
+                return playerCollider;
             }
         }
         public static Vector3 PlayerPosition => PlayerTransform.position;

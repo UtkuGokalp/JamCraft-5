@@ -3,9 +3,10 @@ using UnityEditor;
 using Utility.Health;
 using System.Reflection;
 using JamCraft5.Enemies;
+using Utility.Development;
+using JamCraft5.Enemies.Visuals;
 using JamCraft5.Items.Controllers;
 using JamCraft5.Enemies.Components;
-using Utility.Development;
 
 namespace JamCraft5.Editor
 {
@@ -97,6 +98,7 @@ namespace JamCraft5.Editor
                 AddComponentIfDoesntExist<EnemyState>();
                 AddComponentIfDoesntExist<EnemyDamaged>();
                 AddComponentIfDoesntExist<GroundedItemDropController>();
+                AddComponentIfDoesntExist<OnEnemyDamagedVisualFeedbackController>();
 
                 var enemyChasePlayerComponent = AddComponentIfDoesntExist<EnemyChasePlayerComponent>();
                 typeof(EnemyChasePlayerComponent).GetField("chaseSpeed", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(enemyChasePlayerComponent, 300);

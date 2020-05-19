@@ -38,7 +38,7 @@ ModelImporter:
       name: Sword_Attack
       takeName: Take 001
       internalID: 0
-      firstFrame: 120
+      firstFrame: 130
       lastFrame: 140
       wrapMode: 0
       orientationOffsetY: 0
