@@ -29,6 +29,9 @@ namespace JamCraft5.Enemies.Components
 
             distanceToPlayer /= maxDistance - minDistance;
 
+            // This may not work properly, just a test code for now
+            distanceToPlayer = Mathf.Clamp01(distanceToPlayer);
+
             animator.SetFloat("DistanceToPlayer", distanceToPlayer);
         }
         #endregion
