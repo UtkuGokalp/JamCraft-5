@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
+using JamCraft5.Audio;
 using System.Collections;
 using Utility.Development;
-using JamCraft5.Player.Inventory;
 using JamCraft5.Player.Movement;
-using JamCraft5.Audio;
+using JamCraft5.Player.Inventory;
 
 namespace JamCraft5.Player.Attack
 {
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(PlayerInventoryManager))]
+    [RequireComponent(typeof(PlayerAttackComboController))]
     public class PlayerAttack : MonoBehaviour
     {
         #region Variables
@@ -29,40 +30,25 @@ namespace JamCraft5.Player.Attack
         private AnimationClip swordAttackAnimationClip;
         [SerializeField]
         private AnimationClip shotgunAttackAnimationClip;
+        public static AnimationClip HammerAttackAnimationClip => instance.hammerAttackAnimationClip;
+        public static AnimationClip HalberdAttackAnimationClip => instance.halberdAttackAnimationClip;
+        public static AnimationClip SwordAttackAnimationClip => instance.swordAttackAnimationClip;
+        public static AnimationClip ShotgunAttackAnimationClip => instance.shotgunAttackAnimationClip;
+        private PlayerAttackComboController playerComboController;
         private static PlayerAttack instance;
-
         private static bool attacking;
         public static bool Attacking
         {
-            get
-            {
-                return attacking;
-            }
-            private set
+            get => attacking;
+            set
             {
                 attacking = value;
-                if (AudioManager.Instance != null)
-                {
-                    if (attacking)
-                    {
-                        if (!AudioManager.Instance.PlayingCombatTrack)
-                        {
-                            AudioManager.Instance.PassToCombatTrack();
-                        }
-                    }
-                    else
-                    {
-                        if (!AudioManager.Instance.PlayingIdleTrack)
-                        {
-                            instance.Invoke(nameof(PassToIdleTrack), 2f);
-                        }
-                    }
-                }
+                instance.playerComboController.StartCheckingAttack();
             }
         }
 
         private int comboAttacks = 0;
-        private bool pressedMouse = false;//Is here to detect if betwen combo attacks the mouse has been pressed
+        private bool pressedMouse = false; //Is here to detect if betwen combo attacks the mouse has been pressed
         private PlayerInventoryManager playerInventoryManager;
         private Animator animator;
         #endregion
@@ -73,6 +59,7 @@ namespace JamCraft5.Player.Attack
             instance = this;
             animator = GetComponent<Animator>();
             playerInventoryManager = GetComponent<PlayerInventoryManager>();
+            playerComboController = GetComponent<PlayerAttackComboController>();
         }
         #endregion
 
@@ -196,7 +183,7 @@ namespace JamCraft5.Player.Attack
             Attacking = false;
         }
         #endregion
-        
+
         #region PassToIdleTrack
         private void PassToIdleTrack()
         {

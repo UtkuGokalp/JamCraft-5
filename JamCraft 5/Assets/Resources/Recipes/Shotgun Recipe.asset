@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Shotgun Recipe
   m_EditorClassIdentifier: 
   requiredItems:
-  - requiredItemCount: 1
+  - requiredItemCount: 20
     item:
-      itemData: {fileID: 0}
+      itemData: {fileID: 11400000, guid: 575909daeb32a084aabadfa8414f334a, type: 2}
   outputItem:
     itemData: {fileID: 11400000, guid: 7b502e894df8e2444b10b43b831870b0, type: 2}

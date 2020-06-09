@@ -130,7 +130,7 @@ namespace Utility.Development
         #endregion
 
         #region FadeIn
-        public static void FadeIn(this AudioSource audioSource, float fadeTime, float lastVolume)
+        public static void FadeIn(this AudioSource audioSource, float fadeTime, float lastVolume = 1)
         {
             MonoBehaviourHelper.CreateTemporaryMonoBehaviour(fadeTime).StartCoroutine(FadeInCoroutine(audioSource, fadeTime, lastVolume));
         }
@@ -146,26 +146,32 @@ namespace Utility.Development
         #region FadeInCoroutine
         private static IEnumerator FadeInCoroutine(AudioSource audioSource, float fadeTime, float lastVolume)
         {
-            float speed = lastVolume / fadeTime;
-            while (audioSource.volume < lastVolume)
+            if (audioSource != null)
             {
-                audioSource.volume += speed * Time.deltaTime;
-                yield return null;
+                float speed = lastVolume / fadeTime;
+                while (audioSource.volume < lastVolume)
+                {
+                    audioSource.volume += speed * Time.deltaTime;
+                    yield return null;
+                }
+                audioSource.volume = lastVolume;
             }
-            audioSource.volume = lastVolume;
         }
         #endregion
 
         #region FadeOutCoroutine
         private static IEnumerator FadeOutCoroutine(AudioSource audioSource, float fadeTime)
         {
-            float speed = audioSource.volume / fadeTime;
-            while (audioSource.volume > 0)
+            if (audioSource != null)
             {
-                audioSource.volume -= speed * Time.unscaledDeltaTime;
-                yield return null;
+                float speed = audioSource.volume / fadeTime;
+                while (audioSource.volume > 0)
+                {
+                    audioSource.volume -= speed * Time.unscaledDeltaTime;
+                    yield return null;
+                }
+                audioSource.volume = 0;
             }
-            audioSource.volume = 0;
         }
         #endregion
     }

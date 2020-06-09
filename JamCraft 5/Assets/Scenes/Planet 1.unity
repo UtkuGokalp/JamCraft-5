@@ -3867,7 +3867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0776c2e8329e046a1a5fc9848fcb39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 10
+  sensitivity: 3
 --- !u!1 &826943749
 GameObject:
   m_ObjectHideFlags: 0
@@ -10719,10 +10719,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
-      propertyPath: craftableList.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
       propertyPath: canv
       value: 
       objectReference: {fileID: 642809795}
@@ -10730,6 +10726,14 @@ PrefabInstance:
       propertyPath: mainCanv
       value: 
       objectReference: {fileID: 2087153855}
+    - target: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
+      propertyPath: D1
+      value: 
+      objectReference: {fileID: 1947502943}
+    - target: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
+      propertyPath: D2
+      value: 
+      objectReference: {fileID: 1947502942}
     - target: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
       propertyPath: alertTxt
       value: 
@@ -10742,39 +10746,6 @@ PrefabInstance:
       propertyPath: materialsNec
       value: 
       objectReference: {fileID: 324804418}
-    - target: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
-      propertyPath: craftableList.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: e7120f3026c679643b98f371d6df1cb7,
-        type: 2}
-    - target: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
-      propertyPath: craftableList.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 3d3cbb96f445b9d4c854e0b872836f57,
-        type: 2}
-    - target: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
-      propertyPath: craftableList.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: f165ad1a3da166e4490eb1a5389441dc,
-        type: 2}
-    - target: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
-      propertyPath: craftableList.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: 88a1f233097502e429c9f43c1cd533b1,
-        type: 2}
-    - target: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
-      propertyPath: D1
-      value: 
-      objectReference: {fileID: 1947502943}
-    - target: {fileID: 1113792431, guid: a4e290a4de6d6fa44bea66695aaede13, type: 3}
-      propertyPath: D2
-      value: 
-      objectReference: {fileID: 1947502942}
-    - target: {fileID: 5542407526896326624, guid: a4e290a4de6d6fa44bea66695aaede13,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 310.31
-      objectReference: {fileID: 0}
     - target: {fileID: 5542407526896326624, guid: a4e290a4de6d6fa44bea66695aaede13,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10784,11 +10755,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 7.52
-      objectReference: {fileID: 0}
-    - target: {fileID: 5542407526896326624, guid: a4e290a4de6d6fa44bea66695aaede13,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 301.12
       objectReference: {fileID: 0}
     - target: {fileID: 5542407526896326624, guid: a4e290a4de6d6fa44bea66695aaede13,
         type: 3}
@@ -10814,11 +10780,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5542407526896326624, guid: a4e290a4de6d6fa44bea66695aaede13,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 114
       objectReference: {fileID: 0}
     - target: {fileID: 5542407526896326624, guid: a4e290a4de6d6fa44bea66695aaede13,
         type: 3}

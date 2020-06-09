@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Hallberd Recipe
   m_EditorClassIdentifier: 
   requiredItems:
-  - requiredItemCount: 1
+  - requiredItemCount: 20
     item:
-      itemData: {fileID: 11400000, guid: 0443f58d202f7734d83698af6db2bc67, type: 2}
+      itemData: {fileID: 11400000, guid: 2baf5ce3c205dd641bdf10cc083b9bc2, type: 2}
   outputItem:
     itemData: {fileID: 11400000, guid: 4f97640bb59d96b4da724a3761c9d372, type: 2}
