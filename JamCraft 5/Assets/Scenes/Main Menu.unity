@@ -156,8 +156,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -563, y: 248}
-  m_SizeDelta: {x: 353.5, y: 202.1}
+  m_AnchoredPosition: {x: -563, y: 215}
+  m_SizeDelta: {x: 353.5, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &140576648
 MonoBehaviour:
@@ -310,14 +310,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
+  m_ReferencePixelsPerUnit: 300
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
+  m_FallbackScreenDPI: 300
+  m_DefaultSpriteDPI: 300
   m_DynamicPixelsPerUnit: 1
 --- !u!223 &204203873
 Canvas:
@@ -418,7 +418,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9b3ec6abc8c697e4c8277f0ba3d2b676, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0de8fb212c74a5a4fab950733b601294, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -472,8 +472,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 628, y: 252}
-  m_SizeDelta: {x: 353.5, y: 202.1}
+  m_AnchoredPosition: {x: 628, y: 215}
+  m_SizeDelta: {x: 353.5, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &433064057
 MonoBehaviour:

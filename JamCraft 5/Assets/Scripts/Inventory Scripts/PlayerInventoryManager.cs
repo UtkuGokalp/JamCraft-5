@@ -85,7 +85,7 @@ namespace JamCraft5.Player.Inventory
             }
         }
         #endregion
-
+        
         #region Update
         private void Update()
         {
