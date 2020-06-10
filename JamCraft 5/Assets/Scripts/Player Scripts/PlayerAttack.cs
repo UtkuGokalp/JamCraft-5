@@ -84,7 +84,7 @@ namespace JamCraft5.Player.Attack
                             {
                                 StartCoroutine(ComboAttack());
                             }
-                            AudioManager.Instance.PlayAudio(Audio.AudioType.LightSaberSound);
+                            AudioManager.Instance.PlaySFX(Audio.SFXType.LightSaberSound);
                             break;
                         case 1:
                             animator.SetTrigger(GameUtility.HAMMER_ATTACK_ANIMATION_TRIGGER_NAME);
@@ -97,7 +97,7 @@ namespace JamCraft5.Player.Attack
                         case 3:
                             animator.SetTrigger(GameUtility.SHOTGUN_ATTACK_ANIMATION_TRIGGER_NAME);
                             StartCoroutine(gunAttack());
-                            AudioManager.Instance.PlayAudio(Audio.AudioType.LaserPistolSound);
+                            AudioManager.Instance.PlaySFX(Audio.SFXType.LaserPistolSound);
                             break;
                     }
                 }
@@ -181,13 +181,6 @@ namespace JamCraft5.Player.Attack
             yield return new WaitForSeconds(T2);//fix this value with the animation
             box.enabled = false;
             Attacking = false;
-        }
-        #endregion
-
-        #region PassToIdleTrack
-        private void PassToIdleTrack()
-        {
-            AudioManager.Instance.PassToIdleTrack();
         }
         #endregion
     }

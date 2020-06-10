@@ -107,7 +107,7 @@ namespace JamCraft5.Player.Movement
         {
             if (!PlayerUnlocking.playerPause && !PlayerAttack.Attacking && rawPlayerInput.sqrMagnitude != 0)
             {
-                AudioManager.Instance.PlayAudio(Audio.AudioType.FootstepSound);
+                AudioManager.Instance.PlaySFX(Audio.SFXType.FootstepSound);
             }
         }
         #endregion

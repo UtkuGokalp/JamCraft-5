@@ -15,7 +15,7 @@ namespace JamCraft5.UI.Main_Menu
         #region StartGame
         public void StartGame(string sceneName)
         {
-            AudioManager.Instance.PlayAudio(Audio.AudioType.ButtonSound);
+            AudioManager.Instance.PlaySFX(Audio.SFXType.ButtonSound);
             FadeSystem.Instance.Fade(fadeTime, () =>
             {
                 SceneManager.LoadScene(sceneName);

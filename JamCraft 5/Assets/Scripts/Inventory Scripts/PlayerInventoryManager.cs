@@ -89,7 +89,7 @@ namespace JamCraft5.Player.Inventory
         #region Update
         private void Update()
         {
-            if (!Attack.PlayerAttack.Attacking)
+            if (!Attack.PlayerAttack.Attacking && (int)Input.mouseScrollDelta.y != 0)
             {
                 //Substracting because mouseScrollDelta is positive when we scroll up but we want
                 //the selection to go up in game (visually), which means decreasing the index.
