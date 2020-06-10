@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using Utility.Development;
+using UnityEngine.SceneManagement;
 
 namespace JamCraft5.Audio
 {
@@ -43,7 +43,6 @@ namespace JamCraft5.Audio
             mainMenuTrack.Play();
             mainMenuTrack.FadeIn(.5f);
             combatTrack.volume = 0f;
-            combatTrack.Play();
         }
         #endregion
 
@@ -105,11 +104,13 @@ namespace JamCraft5.Audio
             {
                 mainMenuTrack.FadeOut(.5f);
                 idleTrack.Play();
+                combatTrack.Play();
                 idleTrack.FadeIn(0.5f, 0.5f); //0.5f as the final volume because otherwise it is too loud
             }
             else if (!MainMenuTrackPlaying)
             {
                 idleTrack.FadeOut(.5f);
+                combatTrack.FadeOut(.5f);
                 mainMenuTrack.Play();
                 mainMenuTrack.FadeIn(0.5f);
             }

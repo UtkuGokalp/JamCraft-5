@@ -76,7 +76,6 @@ namespace JamCraft5.Player.Attack
             if (!Attacking)
             {
                 OnPlayerStoppedAttacking?.Invoke(this, System.EventArgs.Empty);
-                print("Player stopped attacking!");
             }
         }
         #endregion
