@@ -61,8 +61,11 @@ namespace JamCraft5.Audio
         private IEnumerator PassToIdleTrackCoroutine()
         {
             yield return transitionWaitTime;
-            AudioManager.Instance.PassToIdleTrack();
-            transitioning = false;
+            if (!PlayerAttackComboController.Attacking)
+            {
+                AudioManager.Instance.PassToIdleTrack();
+                transitioning = false;
+            }
         }
         #endregion
     }

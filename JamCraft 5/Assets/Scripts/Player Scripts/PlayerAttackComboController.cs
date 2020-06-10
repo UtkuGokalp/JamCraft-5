@@ -9,9 +9,9 @@ namespace JamCraft5.Player.Attack
     public class PlayerAttackComboController : MonoBehaviour
     {
         #region Variables
-        private PlayerInventoryManager playerInventoryManager;
-        private bool attacking;
         private float currentComboTime;
+        private PlayerInventoryManager playerInventoryManager;
+        public static bool Attacking { get; private set; }
         public static event System.EventHandler OnPlayerAttacked;
         public static event System.EventHandler OnPlayerStoppedAttacking;
         #endregion
@@ -20,6 +20,7 @@ namespace JamCraft5.Player.Attack
         private void Awake()
         {
             playerInventoryManager = FindObjectOfType<PlayerInventoryManager>();
+            currentComboTime = PlayerAttack.SwordAttackAnimationClip.length;
         }
         #endregion
 
@@ -40,7 +41,7 @@ namespace JamCraft5.Player.Attack
         #region StartCheckingAttack
         public void StartCheckingAttack()
         {
-            attacking = true;
+            Attacking = true;
             OnPlayerAttacked?.Invoke(this, System.EventArgs.Empty);
             StartCoroutine(StartCheckingAttackCoroutine());
         }
@@ -57,17 +58,25 @@ namespace JamCraft5.Player.Attack
             {
                 if (Input.GetMouseButtonDown(MouseButton.LEFT))
                 {
-                    attacked = true;
+                    //If player is attacked, we should set the attacking variable to true too
+                    //because that variable will be used to inform other classes whether 
+                    //the player is currently in the middle of a combo or not
+                    Attacking = attacked = true;
                     break;
                 }
-                currentComboTime -= Time.deltaTime;
+                localCurrentComboTime -= Time.deltaTime;
                 yield return null;
             }
 
-            attacking = attacked;
-            if (!attacking)
+            //When executing this line, if the local variable attacked is false, 
+            //that means player hasn't attacked so the attacking variable will be set 
+            //to false.
+            Attacking = attacked;
+
+            if (!Attacking)
             {
                 OnPlayerStoppedAttacking?.Invoke(this, System.EventArgs.Empty);
+                print("Player stopped attacking!");
             }
         }
         #endregion
