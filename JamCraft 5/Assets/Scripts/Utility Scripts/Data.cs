@@ -16,19 +16,11 @@ namespace Utility.Development
                 File.Create(path).Dispose();
             }
 
-            FileStream stream;
-            if (overwrite)
+            using (FileStream stream = File.Open(path, overwrite ? FileMode.Open : FileMode.Append))
             {
-                stream = File.Open(path, FileMode.Open);
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                binaryFormatter.Serialize(stream, data);
             }
-            else
-            {
-                stream = File.Open(path, FileMode.Append);
-            }
-
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
-            binaryFormatter.Serialize(stream, data);
-            stream.Dispose();
         }
         #endregion
 
@@ -43,10 +35,12 @@ namespace Utility.Development
                 throw new FileNotFoundException();
             }
 
-            FileStream stream = new FileStream(path, FileMode.Open);
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
-            T data = (T)binaryFormatter.Deserialize(stream);
-            stream.Dispose();
+            T data;
+            using (FileStream stream = new FileStream(path, FileMode.Open))
+            {
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                data = (T)binaryFormatter.Deserialize(stream);
+            }
             return data;
         }
         #endregion
