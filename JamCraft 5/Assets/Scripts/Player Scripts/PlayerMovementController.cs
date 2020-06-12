@@ -81,7 +81,7 @@ namespace JamCraft5.Player.Movement
             {
                 Vector3 movementDirection = playerInput * movementSpeed * Time.fixedDeltaTime;
 
-                movementDirection = Quaternion.AngleAxis(CameraRotation.CurrentRotationAngle, Vector3.up) * movementDirection;
+                movementDirection = Quaternion.AngleAxis(CameraRotation.CurrentHorizontalRotationAngle, Vector3.up) * movementDirection;
 
                 //If there is no input in current frame
                 if (rawPlayerInput.sqrMagnitude == 0)
