@@ -9,9 +9,13 @@ namespace JamCraft5.Camera
         #region Variables
         [SerializeField]
         private float sensitivity;
+        [SerializeField]
+        private float verticalRotationLimit;
+        private float firstXRotation;
         private Transform transformCache;
         private CameraFollowing cameraPlayerFollowController;
-        public static float CurrentRotationAngle { get; private set; }
+        public static float CurrentVerticalRotationAngle { get; private set; }
+        public static float CurrentHorizontalRotationAngle { get; private set; }
         public static bool RotatingCamera => Input.GetMouseButton(MouseButton.RIGHT);
         #endregion
 
@@ -19,6 +23,7 @@ namespace JamCraft5.Camera
         private void Awake()
         {
             transformCache = transform;
+            CurrentVerticalRotationAngle = firstXRotation = transformCache.rotation.eulerAngles.x;
             cameraPlayerFollowController = GetComponent<CameraFollowing>();
         }
         #endregion
@@ -28,10 +33,17 @@ namespace JamCraft5.Camera
         {
             if (RotatingCamera)
             {
-                float rotationAngle = sensitivity * Input.GetAxis("Mouse X");
-                CurrentRotationAngle += rotationAngle;
-                transformCache.RotateAround(GameUtility.PlayerPosition, Vector3.up, rotationAngle);
-                cameraPlayerFollowController.OffsetFromPlayer = Quaternion.AngleAxis(rotationAngle, Vector3.up) * cameraPlayerFollowController.OffsetFromPlayer;
+                //Horizontal rotation
+                float horizontalRotationAngle = sensitivity * Input.GetAxis("Mouse X");
+                CurrentHorizontalRotationAngle += horizontalRotationAngle;
+                transformCache.RotateAround(GameUtility.PlayerPosition, Vector3.up, horizontalRotationAngle);
+                cameraPlayerFollowController.OffsetFromPlayer = Quaternion.AngleAxis(horizontalRotationAngle, Vector3.up) * cameraPlayerFollowController.OffsetFromPlayer;
+
+                //Vertical rotation
+                float verticalRotationAngle = sensitivity * Input.GetAxis("Mouse Y");
+                CurrentVerticalRotationAngle -= verticalRotationAngle; //Subtraction is used instead of addition because addition reverses the directions (mouse goes down, camera goes up and vice versa)
+                CurrentVerticalRotationAngle = Mathf.Clamp(CurrentVerticalRotationAngle, firstXRotation - verticalRotationLimit, firstXRotation + verticalRotationLimit);
+                transformCache.rotation = transformCache.rotation.ChangeEulerAngles(CurrentVerticalRotationAngle, null, null);
             }
         }
         #endregion
