@@ -9,13 +9,11 @@ namespace JamCraft5.Player.Attack
 {
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(PlayerInventoryManager))]
-    [RequireComponent(typeof(PlayerAttackComboController))]
     public class PlayerAttack : MonoBehaviour
     {
         #region Variables
         [SerializeField]
         private Transform bullet;//The bullet for the shotgun, it should have attached the Bullet script
-
         [SerializeField]
         private BoxCollider saberCol;
         [SerializeField]
@@ -30,25 +28,14 @@ namespace JamCraft5.Player.Attack
         private AnimationClip swordAttackAnimationClip;
         [SerializeField]
         private AnimationClip shotgunAttackAnimationClip;
+        private static PlayerAttack instance;
         public static AnimationClip HammerAttackAnimationClip => instance.hammerAttackAnimationClip;
         public static AnimationClip HalberdAttackAnimationClip => instance.halberdAttackAnimationClip;
         public static AnimationClip SwordAttackAnimationClip => instance.swordAttackAnimationClip;
         public static AnimationClip ShotgunAttackAnimationClip => instance.shotgunAttackAnimationClip;
-        private PlayerAttackComboController playerComboController;
-        private static PlayerAttack instance;
-        private static bool attacking;
-        public static bool Attacking
-        {
-            get => attacking;
-            set
-            {
-                attacking = value;
-                instance.playerComboController.StartCheckingAttack();
-            }
-        }
-
+        public static bool Attacking { get; private set; }
         private int comboAttacks = 0;
-        private bool pressedMouse = false; //Is here to detect if betwen combo attacks the mouse has been pressed
+        private bool pressedMouse = false; //Is here to detect if between combo attacks the mouse has been pressed
         private PlayerInventoryManager playerInventoryManager;
         private Animator animator;
         #endregion
@@ -59,7 +46,6 @@ namespace JamCraft5.Player.Attack
             instance = this;
             animator = GetComponent<Animator>();
             playerInventoryManager = GetComponent<PlayerInventoryManager>();
-            playerComboController = GetComponent<PlayerAttackComboController>();
         }
         #endregion
 

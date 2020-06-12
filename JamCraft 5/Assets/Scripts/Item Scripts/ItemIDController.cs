@@ -15,7 +15,6 @@ namespace JamCraft5.Items.Controllers
 
         #region CreateUniqueIDs
         [ContextMenu("Create Unique IDs")]
-        //[UnityEditor.MenuItem("Tools/Create Unique IDs")]
         public static void CreateUniqueIDs()
         {
             ItemsBase[] items = Resources.LoadAll<ItemsBase>("Items");

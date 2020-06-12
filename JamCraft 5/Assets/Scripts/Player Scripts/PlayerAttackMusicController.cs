@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
-using JamCraft5.Player.Attack;
+using Utility.Development;
+using JamCraft5.Enemies.Components;
 
 namespace JamCraft5.Audio
 {
@@ -8,64 +8,49 @@ namespace JamCraft5.Audio
     {
         #region Variables
         [SerializeField]
+        private float enemyCheckRadius;
+        [SerializeField]
         private float transitionTime;
-        private WaitForSeconds transitionWaitTime;
-        private bool transitioning;
+        private Collider[] detectedEnemies;
         #endregion
 
-        #region Awake
-        private void Awake()
+        #region FixedUpdate
+        private void FixedUpdate()
         {
-            transitionWaitTime = new WaitForSeconds(transitionTime);
-        }
-        #endregion
+            //1 << GameUtility.EnemyLayer.value returns an integer which has only 10th bit set to 1
+            //(because GameUtility.EnemyLayer.value is 10)
+            detectedEnemies = Physics.OverlapSphere(GameUtility.PlayerPosition, enemyCheckRadius, 1 << GameUtility.EnemyLayer.value);
 
-        #region OnEnable
-        private void OnEnable()
-        {
-            PlayerAttackComboController.OnPlayerAttacked += OnPlayerAttacked;
-            PlayerAttackComboController.OnPlayerStoppedAttacking += OnPlayerStoppedAttacking;
-        }
-        #endregion
-
-        #region OnDisable
-        private void OnDisable()
-        {
-            PlayerAttackComboController.OnPlayerAttacked -= OnPlayerAttacked;
-            PlayerAttackComboController.OnPlayerStoppedAttacking -= OnPlayerStoppedAttacking;
-        }
-        #endregion
-
-        #region OnPlayerAttacked
-        private void OnPlayerAttacked(object sender, System.EventArgs e)
-        {
-            if (AudioManager.Instance.PlayingIdleTrack)
+            if (detectedEnemies.Length > 0)
             {
-                AudioManager.Instance.PassToCombatTrack();
+                foreach (Collider enemy in detectedEnemies)
+                {
+                    EnemyAttackBaseComponent enemyAttackController = enemy.GetComponent<EnemyAttackBaseComponent>();
+                    if (enemyAttackController != null && enemyAttackController.Attacking)
+                    {
+                        if (AudioManager.Instance.PlayingIdleTrack)
+                        {
+                            AudioManager.Instance.PassToCombatTrack();
+                        }
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                if (AudioManager.Instance.PlayingCombatTrack)
+                {
+                    AudioManager.Instance.PassToIdleTrack(transitionTime);
+                }
             }
         }
         #endregion
 
-        #region OnPlayerStoppedAttacking
-        private void OnPlayerStoppedAttacking(object sender, System.EventArgs e)
+        #region OnDrawGizmosSelected
+        private void OnDrawGizmosSelected()
         {
-            if (!transitioning)
-            {
-                transitioning = true;
-                StartCoroutine(PassToIdleTrackCoroutine());
-            }
-        }
-        #endregion
-
-        #region PassToIdleTrackCoroutine
-        private IEnumerator PassToIdleTrackCoroutine()
-        {
-            yield return transitionWaitTime;
-            if (!PlayerAttackComboController.Attacking)
-            {
-                AudioManager.Instance.PassToIdleTrack();
-                transitioning = false;
-            }
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, enemyCheckRadius);
         }
         #endregion
     }
