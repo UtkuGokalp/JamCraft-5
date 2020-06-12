@@ -69,6 +69,7 @@ namespace JamCraft5.Enemies.Components
             }
         }
         public float AttackRange => attackRange;
+        public bool Attacking { get; private set; }
         public bool InAttackRange => Vector3.Distance(TransformCache.position, GameUtility.PlayerPosition) < attackRange;
         #endregion
 
@@ -82,6 +83,10 @@ namespace JamCraft5.Enemies.Components
             }
             if (InAttackRange)
             {
+                if (Attacking == false)
+                {
+                    Attacking = true;
+                }
                 if (timeLeftForNextAttack <= 0)
                 {
                     EnemyState.StateOfEnemy = EnemyStateEnum.Attacking;
@@ -95,6 +100,10 @@ namespace JamCraft5.Enemies.Components
             }
             else
             {
+                if (Attacking == true)
+                {
+                    Attacking = false;
+                }
                 timeLeftForNextAttack = 0;
                 EnemyState.StateOfEnemy = EnemyStateEnum.Idle;
             }

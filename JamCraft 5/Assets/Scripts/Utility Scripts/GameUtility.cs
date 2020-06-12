@@ -73,10 +73,11 @@ namespace Utility.Development
         public static Vector3 PlayerPosition => PlayerTransform.position;
         public static LayerMask GroundedItemLayer => LayerMask.NameToLayer(GROUNDED_ITEM_LAYER_NAME);
         public static LayerMask PlayerLayer => LayerMask.NameToLayer(PLAYER_LAYER_NAME);
-
+        public static LayerMask EnemyLayer => LayerMask.NameToLayer(ENEMY_LAYER_NAME);
         public const string PLAYER_TAG = "Player";
         public const string PLAYER_LAYER_NAME = "Player";
         public const string GROUNDED_ITEM_LAYER_NAME = "Grounded Item";
+        public const string ENEMY_LAYER_NAME = "Enemy";
         public const string HAMMER_ATTACK_ANIMATION_TRIGGER_NAME = "HammerAttack";
         public const string SHOTGUN_ATTACK_ANIMATION_TRIGGER_NAME = "ShotgunAttack";
         public const string SWORD_ATTACK_ANIMATION_TRIGGER_NAME = "SwordAttack";

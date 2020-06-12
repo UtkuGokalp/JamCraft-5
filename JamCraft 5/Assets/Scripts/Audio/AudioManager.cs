@@ -82,16 +82,16 @@ namespace JamCraft5.Audio
         #endregion
 
         #region PassToIdleTrack
-        public void PassToIdleTrack()
+        public void PassToIdleTrack(float fadeTime = 0.5f)
         {
-            combatTrack.FadeOut(.5f);
+            combatTrack.FadeOut(fadeTime);
         }
         #endregion
 
         #region PassToCombatTrack
-        public void PassToCombatTrack()
+        public void PassToCombatTrack(float fadeTime = 0.5f)
         {
-            combatTrack.FadeIn(.5f);
+            combatTrack.FadeIn(fadeTime);
         }
         #endregion
 
