@@ -23,6 +23,8 @@ namespace JamCraft5.Audio
         private AudioSource[] footstepSoundSources;
         public bool PlayingIdleTrack => idleTrack.volume > 0 && idleTrack.isPlaying && (combatTrack.volume <= 0 || !combatTrack.isPlaying);
         public bool PlayingCombatTrack => combatTrack.volume > 0 && combatTrack.isPlaying;
+        public bool TransitioningToIdleTrack { get; private set; }
+        public bool TransitioningToCombatTrack { get; private set; }
         private bool MainMenuTrackPlaying => mainMenuTrack.volume > 0 && mainMenuTrack.isPlaying;
         public static AudioManager Instance { get; private set; }
         #endregion
@@ -81,17 +83,19 @@ namespace JamCraft5.Audio
         }
         #endregion
 
-        #region PassToIdleTrack
-        public void PassToIdleTrack(float fadeTime = 0.5f)
+        #region TransitionToIdleTrack
+        public void TransitionToIdleTrack(float fadeTime = 0.5f)
         {
-            combatTrack.FadeOut(fadeTime);
+            TransitioningToIdleTrack = true;
+            combatTrack.FadeOut(fadeTime, () => TransitioningToIdleTrack = false);
         }
         #endregion
 
-        #region PassToCombatTrack
-        public void PassToCombatTrack(float fadeTime = 0.5f)
+        #region TransitionToCombatTrack
+        public void TransitionToCombatTrack(float fadeTime = 0.5f)
         {
-            combatTrack.FadeIn(fadeTime);
+            TransitioningToCombatTrack = true;
+            combatTrack.FadeIn(fadeTime, 1, () => TransitioningToCombatTrack = false);
         }
         #endregion
 
