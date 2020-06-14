@@ -86,16 +86,22 @@ namespace JamCraft5.Audio
         #region TransitionToIdleTrack
         public void TransitionToIdleTrack(float fadeTime = 0.5f)
         {
-            TransitioningToIdleTrack = true;
-            combatTrack.FadeOut(fadeTime, () => TransitioningToIdleTrack = false);
+            if (!TransitioningToIdleTrack)
+            {
+                TransitioningToIdleTrack = true;
+                combatTrack.FadeOut(fadeTime, () => TransitioningToIdleTrack = false);
+            }
         }
         #endregion
 
         #region TransitionToCombatTrack
         public void TransitionToCombatTrack(float fadeTime = 0.5f)
         {
-            TransitioningToCombatTrack = true;
-            combatTrack.FadeIn(fadeTime, 1, () => TransitioningToCombatTrack = false);
+            if (!TransitioningToCombatTrack)
+            {
+                TransitioningToCombatTrack = true;
+                combatTrack.FadeIn(fadeTime, 1, () => TransitioningToCombatTrack = false);
+            }
         }
         #endregion
 
