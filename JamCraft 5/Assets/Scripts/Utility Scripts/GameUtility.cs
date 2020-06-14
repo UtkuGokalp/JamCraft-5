@@ -9,6 +9,9 @@ namespace Utility.Development
         private static GameObject player;
         private static Collider playerCollider;
         private static Transform playerTransform;
+        private static Transform mainCamTransform;
+        private static float distanceBetweenCameraAndPlayer;
+
         public static Camera MainCam
         {
             get
@@ -59,6 +62,17 @@ namespace Utility.Development
                 return playerTransform;
             }
         }
+        public static Transform MainCamTransform
+        {
+            get
+            {
+                if (mainCamTransform == null)
+                {
+                    mainCamTransform = MainCam.transform;
+                }
+                return mainCamTransform;
+            }
+        }
         public static Collider PlayerCollider
         {
             get
@@ -70,7 +84,19 @@ namespace Utility.Development
                 return playerCollider;
             }
         }
+        public static float DistanceBetweenCameraAndPlayer
+        {
+            get
+            {
+                if (distanceBetweenCameraAndPlayer == default)
+                {
+                    distanceBetweenCameraAndPlayer = Vector3.Distance(PlayerPosition, MainCamPosition);
+                }
+                return distanceBetweenCameraAndPlayer;
+            }
+        }
         public static Vector3 PlayerPosition => PlayerTransform.position;
+        public static Vector3 MainCamPosition => MainCamTransform.position;
         public static LayerMask GroundedItemLayer => LayerMask.NameToLayer(GROUNDED_ITEM_LAYER_NAME);
         public static LayerMask PlayerLayer => LayerMask.NameToLayer(PLAYER_LAYER_NAME);
         public static LayerMask EnemyLayer => LayerMask.NameToLayer(ENEMY_LAYER_NAME);
@@ -102,6 +128,42 @@ namespace Utility.Development
 
         #region GetAngleFromVector
         public static float GetAngleFromVector(Vector2 direction) => Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x);
+        #endregion
+
+        #region BetweenCameraAndPlayer
+        public static bool BetweenCameraAndPlayer(Transform transform)
+        {
+            Vector3 startingPosition = MainCamPosition;
+            Vector3 direction = GetDirection(startingPosition, PlayerPosition);
+            RaycastHit[] hitInfos = Physics.RaycastAll(startingPosition, direction, DistanceBetweenCameraAndPlayer);
+
+            foreach (RaycastHit hitInfo in hitInfos)
+            {
+                if (hitInfo.transform == transform)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        #endregion
+
+        #region BetweenCameraAndPlayerNonAlloc
+        public static bool BetweenCameraAndPlayerNonAlloc(Transform transform, RaycastHit[] hitInfos)
+        {
+            Vector3 startingPosition = MainCamPosition;
+            Vector3 direction = GetDirection(startingPosition, PlayerPosition);
+            Physics.RaycastNonAlloc(startingPosition, direction, hitInfos, DistanceBetweenCameraAndPlayer);
+
+            foreach (RaycastHit hitInfo in hitInfos)
+            {
+                if (hitInfo.transform == transform)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         #endregion
     }
 }
