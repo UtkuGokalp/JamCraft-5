@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using Utility.Development;
-using JamCraft5.Player.Attack;
 using JamCraft5.Audio;
 using JamCraft5.Camera;
+using Utility.Development;
+using JamCraft5.Player.Attack;
 
 namespace JamCraft5.Player.Movement
 {
@@ -107,7 +107,7 @@ namespace JamCraft5.Player.Movement
         {
             if (!PlayerUnlocking.playerPause && !PlayerAttack.Attacking && rawPlayerInput.sqrMagnitude != 0)
             {
-                AudioManager.Instance.PlaySFX(Audio.SFXType.FootstepSound);
+                AudioManager.Instance.PlaySFX(SFXType.FootstepSound);
             }
         }
         #endregion

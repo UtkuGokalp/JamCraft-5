@@ -30,7 +30,7 @@ namespace JamCraft5.Audio
                     {
                         if (AudioManager.Instance.PlayingIdleTrack)
                         {
-                            AudioManager.Instance.PassToCombatTrack();
+                            AudioManager.Instance.TransitionToCombatTrack();
                         }
                         break;
                     }
@@ -38,9 +38,9 @@ namespace JamCraft5.Audio
             }
             else
             {
-                if (AudioManager.Instance.PlayingCombatTrack)
+                if (AudioManager.Instance.PlayingCombatTrack && !AudioManager.Instance.TransitioningToIdleTrack)
                 {
-                    AudioManager.Instance.PassToIdleTrack(transitionTime);
+                    AudioManager.Instance.TransitionToIdleTrack(transitionTime);
                 }
             }
         }

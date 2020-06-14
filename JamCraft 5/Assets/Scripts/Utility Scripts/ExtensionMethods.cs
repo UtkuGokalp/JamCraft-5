@@ -130,47 +130,57 @@ namespace Utility.Development
         #endregion
 
         #region FadeIn
-        public static void FadeIn(this AudioSource audioSource, float fadeTime, float lastVolume = 1)
+        public static void FadeIn(this AudioSource audioSource, float fadeTime, float lastVolume = 1, System.Action afterFadingFinished = null)
         {
-            MonoBehaviourHelper.CreateTemporaryMonoBehaviour(fadeTime).StartCoroutine(FadeInCoroutine(audioSource, fadeTime, lastVolume));
+            MonoBehaviourHelper.CreateTemporaryMonoBehaviour(fadeTime).StartCoroutine(FadeInCoroutine(audioSource, fadeTime, lastVolume, afterFadingFinished));
         }
         #endregion
 
         #region FadeOut
-        public static void FadeOut(this AudioSource audioSource, float fadeTime)
+        public static void FadeOut(this AudioSource audioSource, float fadeTime, System.Action afterFadingFinished = null)
         {
-            MonoBehaviourHelper.CreateTemporaryMonoBehaviour(fadeTime).StartCoroutine(FadeOutCoroutine(audioSource, fadeTime));
+            MonoBehaviourHelper.CreateTemporaryMonoBehaviour(fadeTime).StartCoroutine(FadeOutCoroutine(audioSource, fadeTime, afterFadingFinished));
         }
         #endregion
 
         #region FadeInCoroutine
-        private static IEnumerator FadeInCoroutine(AudioSource audioSource, float fadeTime, float lastVolume)
+        private static IEnumerator FadeInCoroutine(AudioSource audioSource, float fadeTime, float lastVolume, System.Action afterFadingFinished)
         {
             if (audioSource != null)
             {
-                float speed = lastVolume / fadeTime;
-                while (audioSource.volume < lastVolume)
+                float currentTime = 0;
+                float firstVolume = audioSource.volume;
+
+                while (currentTime < fadeTime)
                 {
-                    audioSource.volume += speed * Time.deltaTime;
+                    audioSource.volume = Mathf.Lerp(firstVolume, lastVolume, currentTime / fadeTime);
+                    currentTime += Time.deltaTime;
                     yield return null;
                 }
+
                 audioSource.volume = lastVolume;
+                afterFadingFinished?.Invoke();
             }
         }
         #endregion
 
         #region FadeOutCoroutine
-        private static IEnumerator FadeOutCoroutine(AudioSource audioSource, float fadeTime)
+        private static IEnumerator FadeOutCoroutine(AudioSource audioSource, float fadeTime, System.Action afterFadingFinished)
         {
             if (audioSource != null)
             {
-                float speed = audioSource.volume / fadeTime;
-                while (audioSource.volume > 0)
+                float currentTime = 0;
+                float firstVolume = audioSource.volume;
+
+                while (currentTime < fadeTime)
                 {
-                    audioSource.volume -= speed * Time.unscaledDeltaTime;
+                    audioSource.volume = Mathf.Lerp(firstVolume, 0, currentTime / fadeTime);
+                    currentTime += Time.deltaTime;
                     yield return null;
                 }
+
                 audioSource.volume = 0;
+                afterFadingFinished?.Invoke();
             }
         }
         #endregion
