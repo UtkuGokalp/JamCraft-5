@@ -132,19 +132,21 @@ namespace Utility.Development
         #region FadeIn
         public static void FadeIn(this AudioSource audioSource, float fadeTime, float lastVolume = 1, System.Action afterFadingFinished = null)
         {
-            MonoBehaviourHelper.CreateTemporaryMonoBehaviour(fadeTime).StartCoroutine(FadeInCoroutine(audioSource, fadeTime, lastVolume, afterFadingFinished));
+            MonoBehaviourHelper helper = MonoBehaviourHelper.CreateTemporaryMonoBehaviour(null);
+            helper.StartCoroutine(FadeInCoroutine(audioSource, fadeTime, lastVolume, afterFadingFinished, helper));
         }
         #endregion
 
         #region FadeOut
         public static void FadeOut(this AudioSource audioSource, float fadeTime, System.Action afterFadingFinished = null)
         {
-            MonoBehaviourHelper.CreateTemporaryMonoBehaviour(fadeTime).StartCoroutine(FadeOutCoroutine(audioSource, fadeTime, afterFadingFinished));
+            MonoBehaviourHelper helper = MonoBehaviourHelper.CreateTemporaryMonoBehaviour(null);
+            helper.StartCoroutine(FadeOutCoroutine(audioSource, fadeTime, afterFadingFinished, helper));
         }
         #endregion
 
         #region FadeInCoroutine
-        private static IEnumerator FadeInCoroutine(AudioSource audioSource, float fadeTime, float lastVolume, System.Action afterFadingFinished)
+        private static IEnumerator FadeInCoroutine(AudioSource audioSource, float fadeTime, float lastVolume, System.Action afterFadingFinished, MonoBehaviourHelper helperToDestroy)
         {
             if (audioSource != null)
             {
@@ -160,12 +162,13 @@ namespace Utility.Development
 
                 audioSource.volume = lastVolume;
                 afterFadingFinished?.Invoke();
+                Object.Destroy(helperToDestroy.gameObject);
             }
         }
         #endregion
 
         #region FadeOutCoroutine
-        private static IEnumerator FadeOutCoroutine(AudioSource audioSource, float fadeTime, System.Action afterFadingFinished)
+        private static IEnumerator FadeOutCoroutine(AudioSource audioSource, float fadeTime, System.Action afterFadingFinished, MonoBehaviourHelper helperToDestroy)
         {
             if (audioSource != null)
             {
@@ -181,6 +184,7 @@ namespace Utility.Development
 
                 audioSource.volume = 0;
                 afterFadingFinished?.Invoke();
+                Object.Destroy(helperToDestroy.gameObject);
             }
         }
         #endregion

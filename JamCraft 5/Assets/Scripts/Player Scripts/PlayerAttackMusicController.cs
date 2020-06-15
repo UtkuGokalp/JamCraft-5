@@ -38,7 +38,7 @@ namespace JamCraft5.Audio
             }
             else
             {
-                if (AudioManager.Instance.PlayingCombatTrack && !AudioManager.Instance.TransitioningToIdleTrack)
+                if (AudioManager.Instance.PlayingCombatTrack)
                 {
                     AudioManager.Instance.TransitionToIdleTrack(transitionTime);
                 }
