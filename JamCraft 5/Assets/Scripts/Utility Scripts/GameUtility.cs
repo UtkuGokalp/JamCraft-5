@@ -27,17 +27,11 @@ namespace Utility.Development
         {
             get
             {
-                //Mouse position is being calculated this way because of the camera's
-                //rotation on the scene and because this is a 3D scene.
-                //In order to Camera.ScreenPointToWorldPosition(Input.mousePosition)
-                //work, the camera shouldn't be rotated to look upside down.
+                //Mouse position is being calculated this way because the camera is a perspective camera.
                 Ray ray = MainCam.ScreenPointToRay(Input.mousePosition);
                 Plane plane = new Plane(Vector3.up, Vector3.zero);
-                if (plane.Raycast(ray, out float distance))
-                {
-                    return ray.GetPoint(distance);
-                }
-                return default;
+                plane.Raycast(ray, out float distance);
+                return ray.GetPoint(distance);
             }
         }
         public static GameObject Player
