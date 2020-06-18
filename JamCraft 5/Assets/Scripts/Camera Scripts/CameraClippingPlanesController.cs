@@ -20,7 +20,7 @@ namespace JamCraft5.Camera
         #region FixedUpdate
         private void FixedUpdate()
         {
-            RaycastHit[] hitInfos = Physics.RaycastAll(transformCache.position, DirectionToPlayer, GameUtility.DistanceBetweenCameraAndPlayer);
+            RaycastHit[] hitInfos = Physics.RaycastAll(transformCache.position, DirectionToPlayer, CameraFollowing.DistanceBetweenCameraAndPlayer);
 
             foreach (RaycastHit hitInfo in hitInfos)
             {
