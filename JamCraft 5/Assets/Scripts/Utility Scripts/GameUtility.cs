@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using JamCraft5.Camera;
 
 namespace Utility.Development
 {
@@ -10,7 +11,6 @@ namespace Utility.Development
         private static Collider playerCollider;
         private static Transform playerTransform;
         private static Transform mainCamTransform;
-        private static float distanceBetweenCameraAndPlayer;
 
         public static Camera MainCam
         {
@@ -78,17 +78,7 @@ namespace Utility.Development
                 return playerCollider;
             }
         }
-        public static float DistanceBetweenCameraAndPlayer
-        {
-            get
-            {
-                if (distanceBetweenCameraAndPlayer == default)
-                {
-                    distanceBetweenCameraAndPlayer = Vector3.Distance(PlayerPosition, MainCamPosition);
-                }
-                return distanceBetweenCameraAndPlayer;
-            }
-        }
+
         public static Vector3 PlayerPosition => PlayerTransform.position;
         public static Vector3 MainCamPosition => MainCamTransform.position;
         public static LayerMask GroundedItemLayer => LayerMask.NameToLayer(GROUNDED_ITEM_LAYER_NAME);
@@ -129,7 +119,7 @@ namespace Utility.Development
         {
             Vector3 startingPosition = MainCamPosition;
             Vector3 direction = GetDirection(startingPosition, PlayerPosition);
-            RaycastHit[] hitInfos = Physics.RaycastAll(startingPosition, direction, DistanceBetweenCameraAndPlayer);
+            RaycastHit[] hitInfos = Physics.RaycastAll(startingPosition, direction, CameraFollowing.DistanceBetweenCameraAndPlayer);
 
             foreach (RaycastHit hitInfo in hitInfos)
             {
@@ -147,7 +137,7 @@ namespace Utility.Development
         {
             Vector3 startingPosition = MainCamPosition;
             Vector3 direction = GetDirection(startingPosition, PlayerPosition);
-            Physics.RaycastNonAlloc(startingPosition, direction, hitInfos, DistanceBetweenCameraAndPlayer);
+            Physics.RaycastNonAlloc(startingPosition, direction, hitInfos, CameraFollowing.DistanceBetweenCameraAndPlayer);
 
             foreach (RaycastHit hitInfo in hitInfos)
             {

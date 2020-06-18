@@ -11,21 +11,21 @@ namespace JamCraft5.Camera
         private float smoothing;
         [SerializeField]
         private Vector3 offsetFromPlayer;
-        public Vector3 OffsetFromPlayer { get => offsetFromPlayer; set => offsetFromPlayer = value; }
+        public Vector3 OffsetFromPlayer { get; set; }
+        public static float DistanceBetweenCameraAndPlayer { get; private set; }
         #endregion
 
         #region Awake
         private void Awake()
         {
-            //Set the first offset from player to the value set from the editor.
-            //This is a separate variable so that changing the value from code
-            //doesn't somehow affect the orginal value permanantly.
             OffsetFromPlayer = offsetFromPlayer;
+            transform.position = GameUtility.PlayerPosition + OffsetFromPlayer;
+            DistanceBetweenCameraAndPlayer = Vector3.Distance(transform.position, GameUtility.PlayerPosition);
         }
         #endregion
 
-        #region FixedUpdate
-        private void FixedUpdate()
+        #region LateUpdate
+        private void LateUpdate()
         {
             Vector3 desiredPosition = GameUtility.PlayerPosition + OffsetFromPlayer;
             transform.position = Vector3.Slerp(transform.position, desiredPosition, smoothing);

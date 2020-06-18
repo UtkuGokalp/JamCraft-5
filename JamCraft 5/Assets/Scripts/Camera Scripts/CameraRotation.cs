@@ -28,8 +28,8 @@ namespace JamCraft5.Camera
         }
         #endregion
 
-        #region Update
-        private void Update()
+        #region LateUpdate
+        private void LateUpdate()
         {
             if (RotatingCamera)
             {
@@ -38,7 +38,7 @@ namespace JamCraft5.Camera
                 CurrentHorizontalRotationAngle += horizontalRotationAngle;
                 transformCache.RotateAround(GameUtility.PlayerPosition, Vector3.up, horizontalRotationAngle);
                 cameraPlayerFollowController.OffsetFromPlayer = Quaternion.AngleAxis(horizontalRotationAngle, Vector3.up) * cameraPlayerFollowController.OffsetFromPlayer;
-
+                
                 //Vertical rotation
                 float verticalRotationAngle = sensitivity * Input.GetAxis("Mouse Y");
                 CurrentVerticalRotationAngle -= verticalRotationAngle; //Subtraction is used instead of addition because addition reverses the directions (mouse goes down, camera goes up and vice versa)
