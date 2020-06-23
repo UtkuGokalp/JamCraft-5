@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using Utility.Development;
 
 namespace JamCraft5.Camera
@@ -28,6 +29,20 @@ namespace JamCraft5.Camera
         }
         #endregion
 
+        #region OnEnable
+        private void OnEnable()
+        {
+            SceneManager.activeSceneChanged += OnSceneChanged;
+        }
+        #endregion
+
+        #region OnDisable
+        private void OnDisable()
+        {
+            SceneManager.activeSceneChanged -= OnSceneChanged;
+        }
+        #endregion
+
         #region LateUpdate
         private void LateUpdate()
         {
@@ -45,6 +60,14 @@ namespace JamCraft5.Camera
                 CurrentVerticalRotationAngle = Mathf.Clamp(CurrentVerticalRotationAngle, firstXRotation - verticalRotationLimit, firstXRotation + verticalRotationLimit);
                 transformCache.rotation = transformCache.rotation.ChangeEulerAngles(CurrentVerticalRotationAngle, null, null);
             }
+        }
+        #endregion
+
+        #region OnSceneChanged
+        private void OnSceneChanged(Scene oldScene, Scene newScene)
+        {
+            CurrentHorizontalRotationAngle = 0;
+            CurrentVerticalRotationAngle = transformCache.rotation.eulerAngles.x;
         }
         #endregion
     }
