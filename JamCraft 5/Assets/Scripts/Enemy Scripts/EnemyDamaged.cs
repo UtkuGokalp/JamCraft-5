@@ -3,7 +3,6 @@ using Utility.Health;
 using JamCraft5.Items;
 using System.Collections;
 using Utility.Development;
-using System.Collections.Generic;
 using JamCraft5.Player.Inventory;
 using JamCraft5.Items.Controllers;
 
@@ -17,17 +16,28 @@ namespace JamCraft5.Enemies.Components
     public class EnemyDamaged : MonoBehaviour
     {
         #region Variables
+        private bool dying;
         private Rigidbody rb;
         private HealthSystem hs;
         private EnemyState enemyState;
         private Collider colliderComponent;
-
         private Animator animator;
         private AnimationClip deathAnimation;
         private InventoryItem grenade;
         private PlayerInventoryManager playerInventoryManager;
         private GroundedItemDropController groundedItemDropController;
-        private bool dying;
+        private static Collider playerColliderComponent;
+        private static Collider PlayerColliderComponent
+        {
+            get
+            {
+                if (playerColliderComponent == null)
+                {
+                    playerColliderComponent = GameUtility.Player.GetComponent<Collider>();
+                }
+                return playerColliderComponent;
+            }
+        }
         #endregion
 
         #region Awake
@@ -121,7 +131,7 @@ namespace JamCraft5.Enemies.Components
         {
             groundedItemDropController.DropItems();
             animator.SetTrigger("Dead");
-            Physics.IgnoreCollision(colliderComponent, GameUtility.PlayerCollider);
+            Physics.IgnoreCollision(colliderComponent, PlayerColliderComponent);
             GetComponent<EnemyChasePlayerComponent>().enabled = false;
             yield return new WaitForSeconds(deathAnimation.length);
             Destroy(gameObject);

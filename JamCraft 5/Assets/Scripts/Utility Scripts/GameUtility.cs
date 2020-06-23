@@ -8,7 +8,6 @@ namespace Utility.Development
         #region Variables
         private static Camera mainCam;
         private static GameObject player;
-        private static Collider playerCollider;
         private static Transform playerTransform;
         private static Transform mainCamTransform;
 
@@ -65,17 +64,6 @@ namespace Utility.Development
                     mainCamTransform = MainCam.transform;
                 }
                 return mainCamTransform;
-            }
-        }
-        public static Collider PlayerCollider
-        {
-            get
-            {
-                if (playerCollider == null)
-                {
-                    playerCollider = Player.GetComponent<Collider>();
-                }
-                return playerCollider;
             }
         }
 
