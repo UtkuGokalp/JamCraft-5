@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Utility.Development;
+using JamCraft5.Player.Movement;
 
 namespace JamCraft5.Camera
 {
@@ -27,8 +28,9 @@ namespace JamCraft5.Camera
         #region LateUpdate
         private void LateUpdate()
         {
-            Vector3 desiredPosition = GameUtility.PlayerPosition + OffsetFromPlayer;
+            Vector3 desiredPosition = GameUtility.PlayerPosition + (Quaternion.AngleAxis(PlayerRotationController.CurrentRotationOffset, Vector3.up) * OffsetFromPlayer);
             transform.position = Vector3.Slerp(transform.position, desiredPosition, smoothing);
+            transform.LookAt(GameUtility.PlayerTransform, Vector3.up);
         }
         #endregion
     }

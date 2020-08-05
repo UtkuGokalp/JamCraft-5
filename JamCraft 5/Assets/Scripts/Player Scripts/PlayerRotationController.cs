@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using JamCraft5.Utility;
 using Utility.Development;
 using JamCraft5.Player.Attack;
 using JamCraft5.EventArguments;
@@ -29,14 +30,23 @@ namespace JamCraft5.Player.Movement
         {
             if (!PlayerAttack.Attacking && !PlayerDashController.Dashing && !PlayerUnlocking.playerPause)
             {
-                Vector3 direction = GameUtility.GetDirectionToMouse(transformCache.position);
-                float rotation = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-                Quaternion desiredRotation = Quaternion.Euler(transformCache.rotation.eulerAngles.x, rotation, transformCache.rotation.eulerAngles.z);
-                transformCache.rotation = Quaternion.Slerp(transformCache.rotation, desiredRotation, lerpSpeed);
-                if (previousAngle != rotation)
+                //Vector3 direction = GameUtility.GetDirectionToMouse(transformCache.position);
+                //float rotation = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+                //Quaternion desiredRotation = Quaternion.Euler(transformCache.rotation.eulerAngles.x, rotation, transformCache.rotation.eulerAngles.z);
+                //transformCache.rotation = Quaternion.Slerp(transformCache.rotation, desiredRotation, lerpSpeed);
+                //if (previousAngle != rotation)
+                //{
+                //    CurrentRotationOffset += rotation;
+                //    previousAngle = rotation;
+                //    OnPlayerRotationChanged?.Invoke(this, new OnPlayerRotationChangedEventArgs(CurrentRotationOffset));
+                //}
+                float changeOnMouseXPosition = MouseMovement.GetMouseMovement(MouseMovement.Axis.X);
+                const float SENSITIVITY = 0.1f;
+                transformCache.rotation = transformCache.rotation.ChangeEulerAngles(null, transformCache.rotation.eulerAngles.y - (changeOnMouseXPosition * SENSITIVITY), null);
+                if (previousAngle != transformCache.rotation.eulerAngles.y)
                 {
-                    CurrentRotationOffset += rotation;
-                    previousAngle = rotation;
+                    CurrentRotationOffset += (transformCache.rotation.eulerAngles.y - previousAngle);
+                    previousAngle = transformCache.rotation.eulerAngles.y;
                     OnPlayerRotationChanged?.Invoke(this, new OnPlayerRotationChangedEventArgs(CurrentRotationOffset));
                 }
             }
