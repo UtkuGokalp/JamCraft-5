@@ -36,6 +36,12 @@ namespace JamCraft5.Player
         #region OnPlayerDeath
         private void OnPlayerDeath()
         {
+#if UNITY_EDITOR
+            if (FadeSystem.Instance == null)
+            {
+                return;
+            }
+#endif
             FadeSystem.Instance.Fade(1, () =>
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
